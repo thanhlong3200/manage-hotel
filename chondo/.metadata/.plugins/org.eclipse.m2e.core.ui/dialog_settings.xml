@@ -2,6 +2,7 @@
 <section name="Workbench">
 	<section name="MavenProjectImportWizardPage">
 		<list key="rootDirectory">
+			<item value="E:\HK2-2021\HTTT\manage-hotel\chondo"/>
 			<item value="E:\HK2-2021\HTTT\chondo"/>
 		</list>
 		<list key="projectNameTemplate">

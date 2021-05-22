@@ -1,4 +1,4 @@
-<%@ page import="com.laptrinhjavaweb.util.SecurityUtils" %>
+<%@ page import="com.chondo.util.SecurityUtils" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">

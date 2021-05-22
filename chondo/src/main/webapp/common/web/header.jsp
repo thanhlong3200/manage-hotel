@@ -1,28 +1,99 @@
 <%@ page import="com.chondo.util.SecurityUtils" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
-	<div class="container">
-		<a class="navbar-brand" href="#">Start Bootstrap</a>
-		<button class="navbar-toggler" type="button" data-toggle="collapse"
-			data-target="#navbarResponsive" aria-controls="navbarResponsive"
-			aria-expanded="false" aria-label="Toggle navigation">
-			<span class="navbar-toggler-icon"></span>
-		</button>
-		<div class="collapse navbar-collapse" id="navbarResponsive">
-			<ul class="navbar-nav ml-auto">
-				<li class="nav-item active"><a class="nav-link" href="<c:url value='/trang-chu'/>">Trang chủ
-						<span class="sr-only">(current)</span>
-				</a></li>
-				<security:authorize access = "isAnonymous()">
-					<li class="nav-item"><a class="nav-link" href="#">Đăng nhập</a></li>
-					<li class="nav-item"><a class="nav-link" href="#">Đăng ký</a></li>
-				</security:authorize>
-				<security:authorize access = "isAuthenticated()">
-					<li class="nav-item"><a class="nav-link" href="#">Wellcome <%=SecurityUtils.getPrincipal().getFullName()%></a></li>
-					<li class="nav-item"><a class="nav-link" href="<c:url value='/thoat'/>">Thoát</a></li>
-				</security:authorize>
-			</ul>
-		</div>
-	</div>
-</nav>
+<!--Header section start-->
+        <div class="header-section">
+            <div class="bg-opacity"></div>
+            <div class="top-header sticky-header">
+                <div class="top-header-inner">
+                    <div class="container">
+                        <div class="mgea-full-width">
+                            <div class="row">
+                                <div class="col-md-2 col-sm-2 col-xs-12">
+                                    <div class="logo mt-15">
+                                        <a href="index.html"><img src="images/logo/logo.png" alt=""></a>
+                                    </div>
+                                </div>
+                                <div class="col-md-10 col-sm-10 hidden-xs">
+                                    <div class="header-top ptb-10">
+                                        <div class="adresses">
+                                            <div class="phone">
+                                                <p>call <span>+012 345 678 102 </span></p>
+                                            </div>
+                                            <div class="email">
+                                                <p>Email: <span>info@example.com</span></p>
+                                            </div>
+                                        </div>
+                                        <div class="social-links">
+                                            <a href="#">Đăng ký</a>
+                                            <a href="#"><i class="mdi mdi-rss"></i></a>
+                                            
+                                        </div>
+                                    </div>
+                                    <div class="menu mt-25">
+                                        <div class="menu-list hidden-sm hidden-xs">
+                                            <nav>
+                                                <ul>
+                                                    <li><a href="index.html">home</a></li>
+                                                    <li><a href="about-us.html">About</a></li>
+                                                    <li><a href="gallery.html">Gallery</a></li>
+                                                    <li><a href="#">pages<i class="fa fa-angle-down"></i></a>
+                                                        <ul class="dropdown_menu">
+                                                            <li><a href="404.html">404</a></li>
+															<li><a href="booking-information.html">Booking Information</a></li>
+															<li><a href="personal-information.html">Personal Information</a></li>
+															<li><a href="payment-information.html">Parment Information</a></li>
+															<li><a href="booking-done.html">Booking Done</a></li>
+															<li><a href="room-booking.html">Room booking</a></li>
+															<li><a href="news.html">News</a></li>
+															<li><a href="gallery.html">Gallery</a></li>
+															 <li><a href="staff.html">Staff</a></li>
+															<li><a href="our-room.html">Room</a></li>
+                                                        </ul>
+                                                    </li>
+                                                    <li><a href="contact-us.html">Contact</a></li>
+                                                </ul>
+                                            </nav>
+                                        </div>
+                                        <div class="search-bar-icon">
+                                           <a class="search-open" href="#"><i class="fa fa-search"></i></a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>    
+                </div>
+                 <!-- Mobile menu start -->
+                <div class="mobile-menu-area hidden-lg hidden-md">
+                    <div class="container">
+                        <div class="col-md-12">
+                            <nav id="dropdown">
+                            <ul>
+                                <li><a href="index.html">home</a></li>
+                                <li><a href="about-us.html">About</a></li>
+                                <li><a href="gallery.html">Gallery</a></li>
+                                <li><a href="#">pages</a>
+                                    <ul>
+                                        <li><a href="404.html">404</a></li>
+                                        <li><a href="booking-information.html">Booking Information</a></li>
+                                        <li><a href="personal-information.html">Personal Information</a></li>
+                                        <li><a href="payment-information.html">Parment Information</a></li>
+                                        <li><a href="booking-done.html">Booking Done</a></li>
+                                        <li><a href="room-booking.html">Room booking</a></li>
+                                        <li><a href="news.html">News</a></li>
+                                        <li><a href="gallery.html">Gallery</a></li>
+                                        <li><a href="staff.html">Staff</a></li>
+                                        <li><a href="our-room.html">Room</a></li>
+                                    </ul>
+                                </li>
+                                <li><a href="contact-us.html">contact</a></li>
+                            </ul>
+                        </nav>
+                        </div>
+                    </div>
+                </div>
+                <!-- Mobile menu end -->
+            </div>
+        </div>
+        <!-- Header section end -->

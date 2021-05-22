@@ -1,43 +1,65 @@
 package com.chondo.entity;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.sql.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "user")
+@Table(name = "users")
 public class UserEntity extends BaseEntity {
 
 	@Column(name = "username")
-	private String userName;
+	private String username;
 
 	@Column(name = "password")
 	private String password;
 
 	@Column(name = "fullname")
-	private String fullName;
+	private String fullname;
+	
+	@Column(name = "email")
+	private String email;
 
-	@Column
+	@Column(name = "phone")
+	private String phone;
+	
+	@Column(name = "gender")
+	private String gender;
+	
+	@Column(name = "birthday")
+	private Date birthday;
+//	user.setCreatedDate(new Timestamp(Calendar.getInstance().getTimeInMillis()));
+	
+	@Column(name = "address")
+	private String address;
+	
+	@Column (name = "status")
 	private Integer status;
 
-	@ManyToMany(fetch = FetchType.LAZY)
-	@JoinTable(name = "user_role", joinColumns = @JoinColumn(name = "userid"), 
-								  inverseJoinColumns = @JoinColumn(name = "roleid"))
-	private List<RoleEntity> roles = new ArrayList<>();
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "group_id")
+	private UserGroupEntity group;
 
-	public String getUserName() {
-		return userName;
+
+	public String getUsername() {
+		return username;
 	}
 
-	public void setUserName(String userName) {
-		this.userName = userName;
+	public void setUsername(String username) {
+		this.username = username;
+	}
+
+	public String getFullname() {
+		return fullname;
+	}
+
+	public void setFullname(String fullname) {
+		this.fullname = fullname;
 	}
 
 	public String getPassword() {
@@ -48,12 +70,45 @@ public class UserEntity extends BaseEntity {
 		this.password = password;
 	}
 
-	public String getFullName() {
-		return fullName;
+
+	public String getEmail() {
+		return email;
 	}
 
-	public void setFullName(String fullName) {
-		this.fullName = fullName;
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public String getPhone() {
+		return phone;
+	}
+
+	public void setPhone(String phone) {
+		this.phone = phone;
+	}
+
+	public String getGender() {
+		return gender;
+	}
+
+	public void setGender(String gender) {
+		this.gender = gender;
+	}
+
+	public Date getBirthday() {
+		return birthday;
+	}
+
+	public void setBirthday(Date birthday) {
+		this.birthday = birthday;
+	}
+
+	public String getAddress() {
+		return address;
+	}
+
+	public void setAddress(String address) {
+		this.address = address;
 	}
 
 	public Integer getStatus() {
@@ -64,11 +119,14 @@ public class UserEntity extends BaseEntity {
 		this.status = status;
 	}
 
-	public List<RoleEntity> getRoles() {
-		return roles;
+
+	public UserGroupEntity getGroup() {
+		return group;
 	}
 
-	public void setRoles(List<RoleEntity> roles) {
-		this.roles = roles;
+	public void setGroup(UserGroupEntity group) {
+		this.group = group;
 	}
+	
+
 }

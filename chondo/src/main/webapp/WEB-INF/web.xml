@@ -13,7 +13,7 @@
         <param-name>contextConfigLocation</param-name>
         <param-value>
             /WEB-INF/context/applicationContext.xml
-            /WEB-INF/context/security.xml
+            <!-- /WEB-INF/context/security.xml -->
         </param-value>
     </context-param>
 
@@ -32,8 +32,8 @@
         <url-pattern>/</url-pattern>
     </servlet-mapping>
     
-    <!-- Declare Spring Security Filter -->
-	<filter>
+ 
+	<!-- <filter>
 		<filter-name>springSecurityFilterChain</filter-name>
 		<filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>
 	</filter>
@@ -43,7 +43,7 @@
 		<url-pattern>/*</url-pattern>
 		<dispatcher>REQUEST</dispatcher>
 		<dispatcher>ERROR</dispatcher>
-	</filter-mapping>
+	</filter-mapping> -->
     
     <!-- sitemesh filter -->
     <filter>
