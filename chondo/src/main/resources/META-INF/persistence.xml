@@ -3,6 +3,7 @@
     <persistence-unit name="persistence-data">
         <class>com.chondo.entity.UserEntity</class>
         <class>com.chondo.entity.UserGroupEntity</class>
+        <class>com.chondo.entity.RoleEntity</class>
     </persistence-unit>
 </persistence>
 

@@ -22,7 +22,7 @@ public class HomeController {
 	
 	@RequestMapping(value = "/dang-nhap", method = RequestMethod.GET)
 	public ModelAndView loginPage() {
-		ModelAndView mav = new ModelAndView("login");
+		ModelAndView mav = new ModelAndView("web/login");
 		return mav;
 	}
 	

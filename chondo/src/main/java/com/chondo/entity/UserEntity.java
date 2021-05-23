@@ -13,32 +13,31 @@ import javax.persistence.Table;
 @Table(name = "users")
 public class UserEntity extends BaseEntity {
 
-	@Column(name = "username")
+	@Column(name = "username", nullable = false)
 	private String username;
 
-	@Column(name = "password")
+	@Column(name = "password", nullable = false)
 	private String password;
 
-	@Column(name = "fullname")
+	@Column(name = "fullname", nullable = false)
 	private String fullname;
 	
-	@Column(name = "email")
+	@Column(name = "email", nullable = false)
 	private String email;
 
-	@Column(name = "phone")
+	@Column(name = "phone", nullable = false)
 	private String phone;
 	
-	@Column(name = "gender")
+	@Column(name = "gender", nullable = false)
 	private String gender;
 	
-	@Column(name = "birthday")
+	@Column(name = "birthday", nullable = false)
 	private Date birthday;
-//	user.setCreatedDate(new Timestamp(Calendar.getInstance().getTimeInMillis()));
-	
-	@Column(name = "address")
+//
+	@Column(name = "address", nullable = false)
 	private String address;
 	
-	@Column (name = "status")
+	@Column (name = "status", nullable = false)
 	private Integer status;
 
 	@ManyToOne(fetch = FetchType.LAZY)

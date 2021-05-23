@@ -5,6 +5,10 @@ import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -19,6 +23,20 @@ public class UserGroupEntity extends BaseEntity{
 	
 	@OneToMany(mappedBy = "group")
     private List<UserEntity> users = new ArrayList<UserEntity>();
+
+	@ManyToMany(fetch = FetchType.LAZY)
+	@JoinTable(name = "user_group_role", joinColumns = @JoinColumn(name = "user_group_id"), 
+								  inverseJoinColumns = @JoinColumn(name = "role_id"))
+	private List<RoleEntity> roles = new ArrayList<>();
+
+	
+	public List<RoleEntity> getRoles() {
+		return roles;
+	}
+
+	public void setRoles(List<RoleEntity> roles) {
+		this.roles = roles;
+	}
 
 	public String getCode() {
 		return code;

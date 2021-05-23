@@ -25,8 +25,16 @@
                                             </div>
                                         </div>
                                         <div class="social-links">
-                                            <a href="#">Đăng ký</a>
-                                            <a href="#"><i class="mdi mdi-rss"></i></a>
+                                        <security:authorize access = "isAnonymous()">
+											<a href="#">Đăng ký</a>
+											<a href="#">Đăng nhập</a>
+										</security:authorize>
+										<security:authorize access = "isAuthenticated()">
+											<a  href="#">Wellcome <%=SecurityUtils.getPrincipal().getFullname()%></a>
+											<a  href="<c:url value='/thoat'/>">Thoát</a>
+										</security:authorize>
+                                            
+                                            
                                             
                                         </div>
                                     </div>
