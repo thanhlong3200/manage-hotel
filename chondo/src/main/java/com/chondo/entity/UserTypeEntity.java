@@ -5,40 +5,24 @@ import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "users_group")
-public class UserGroupEntity extends BaseEntity{
-	@Column(name = "code")
+@Table(name = "user_types")
+public class UserTypeEntity extends BaseEntity {
+	@Column
 	private String code;
 	
-	@Column(name = "name")
+	@Column
 	private String name;
 	
-	@OneToMany(mappedBy = "group")
+	@OneToMany(mappedBy = "type")
     private List<UserEntity> users = new ArrayList<UserEntity>();
-
-	@ManyToMany(fetch = FetchType.LAZY)
-	@JoinTable(name = "user_group_role", joinColumns = @JoinColumn(name = "user_group_id"), 
-								  inverseJoinColumns = @JoinColumn(name = "role_id"))
-	private List<RoleEntity> roles = new ArrayList<>();
 	
-	
-
-	
-	public List<RoleEntity> getRoles() {
-		return roles;
-	}
-
-	public void setRoles(List<RoleEntity> roles) {
-		this.roles = roles;
-	}
+	@ManyToMany(mappedBy = "userTypes")
+	private List<ServiceEntity> services = new ArrayList<ServiceEntity>();
 
 	public String getCode() {
 		return code;
@@ -63,5 +47,6 @@ public class UserGroupEntity extends BaseEntity{
 	public void setUsers(List<UserEntity> users) {
 		this.users = users;
 	}
+	
 	
 }

@@ -1,12 +1,15 @@
 package com.chondo.entity;
 
 import java.sql.Date;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -33,17 +36,34 @@ public class UserEntity extends BaseEntity {
 	
 	@Column(name = "birthday", nullable = false)
 	private Date birthday;
-//
+
 	@Column(name = "address", nullable = false)
 	private String address;
 	
 	@Column (name = "status", nullable = false)
 	private Integer status;
+	
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "user_type_id")
+	private UserTypeEntity type;
+	
 
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "group_id")
 	private UserGroupEntity group;
 
+	@OneToMany(mappedBy = "user")
+	private List<BookingEntity> bookings = new ArrayList<BookingEntity>();
+	
+	
+
+	public UserTypeEntity getType() {
+		return type;
+	}
+
+	public void setType(UserTypeEntity type) {
+		this.type = type;
+	}
 
 	public String getUsername() {
 		return username;

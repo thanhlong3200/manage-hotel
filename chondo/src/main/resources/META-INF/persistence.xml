@@ -4,6 +4,10 @@
         <class>com.chondo.entity.UserEntity</class>
         <class>com.chondo.entity.UserGroupEntity</class>
         <class>com.chondo.entity.RoleEntity</class>
+        <class>com.chondo.entity.RoomEntity</class>
+        <class>com.chondo.entity.RoomTypeEntity</class>
+        <class>com.chondo.entity.HotelEntity</class>
+        <class>com.chondo.entity.UserTypeEntity</class>
     </persistence-unit>
 </persistence>
 
