@@ -3,11 +3,20 @@
     <persistence-unit name="persistence-data">
         <class>com.chondo.entity.UserEntity</class>
         <class>com.chondo.entity.UserGroupEntity</class>
+        <class>com.chondo.entity.UserTypeEntity</class>
         <class>com.chondo.entity.RoleEntity</class>
         <class>com.chondo.entity.RoomEntity</class>
+        <class>com.chondo.entity.RoomStatusEntity</class>
         <class>com.chondo.entity.RoomTypeEntity</class>
         <class>com.chondo.entity.HotelEntity</class>
-        <class>com.chondo.entity.UserTypeEntity</class>
+        <class>com.chondo.entity.BookingEntity</class>
+        <class>com.chondo.entity.BookingStatusEntity</class>
+        <class>com.chondo.entity.PaymentEntity</class>
+        <class>com.chondo.entity.PaymentStatusEntity</class>
+        <class>com.chondo.entity.PaymentTypeEntity</class>
+        <class>com.chondo.entity.PromotionEntity</class>
+        <class>com.chondo.entity.RateEntity</class>
+        <class>com.chondo.entity.ServiceEntity</class>
     </persistence-unit>
 </persistence>
 

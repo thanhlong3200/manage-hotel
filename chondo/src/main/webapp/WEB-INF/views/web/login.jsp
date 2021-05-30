@@ -8,18 +8,18 @@
 <title>Đăng nhập</title>
 </head>
 <body>
-	<div class="container">
-		<!-- <h1 class="form-heading">login Form</h1> -->
+	<<div class="container" style="width: 35%; padding: 50px 0px 100px 0px;">
+		<h2 style="text-align: center;">ĐĂNG NHẬP</h2>
 		<div class="login-form">
 			<div class="main-div">
 				<c:if test="${param.incorrectAccount != null}">
 					<div class="alert alert-danger">	
-							Username or password incorrect
+							Tên đăng nhập hoặc mật khẩu không đúng !
 					</div>
 				</c:if>
 				<c:if test="${param.accessDenied != null}">
 					<div class="alert alert-danger">	
-							you Not authorize
+							Bạn không có quyền !
 					</div>
 				</c:if>
 				<form action="j_spring_security_check" id="formLogin" method="post">
@@ -30,10 +30,10 @@
 					<div class="form-group">
 						<input type="password" class="form-control" id="password" name="j_password" placeholder="Mật khẩu">
 					</div>
-					<button type="submit" class="btn btn-primary" >Đăng nhập</button>
+					<button type="submit" class="btn btn-primary"  style="text-align: center;">Đăng nhập</button>
 				</form>
 			</div>
 		</div>
-	</div>
+	</div> 
 </body>
 </html>

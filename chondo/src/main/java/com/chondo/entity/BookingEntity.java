@@ -29,10 +29,11 @@ public class BookingEntity extends BaseEntity {
 	@Column (name = "room_count")
 	private Integer roomCount;
 	
-	@Column(name = "guest_count")
-	private Integer guestCount;
+	@Column(name = "adult")
+	private Integer adult;
 	
-	
+	@Column(name = "children")
+	private Integer children;
 	
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "user_id")

@@ -18,12 +18,25 @@ public class UserConverter {
 		dto.setAddress(entity.getAddress());
 		dto.setGender(entity.getGender());
 		dto.setStatus(entity.getStatus());
+		dto.setBirthday(entity.getBirthday());
 		dto.setGroupId(entity.getGroup().getId());
 		return dto;
 	}
 	
 	public UserEntity toEntity(UserDTO dto) {
 		UserEntity entity = new UserEntity();
+		entity.setUsername(dto.getUsername());
+		entity.setPassword(dto.getPassword());
+		entity.setFullname(dto.getFullname());
+		entity.setEmail(dto.getEmail());
+		entity.setPhone(dto.getPhone());
+		entity.setAddress(dto.getAddress());
+		entity.setGender(dto.getGender());
+		entity.setStatus(dto.getStatus());
+		return entity;
+	}
+	
+	public UserEntity toEntity(UserEntity entity, UserDTO dto) {
 		entity.setUsername(dto.getUsername());
 		entity.setPassword(dto.getPassword());
 		entity.setFullname(dto.getFullname());

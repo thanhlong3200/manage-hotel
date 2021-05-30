@@ -21,6 +21,9 @@ public class HotelEntity extends BaseEntity {
 	private String address;
 	
 	@Column
+	private String location;
+	
+	@Column
 	private String email;
 	
 	@Column

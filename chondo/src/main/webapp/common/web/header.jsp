@@ -9,9 +9,17 @@
                     <div class="container">
                         <div class="mgea-full-width">
                             <div class="row">
+                            
+                            
+                            
+                            <c:url value ='/template/web/images/about.jpg'/>
+                            
+                            
+                            
+                            
                                 <div class="col-md-2 col-sm-2 col-xs-12">
                                     <div class="logo mt-15">
-                                        <a href="index.html"><img src="images/logo/logo.png" alt=""></a>
+                                        <a href="index.html"><img src="<c:url value ='/template/web/images/logo/logo.png'/>" alt=""></a>
                                     </div>
                                 </div>
                                 <div class="col-md-10 col-sm-10 hidden-xs">
@@ -26,11 +34,22 @@
                                         </div>
                                         <div class="social-links">
                                         <security:authorize access = "isAnonymous()">
-											<a href="#">Đăng ký</a>
-											<a href="#">Đăng nhập</a>
+											<a href="<c:url value='/dang-ky'/>">Đăng ký</a>
+											<a href="<c:url value='/dang-nhap'/>">Đăng nhập</a>
 										</security:authorize>
 										<security:authorize access = "isAuthenticated()">
-											<a  href="#">Wellcome <%=SecurityUtils.getPrincipal().getFullname()%></a>
+											<a id="infor" href="">
+												<%=SecurityUtils.getPrincipal().getFullname()%>
+												<div id="infor-panel">
+													<a  href="<c:url value='/thoat'/>">Xem thông tin</a>
+													<c:url value = "/thay-doi-thong-tin" var = "updateURL">
+													   <c:param name = "id" value = "<%=SecurityUtils.getPrincipal().getId()%>"/>		
+													</c:url>
+													<a  href="${updateURL}">
+													Thay đổi thông tin</a>
+													<a  href="<c:url value='/thoat'/>">Đổi mật khẩu</a>
+												</div>
+											</a>
 											<a  href="<c:url value='/thoat'/>">Thoát</a>
 										</security:authorize>
                                             
@@ -103,5 +122,21 @@
                 </div>
                 <!-- Mobile menu end -->
             </div>
+            
+            
         </div>
         <!-- Header section end -->
+        <script>
+	        $('#infor').hover(function () {
+	            $('#infor-panel').css('display', 'block');
+	        }, function () {
+	            $('#infor-panel').css('display', 'none');
+	        });
+	        $('#infor-panel').hover(function () {
+	            $('#infor-panel').css('display', 'block');
+	        }, function () {
+	            $('#infor-panel').css('display', 'none');
+	        });
+	        
+	        
+        </script>

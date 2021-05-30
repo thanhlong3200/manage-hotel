@@ -1,0 +1,24 @@
+a#infor {position: relative;}
+
+div#infor-panel {
+    display: none;
+    position: absolute;
+    padding: 0px 20px;
+    background: white;
+    box-shadow: 0 0 2px #00000087;
+    top: 40px;
+    right: 0;
+}
+
+div#infor-panel a {
+    display: block;
+    margin: 20px 0px;
+}
+h1.cd-headline.clip span { 
+    display: block;
+    font-size: 60px;
+}
+
+.cd-headline.clip .cd-words-wrapper.coloring{
+	font-size: 44px;
+}

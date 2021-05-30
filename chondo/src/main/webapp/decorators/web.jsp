@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Trang chủ</title>
+<title><dec:title></dec:title></title>
 	<link href="<c:url value='/template/web/images/apple-touch-icon.png'/>" type="images/x-icon" rel="shortcut icon">
     <!-- Place favicon.ico in the root directory -->
     
@@ -14,6 +14,7 @@
     <link rel="stylesheet" href="<c:url value='/template/web/css/bootstrap.min.css'/>">
     <!-- This core.css file contents all plugings css file. -->
     <link rel="stylesheet" href="<c:url value='/template/web/css/core.css'/>">
+     <link rel="stylesheet" href="<c:url value='/template/web/css/custom.css'/>">
     <!-- Theme shortcodes/elements style -->
     <link rel="stylesheet" href="<c:url value='/template/web/css/shortcode/shortcodes.css'/>">
     <!-- Theme main style -->
@@ -25,7 +26,13 @@
    
     <!-- Modernizr JS -->
     <script src="<c:url value='/template/web/js/vendor/jquery-1.12.0.min.js'/>"></script>
+    <script src="<c:url value='/template/web/js/vendor/jquery.min.js'/>"></script>
     <script src="<c:url value='/template/web/js/vendor/modernizr-2.8.3.min.js'/>"></script>
+
+
+
+    
+    <dec:head></dec:head>
 
 </head>
 <body>
@@ -50,9 +57,9 @@
 	
 
 
-    
+    <script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/jquery.validate.min.js"></script>
     <!-- Bootstrap framework js -->
-    <script src="<c:url value='/template/web/js/bootstrap.min.js'/>"></script>
+    <script src="<c:url value='/template/web/js/vendor/bootstrap.min.js'/>"></script>
     <!--counter up js-->
     <script src="<c:url value='/template/web/js/waypoints.min.js'/>"></script>
     <script src="<c:url value='/template/web/js/jquery.counterup.min.js'/>"></script>

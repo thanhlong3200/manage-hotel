@@ -261,10 +261,11 @@
 }
 .booking-box {
   background: rgba(58, 196, 250, 0.5) none repeat scroll 0 0;
-  padding: 50px 35px 35px;
+  padding: 15px 35px 35px;
   margin-right: 38px;
 }
 .booking-title h3 {
+	margin:0;
     font-size: 24px;
     font-weight: bold;
     text-transform: uppercase;
@@ -272,7 +273,7 @@
 .booking-title > p {
   font-weight: 300;
   line-height: 20px;
-  margin-bottom: 40px;
+  margin-bottom: 20px;
 }
 .b-date i {
   font-size: 18px;
@@ -327,7 +328,7 @@
     border: none;
 }
 .select-book::before {
-    content: "";
+    content: "ï„‡";
     font-family: FontAwesome;
     font-size: 18px;
     pointer-events: none;
@@ -340,16 +341,16 @@
     background: rgba(83, 152, 178, 0.5) none repeat scroll 0 0;
 }
 .submit-form > button {
-  background: #fff none repeat scroll 0 0;
+  background: black;
   border: medium none;
-  color: #2e2e2e;
+  color: white;
   padding: 14px 0;
   text-transform: uppercase;
   transition: all 0.3s ease 0s;
   width: 100%;
 }
 .submit-form button:hover {
-    background: #3ac4fa none repeat scroll 0 0;
+    background: #105671 none repeat scroll 0 0;
 }
 .welcome-desc {
   margin-bottom: 32px;
@@ -359,6 +360,7 @@
     font-size: 32px;
     font-weight: 400;
     text-transform: uppercase;
+    margin-bottom:15px;
 }
 .welcome-text h2 span.coloring,.welcome-text h1 span.coloring{
     color: #3ac4fa;
@@ -371,6 +373,7 @@
 }
 p.welcome-desc {
   font-weight: 300;
+  font-size: 18px;
 }
 .explore > a {
     background: #3ac4fa none repeat scroll 0 0;
@@ -896,7 +899,7 @@ p.welcome-desc {
   width: 0;
 }
 .staff-hover-desc::after {
-  content: "";
+  content: "ï�¨";
    top: -86px;
 }
 .staff-hover-desc::after,.staff-list span.plus:before {
@@ -914,7 +917,7 @@ p.welcome-desc {
   line-height: 16px
 }
 .staff-list span.plus::before {
-  content: "";
+  content: "ï�§";
   top: -15px;
   z-index: 999;
 }
@@ -1189,7 +1192,7 @@ h3.news-title {
 .newsletter-form input::-webkit-input-placeholder{ color:#fff; }
 .newsletter-form input::-webkit-input-placeholder { color:#fff; }
 .newsletter-form input::-moz-placeholder{ color:#fff; } /* firefox 19+ */
-.newsletter-form input:-ms-input-placeholder color:#fff; } /* ie */
+.newsletter-form input:-ms-input-placeholder {color:#fff; } /* ie */
 .newsletter-form input:-moz-placeholder{ color:#fff; }
 .newsletter-form button {
   background: #fff none repeat scroll 0 0;
@@ -2042,7 +2045,7 @@ h3.news-title {
 }
 .booking-box3 .select_book::before,.room-booking-box .select-book.room:before,.booking-form-list .single-form-part .select-option:before,.single_form  .select-date:before{
     color: #bababa;
-    content: "";
+    content: "ï„‡";
     font-family: FontAwesome;
     font-size: 22px;
     position: absolute;
@@ -2228,7 +2231,7 @@ h3.news-title {
 }
 .single-form-part .select-option::before {
     color: #fff;
-    content: "";
+    content: "ï„‡";
     font-family: FontAwesome;
     font-size: 22px;
     position: absolute;

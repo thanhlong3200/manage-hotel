@@ -1,16 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@include file="/common/taglib.jsp" %>
 <!DOCTYPE html>
 <html>
-
 <head>
-
 <meta charset="UTF-8">
 <title>Trang chủ</title>
-
 </head>
-
 <body>
+
 <!--About Section Title start-->
         <div class="about-section text-center ptb-80 white_bg">
             <div class="container">
@@ -24,7 +22,14 @@
                     <div class="col-md-12">
                         <div class="about-chondo">
                             <div class="about-member">
-                                <img src="images/about.jpg" alt="">
+                            
+                            
+                            
+                            <c:url value ='images/about.jpg'/>
+                            
+                            
+                            
+                                <img alt="" src="<c:url value ='/template/web/images/about.jpg'/>">
                                 <h3>Mohin patwary</h3>
                                 <h5 class="mb-0">hrd head</h5>
                             </div>

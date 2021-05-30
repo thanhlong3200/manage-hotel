@@ -10,7 +10,7 @@
        <pattern>/quan-tri*</pattern>
     </decorator>
     
-   <!--  <decorator name="login" page="login.jsp">
-        <pattern>/dang-nhap</pattern>
-    </decorator> -->
+    <decorator name="index" page="index.jsp">
+        <pattern>/trang-chu</pattern>
+    </decorator> 
 </decorators>

@@ -43,11 +43,28 @@ NOTE: If you have any note put here.
 		5. Parallax active
 	----------------------*/
 	$('.header-section.static4').parallax("50%", 0.3);
-	
-    
-    $('.date-picker').datepicker({
-            startDate: '-3d'
-    });
+
+var tomorrow = new Date(); 
+tomorrow.setDate(tomorrow.getDate()+1);
+$("#dateTo").datepicker({
+		startDate: tomorrow,
+      format: 'dd/mm/yyyy'
+    }).on("changeDate", function (e) {
+		var currentDate = $( "#dateTo" ).datepicker( "getDate","-1d");
+		currentDate.setDate(currentDate.getDate()-1);
+		 $("#dateFrom").datepicker('setEndDate', currentDate);
+	});
+$("#dateFrom").datepicker({
+      startDate: '0',
+    	format: 'dd/mm/yyyy'
+    }).on("changeDate", function (e) {
+		var currentDate = $( "#dateFrom" ).datepicker( "getDate","+1d");
+		currentDate.setDate(currentDate.getDate()+1);
+		 $("#dateTo").datepicker('setStartDate', currentDate);
+	});
+
+
+ 
 
     $('.select-booking').selectpicker({
       style: 'btn-info',
@@ -254,7 +271,7 @@ NOTE: If you have any note put here.
 			$('.mailchimp-error').html('' + resp.msg).fadeIn(900);
 		}  
 	};
-    
+	
 })
 (jQuery);
 

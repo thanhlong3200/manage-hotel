@@ -14,6 +14,7 @@ public class MyUser extends User {
 		super(username, password, enabled, accountNonExpired, credentialsNonExpired, accountNonLocked, authorities);
 	}
 	
+	private String id;
 	private String fullname;
 	private String email;
 	private String address;
@@ -68,5 +69,14 @@ public class MyUser extends User {
 	public void setPhone(String phone) {
 		this.phone = phone;
 	}
+
+	public String getId() {
+		return id;
+	}
+
+	public void setId(String id) {
+		this.id = id;
+	}
+
 	
 }
