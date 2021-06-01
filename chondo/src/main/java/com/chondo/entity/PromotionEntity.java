@@ -7,7 +7,6 @@ import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -32,7 +31,7 @@ public class PromotionEntity extends BaseEntity {
 	private Date dateEnd;
 	
 	@OneToMany(mappedBy = "promotion")
-	private List<RoomEntity> rooms = new ArrayList<RoomEntity>();
+	private List<RoomTypeEntity> roomTypes = new ArrayList<RoomTypeEntity>();
 	
 	
 }

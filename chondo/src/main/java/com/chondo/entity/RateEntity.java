@@ -17,8 +17,8 @@ public class RateEntity extends BaseEntity{
 	private Integer vote;
 	
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "room_id")
-	private RoomEntity room;
+	@JoinColumn(name = "room_type_id")
+	private RoomTypeEntity roomType;
 
 	public String getComment() {
 		return comment;
@@ -36,13 +36,5 @@ public class RateEntity extends BaseEntity{
 		this.vote = vote;
 	}
 
-	public RoomEntity getRoom() {
-		return room;
-	}
-
-	public void setRoom(RoomEntity room) {
-		this.room = room;
-	}
-	
 	
 }

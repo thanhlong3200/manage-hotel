@@ -11,6 +11,8 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "hotels")
 public class HotelEntity extends BaseEntity {
+	
+
 	@Column
 	private String code;
 	
@@ -86,14 +88,22 @@ public class HotelEntity extends BaseEntity {
 		this.status = status;
 	}
 
-	public List<RoomEntity> getRooms() {
-		return rooms;
+
+	public String getLocation() {
+		return location;
 	}
 
-	public void setRooms(List<RoomEntity> rooms) {
-		this.rooms = rooms;
+	public void setLocation(String location) {
+		this.location = location;
 	}
-	
+
+	public List<BookingEntity> getBookings() {
+		return bookings;
+	}
+
+	public void setBookings(List<BookingEntity> bookings) {
+		this.bookings = bookings;
+	}
 	
 	
 }

@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ include file="/common/taglib.jsp" %>
 <%@ page import="com.chondo.util.SecurityUtils" %>
+<c:url var="searchAPI" value="/tim-kiem"/>
 <!DOCTYPE html>
 <html>
 <head>
@@ -171,17 +172,17 @@
                             <div class="booking-box">
                                
                                 <div class="booking-form">
-                                    <form action="#">
+                                    <form id = "formSubmit" action="${searchAPI}" method="get"> 
                                         <div class="b-date arrive mb-15">
-                                            <input id="dateFrom" name="dateFrom" class="date-picker" type="text" placeholder="Ngày đến">                   
+                                            <input id="dateFrom" name="dateFrom" value = "01/06/2021" class="date-picker" type="text" placeholder="Ngày đến">                   
                                         </div>
                                         <div class="b-date departure mb-15">
-                                            <input id="dateTo" name="dateTo" class="date-picker" type="text" placeholder="Ngày đi">              
+                                            <input id="dateTo" name="dateTo"  value = "05/06/2021" class="date-picker" type="text" placeholder="Ngày đi">              
                                         </div>
                                         <div class="mb-15">
                                             <select  id="adult" name="adult" class="">
                                                 <option value="1" disabled>Số người lượng lớn</option>
-                                                <option value="1" selected>1 người lớn</option>
+                                                <option value="3" selected>1 người lớn</option>
                                                 <option value="1" >2 người lớn</option>
                                                 <option value="1" >3 người lớn</option>
                                                 <option value="1" >4 người lớn</option>
@@ -191,7 +192,7 @@
                                         <div class="mb-15">
                                             <select id="children" name="children" class="">
                                                 <option value="1" disabled>Số lượng trẻ em</option>
-                                                <option value="1" selected>0 trẻ em</option>
+                                                <option value="2" selected>0 trẻ em</option>
                                                 <option value="1" >1 trẻ em</option>
                                                 <option value="1" >2 trẻ em</option>
                                                 <option value="1" >3 trẻ em</option>
@@ -202,7 +203,7 @@
                                         <div class="mb-15">
                                             <select id="roomCount" name="roomCount" class="">
                                                 <option value="1" disabled>Số lượng phòng</option>
-                                                <option value="1" >1 phòng</option>
+                                                <option value="2" selected>1 phòng</option>
                                                 <option value="1" >2 phòng</option>
                                                 <option value="1" >3 phòng</option>
                                                 <option value="1" >4 phòng</option>
@@ -211,9 +212,9 @@
                                         </div>
                                         <div class="mb-15">
                                             <select id="location" name="location" class="">
-                                                <option value="1" disabled>Địa điểm</option>
-                                                <option value="1" >Đà Lạt</option>
-                                                <option value="1" >Vũng Tàu</option>                                           
+                                                <option value="1" disabled>Địa điểm</option>                                          
+                                                <option value="Vũng Tàu" selected>Vũng Tàu</option>     
+                                                  <option value="1" >Đà Lạt</option>                                      
                                             </select>
                                         </div>
                                         <div class="submit-form">
@@ -258,10 +259,33 @@
 	
 
 	
-
+		
 		<script>
-			$(document).ready(function(){
-				
+/* 			$(document).ready(function(){
+				$('#searchRoom').on('click', function(event) {
+					console.log("searchRoom");
+					event.preventDefault();
+					var data = {};
+					var formData = $('#formSubmit').serializeArray();
+					$.each(formData, function(i, v) {
+						data["" + v.name + ""] = v.value;
+					});
+					search(data);	
+				});
+				function search(data) {
+					$.ajax({
+						url : '${searchAPI}',
+						type : 'GET',
+						contentType : 'application/json',
+						data : JSON.stringify(data),
+						dataType : 'json',
+						success : function(result) {
+							alert("Thành công");
+						},
+						error : function(error) {
+						}
+					});
+				} */
 		        $('#infor').hover(function () {
 		            $('#infor-panel').css('display', 'block');
 		        }, function () {

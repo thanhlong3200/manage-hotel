@@ -41,8 +41,8 @@ public class ServiceEntity extends BaseEntity{
 	private List<RoomTypeEntity> roomTypes = new ArrayList<>();
 	
 	@ManyToMany(fetch = FetchType.LAZY)
-	@JoinTable(name = "bookings_services", joinColumns = @JoinColumn(name = "service_id"), 
-								  inverseJoinColumns = @JoinColumn(name = "booking_id"))
-	private List<BookingEntity> bookings = new ArrayList<>();
+	@JoinTable(name = "rooms_services", joinColumns = @JoinColumn(name = "service_id"), 
+								  inverseJoinColumns = @JoinColumn(name = "room_id"))
+	private List<RoomEntity> rooms = new ArrayList<>();
 	
 }
