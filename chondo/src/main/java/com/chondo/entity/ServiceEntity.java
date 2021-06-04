@@ -9,6 +9,8 @@ import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -25,10 +27,7 @@ public class ServiceEntity extends BaseEntity{
 	private Long price;
 	
 	@Column
-	private Integer used;
-	
-	@Column
-	private Integer free;
+	private String symbol;
 	
 	@ManyToMany(fetch = FetchType.LAZY)
 	@JoinTable(name = "user_type_services", joinColumns = @JoinColumn(name = "service_id"), 
@@ -39,10 +38,10 @@ public class ServiceEntity extends BaseEntity{
 	@JoinTable(name = "room_type_services", joinColumns = @JoinColumn(name = "service_id"), 
 								  inverseJoinColumns = @JoinColumn(name = "room_type_id"))
 	private List<RoomTypeEntity> roomTypes = new ArrayList<>();
+
+	@OneToMany(mappedBy = "service")
+	private List<BookedServiceEntity> bookedServices = new ArrayList<BookedServiceEntity>();
 	
-	@ManyToMany(fetch = FetchType.LAZY)
-	@JoinTable(name = "rooms_services", joinColumns = @JoinColumn(name = "service_id"), 
-								  inverseJoinColumns = @JoinColumn(name = "room_id"))
-	private List<RoomEntity> rooms = new ArrayList<>();
+
 	
 }

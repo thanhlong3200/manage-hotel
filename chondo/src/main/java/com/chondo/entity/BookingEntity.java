@@ -1,12 +1,16 @@
 package com.chondo.entity;
 
 import java.sql.Date;
+import java.util.ArrayList;
+import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
@@ -44,15 +48,12 @@ public class BookingEntity extends BaseEntity {
 	@JoinColumn(name = "status_id")
 	private BookingStatusEntity status;
 	
-	
-	@OneToOne
+	@ManyToOne(cascade = CascadeType.ALL,fetch = FetchType.LAZY)
     @JoinColumn(name = "room_type_id")
     private RoomTypeEntity roomType;
 	
-	
-	
-	@OneToOne(mappedBy = "booking")
-	private BookedRoomEntity bookedRoom;
+	@OneToMany(mappedBy = "booking")
+	private List<BookedRoomEntity> bookedRooms = new ArrayList<BookedRoomEntity>();
 	
 	@OneToOne(mappedBy = "booking")
 	private PaymentEntity payment;

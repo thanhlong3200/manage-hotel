@@ -1,5 +1,8 @@
 package com.chondo.dto;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class RoomTypeDTO extends AbstractDTO<RoomTypeDTO>{
 	private String code;
 	
@@ -14,6 +17,22 @@ public class RoomTypeDTO extends AbstractDTO<RoomTypeDTO>{
 	private String image;
 	
 	private String review;
+	
+	private List<FurnitureDTO> furnitures = new ArrayList<FurnitureDTO>();
+
+	private List<RateDTO> rates =  new ArrayList<RateDTO>();
+	
+	private double averageBadge;
+	
+	private String rank;
+	
+	public List<FurnitureDTO> getFurnitures() {
+		return furnitures;
+	}
+
+	public void setFurnitures(List<FurnitureDTO> furnitures) {
+		this.furnitures = furnitures;
+	}
 
 	public String getCode() {
 		return code;
@@ -69,6 +88,30 @@ public class RoomTypeDTO extends AbstractDTO<RoomTypeDTO>{
 
 	public void setReview(String review) {
 		this.review = review;
+	}
+
+	public List<RateDTO> getRates() {
+		return rates;
+	}
+
+	public void setRates(List<RateDTO> rates) {
+		this.rates = rates;
+	}
+
+	public double getAverageBadge() {
+		return averageBadge;
+	}
+
+	public void setAverageBadge(double averageBadge) {
+		this.averageBadge = averageBadge;
+	}
+
+	public String getRank() {
+		return rank;
+	}
+
+	public void setRank(String rank) {
+		this.rank = rank;
 	}
 	
 }

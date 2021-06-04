@@ -1,72 +1,141 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ include file="/common/taglib.jsp" %>
-<%@ page import="com.chondo.util.SecurityUtils" %>
-<c:url var="searchAPI" value="/tim-kiem"/>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<%@ include file="/common/taglib.jsp"%>
+<%@ page import="com.chondo.util.SecurityUtils"%>
+<%@page import="com.chondo.util.PriceUtil" %>
+<c:url var="searchAPI" value="/tim-kiem" />
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>Tìm phòng</title>
-   
 </head>
 <body>
+	<div class="searchPage">
+		<div class="filter">
+			<div class="booking-box">
+				<div class="booking-form">
+					<form:form id="formSubmit" action="${searchAPI}" method="get" modelAttribute="search">			
+						<div class="b-date arrive mb-15">
+							<form:input path="dateFrom" autocomplete="off" data-date-format="dd/mm/yyyy" class="date-picker"  placeholder="Ngày đến"/>
+						</div>
+						<div class="b-date departure mb-15">
+							<form:input path="dateTo" autocomplete="off" data-date-format="dd/mm/yyyy" class="date-picker"  placeholder="Ngày đi"/>
+						</div>
+						<div class="mb-15">
+							<form:select path="adult"  >
+								<option disabled value="">Số lượng người lớn</option>
+								<form:option value="1">1 người lớn</form:option>
+								<form:option value="2">2 người lớn</form:option>
+								<form:option value="3">3 người lớn</form:option>
+							</form:select>
+						</div>
+						<div class="mb-15">
+							<form:select path="children"  >
+								<option disabled value="">Số lượng trẻ em</option>
+								<form:option value="0">0 trẻ em</form:option>
+								<form:option value="1">1 trẻ em</form:option>
+								<form:option value="2">2 trẻ em</form:option>
+								<form:option value="3">3 trẻ em</form:option>
+							</form:select>
+						</div>
+						<div class="mb-15">
+							<form:select path="roomCount"  >
+								<option disabled value="">Số lượng phòng</option>
+								<form:option value="1">1 phòng</form:option>
+								<form:option value="2">2 phòng</form:option>
+								<form:option value="3">3 phòng</form:option>
+							</form:select>
+						</div>
+						<div class="mb-15">
+							 <form:select path="location"  >
+								<option disabled value="">Địa điểm</option>
+								<form:option value="Vũng Tàu">Vũng Tàu</form:option>
+								<form:option value="Đà Lạt">Đà Lạt</form:option>
+							</form:select>
+						</div>
+						<form:hidden path="page"/>
+						<form:hidden path="limit"/>
+						<div class="submit-form">
+							<button id="searchRoom">Tìm phòng trống</button>
+						</div>
+					</form:form>
+				</div>
+			</div>
+			
+		</div>
+		<div class="result">
+			<h1 class="resultTitle">
+				<c:if test="${search.totalItem == 0}">
+					Không tìm thấy loại phòng phù hợp
+				</c:if>
+				<c:if test="${search.totalItem > 0}">
+					Tìm thấy ${search.totalItem} loại phòng phù hợp
+				</c:if>
+			</h1>
+			<div class="listResult">
+				<c:forEach items="${model.listResult}" var="roomType">	
+					<div class="room">
+						<div class="container-fuild">
+							<div class="row">
+								<div class="col-md-3">
+									<a href="">
+										<img alt="" src="<c:url value = "/template/web/images/room/room1.jpg" />">
+									</a>
+								</div>
+								<div class="col-md-6">
+									<a href="" class="h3 roomTitle">${roomType.name} </br>${search.location}</a>
+									<c:forEach items="${roomType.furnitures}" var="furnitures">
+										<p>${furnitures.quality} ${furnitures.name}</p>
+									</c:forEach>
+							
+								</div>	
+								<div class="col-md-3">
+									<div class="roomReview">
+										<div class="roomReviewContent">
+											<h4>${roomType.rank}</h4>
+											<p>${roomType.rates.size()} đánh giá</p>
+										</div>
+										<div class="roomReviewBadge">${roomType.averageBadge}</div>
+									</div>
+									<div class="roomPrice">
+										<p>${search.adult} người lớn 
+											<c:if test="${search.children > 0}">
+												, ${search.children} trẻ em
+											</c:if>
+										</p>
+										<p>${search.nightCount} đêm</p>
+										<h4>${PriceUtil.convert(roomType.sellPrice * search.nightCount)} VND</h4>
+									</div>
+									<a href="" class="btn btn-primary">Xem chi tiết</a>
+								</div>		
+							</div>	
+						</div>	
+					</div>
+				</c:forEach>	
+					
+				<ul id="pagination-demo" class="pagination-lg"></ul>
+			</div>
+		</div>
+	</div>
+	<script src="<c:url value = "/template/pagination/jquery.twbsPagination.js" />"></script>
+	<script type="text/javascript">
+		var totalPage = ${search.totalPage};
+		var currentPage = ${search.page};
+		var limit = ${search.limit};
+		$('#pagination-demo').twbsPagination({
+			totalPages: totalPage,
+			visiblePages: 5,
+			startPage : currentPage,
+			onPageClick: function(event, page) {
+				if (page!=currentPage) {
+					$('#page').val(page);
+					$('#limit').val(limit);
+					$('#formSubmit').submit();
+				}
+			}
+		});
 
-                            
-         <div class="booking-box">
-            
-             <div class="booking-form">
-                 <form id = "formSubmit" action="${searchAPI}" method="get"> 
-                     <div class="b-date arrive mb-15">
-                         <input id="dateFrom" name="dateFrom" class="date-picker" type="text" placeholder="Ngày đến">                   
-                     </div>
-                     <div class="b-date departure mb-15">
-                         <input id="dateTo" name="dateTo" class="date-picker" type="text" placeholder="Ngày đi">              
-                     </div>
-                     <div class="mb-15">
-                         <select  id="adult" name="adult" class="">
-                             <option value="1" disabled>Số người lượng lớn</option>
-                             <option value="1" selected>1 người lớn</option>
-                             <option value="1" >2 người lớn</option>
-                             <option value="1" >3 người lớn</option>
-                             <option value="1" >4 người lớn</option>
-                             <option value="1" >5 người lớn</option>
-                         </select>
-                     </div>
-                     <div class="mb-15">
-                         <select id="children" name="children" class="">
-                             <option value="1" disabled>Số lượng trẻ em</option>
-                             <option value="1" selected>0 trẻ em</option>
-                             <option value="1" >1 trẻ em</option>
-                             <option value="1" >2 trẻ em</option>
-                             <option value="1" >3 trẻ em</option>
-                             <option value="1" >4 trẻ em</option>
-                             <option value="1" >5 trẻ em</option>
-                         </select>
-                     </div>
-                     <div class="mb-15">
-                         <select id="roomCount" name="roomCount" class="">
-                             <option value="1" disabled>Số lượng phòng</option>
-                             <option value="1" >1 phòng</option>
-                             <option value="1" >2 phòng</option>
-                             <option value="1" >3 phòng</option>
-                             <option value="1" >4 phòng</option>
-                             <option value="1" >5 phòng</option>
-                         </select>
-                     </div>
-                     <div class="mb-15">
-                         <select id="location" name="location" class="">
-                             <option value="1" disabled>Địa điểm</option>
-                             <option value="1" >Đà Lạt</option>
-                             <option value="1" >Vũng Tàu</option>                                           
-                         </select>
-                     </div>
-                     <div class="submit-form">
-                         <button id="searchRoom">Tìm phòng trống</button>
-                     </div>
-                 </form>
-             </div>
-         </div>
-     </div>
-                    
+	</script>
 </body>
 </html>

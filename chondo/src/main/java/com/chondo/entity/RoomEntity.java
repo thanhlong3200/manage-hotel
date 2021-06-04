@@ -38,7 +38,6 @@ public class RoomEntity extends BaseEntity {
 	@JoinColumn(name = "hotel_id")
 	private HotelEntity hotel;
 	
-	@ManyToMany(mappedBy = "rooms")
-	private List<ServiceEntity> services = new ArrayList<ServiceEntity>();
+	
 	
 }

@@ -10,7 +10,6 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -36,6 +35,25 @@ public class RoomTypeEntity extends BaseEntity {
 	
 	@Column(columnDefinition = "TEXT")
 	private String review;
+	
+	@OneToMany(mappedBy = "roomType")
+	private List<RateEntity> rates = new ArrayList<RateEntity>();
+
+	@OneToMany(mappedBy = "roomType")
+	private List<RoomEntity> rooms = new ArrayList<RoomEntity>();
+	
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "promotion_id")
+	private PromotionEntity promotion;
+	
+	@ManyToMany(mappedBy = "roomTypes")
+	private List<ServiceEntity> services = new ArrayList<ServiceEntity>();
+	
+	@OneToMany(mappedBy = "roomType")
+	private List<BookingEntity> bookings = new ArrayList<BookingEntity>();
+	
+	@ManyToMany(mappedBy = "roomTypes")
+	private List<FurnitureEntity> furnitures = new ArrayList<FurnitureEntity>();
 	
 	public Integer getCapacity() {
 		return capacity;
@@ -101,32 +119,13 @@ public class RoomTypeEntity extends BaseEntity {
 		this.services = services;
 	}
 
-	public BookingEntity getBooking() {
-		return booking;
+	public List<BookingEntity> getBookings() {
+		return bookings;
 	}
 
-	public void setBooking(BookingEntity booking) {
-		this.booking = booking;
+	public void setBookings(List<BookingEntity> bookings) {
+		this.bookings = bookings;
 	}
-
-	@OneToMany(mappedBy = "roomType")
-	private List<RateEntity> rates = new ArrayList<RateEntity>();
-
-	@OneToMany(mappedBy = "roomType")
-	private List<RoomEntity> rooms = new ArrayList<RoomEntity>();
-	
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "promotion_id")
-	private PromotionEntity promotion;
-	
-	@ManyToMany(mappedBy = "roomTypes")
-	private List<ServiceEntity> services = new ArrayList<ServiceEntity>();
-	
-	@OneToOne(mappedBy = "roomType")
-	private BookingEntity booking;
-	
-	
-	
 
 	public String getCode() {
 		return code;

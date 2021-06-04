@@ -260,7 +260,7 @@
   right: 5px
 }
 .booking-box {
-  background: rgba(58, 196, 250, 0.5) none repeat scroll 0 0;
+  background: #1a456b;
   padding: 15px 35px 35px;
   margin-right: 38px;
 }
@@ -350,7 +350,7 @@
   width: 100%;
 }
 .submit-form button:hover {
-    background: #105671 none repeat scroll 0 0;
+    background:#298e2d none repeat scroll 0 0;
 }
 .welcome-desc {
   margin-bottom: 32px;

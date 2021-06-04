@@ -1,7 +1,5 @@
 package com.chondo.dto;
 
-import com.chondo.entity.RoomEntity;
-
 public class RoomDTO extends AbstractDTO<RoomDTO>{
 	private Integer number;
 	private Integer floor;

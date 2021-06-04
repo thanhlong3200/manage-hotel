@@ -8,7 +8,7 @@
 <title><dec:title></dec:title></title>
 	<link href="<c:url value='/template/web/images/apple-touch-icon.png'/>" type="images/x-icon" rel="shortcut icon">
     <!-- Place favicon.ico in the root directory -->
-    
+    <link rel="stylesheet" href="<c:url value='/template/admin/font-awesome/4.5.0/css/font-awesome.min.css' />" />
     <!-- All css files are included here. -->
     <!-- Bootstrap fremwork main css -->
     <link rel="stylesheet" href="<c:url value='/template/web/css/bootstrap.min.css'/>">

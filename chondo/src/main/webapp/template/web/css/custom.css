@@ -22,3 +22,80 @@ h1.cd-headline.clip span {
 .cd-headline.clip .cd-words-wrapper.coloring{
 	font-size: 44px;
 }
+
+.searchPage {
+    padding: 10px 50px;
+    display: flex;
+}
+
+.searchPage .filter {
+    width: 25%;
+}
+
+.result {
+    width: 75%;
+    padding: 10px 0px 0px 30px;
+}
+
+.filter .booking-box {
+    width: 100%;
+    background: #1a456b;
+}
+.room .col-2 a img {
+    width: 100%;
+    height: 150px;
+}
+
+.room {
+    padding: 20px 35px;
+    box-shadow:0 0 3px #0000006b;
+    margin-bottom: 20px;
+    transition:0.5s;
+}
+.room:hover {
+    box-shadow: 0 0 5px #000000;
+}
+.room a img {
+    height: 200px;
+    width: 100%;
+}
+.room .col-md-4,.room .col-md-5,.room .col-md-3 {
+    padding: 0;
+}
+
+.roomReview {display: inline-block;margin-bottom: 20px;}
+
+.roomReviewBadge {
+    width: 50px;
+    height: 50px;
+    background: #005eaf;
+    text-align: center;
+    color: white;
+    line-height: 50px;
+    border-radius: 5px;
+    float: left;
+    margin-left: 10px;
+}
+
+.room .col-md-3 {text-align: right;}
+
+.roomReviewContent {
+    float: left;
+    padding-top: 3px;
+}
+
+.room p {
+    margin: 0;
+}
+
+.room .h3.roomTitle {
+	font-size:25px;
+	font-weight:600;
+    margin-bottom: 10px;
+    margin-top: 0;
+    text-decoration: none;
+    display: block;
+}
+.roomReviewContent h4 {
+    margin: 0;
+}

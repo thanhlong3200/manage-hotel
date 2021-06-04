@@ -3,6 +3,7 @@ package com.chondo.repository;
 import java.util.Date;
 import java.util.List;
 
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -35,9 +36,10 @@ public interface RoomTypeRepository extends JpaRepository<RoomTypeEntity, Long>{
 			"or (b.date_from <= :dateFrom and b.date_to >= :dateTo))) \r\n" + 
 			"and rt.capacity >= :capacity\r\n" + 
 			"GROUP BY r.room_type_id\r\n" + 
-			"having COUNT(room_type_id) >= :roomCount", nativeQuery = true)
+			"having COUNT(room_type_id) >= :roomCount \n#pageable\n", nativeQuery = true)
 		List<RoomTypeEntity> findAvailable(@Param("hotelId") Long hotelId, @Param("roomCount") Integer roomCount,
-				@Param("capacity") Integer capacity, @Param("dateFrom") Date dateFrom, @Param("dateTo") Date dateTo);
+				@Param("capacity") Integer capacity, @Param("dateFrom") Date dateFrom, @Param("dateTo") Date dateTo,
+				Pageable pageable);
 	
 	
 }

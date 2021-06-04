@@ -44,8 +44,11 @@ NOTE: If you have any note put here.
 	----------------------*/
 	$('.header-section.static4').parallax("50%", 0.3);
 
+var today = new Date(); 
 var tomorrow = new Date(); 
-tomorrow.setDate(tomorrow.getDate()+1);
+tomorrow.setDate(today.getDate()+1);
+$("#dateFrom").datepicker('setStartDate', today);
+$("#dateTo").datepicker('setStartDate', tomorrow);
 $("#dateTo").datepicker({
 		startDate: tomorrow,
       format: 'dd/mm/yyyy'

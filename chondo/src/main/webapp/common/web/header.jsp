@@ -61,7 +61,7 @@
                                         <div class="menu-list hidden-sm hidden-xs">
                                             <nav>
                                                 <ul>
-                                                    <li><a href="index.html">home</a></li>
+                                                    <li><a href="<c:url value='/trang-chu'/>">home</a></li>
                                                     <li><a href="about-us.html">About</a></li>
                                                     <li><a href="gallery.html">Gallery</a></li>
                                                     <li><a href="#">pages<i class="fa fa-angle-down"></i></a>
@@ -97,7 +97,7 @@
                         <div class="col-md-12">
                             <nav id="dropdown">
                             <ul>
-                                <li><a href="index.html">home</a></li>
+                                <li><a href="<c:url value='/trang-chu'/>">home</a></li>
                                 <li><a href="about-us.html">About</a></li>
                                 <li><a href="gallery.html">Gallery</a></li>
                                 <li><a href="#">pages</a>
