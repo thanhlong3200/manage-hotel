@@ -30,6 +30,15 @@ public class RoomTypeService implements IRoomTypeService{
 		return dtos;
 	}
 
+
+	@Override
+	public RoomTypeDTO findOneById(Long roomTypeId) {
+		RoomTypeEntity entity = roomTypeRepository.findOne(roomTypeId); 
+		ModelMapper modelMapper = new ModelMapper();
+		RoomTypeDTO dto = modelMapper.map(entity, RoomTypeDTO.class);
+		return dto;
+	}
+
 	
 
 	

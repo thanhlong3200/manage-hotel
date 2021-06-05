@@ -24,6 +24,9 @@ public class RoomTypeEntity extends BaseEntity {
 	@Column
 	private Integer capacity;
 	
+	@Column
+	private Integer acreage;
+	
 	@Column(name = "original_price")
 	private Long originalPrice;
 	
@@ -41,6 +44,9 @@ public class RoomTypeEntity extends BaseEntity {
 
 	@OneToMany(mappedBy = "roomType")
 	private List<RoomEntity> rooms = new ArrayList<RoomEntity>();
+	
+	@OneToMany(mappedBy = "roomType")
+	private List<ImageEntity> images = new ArrayList<ImageEntity>();
 	
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "promotion_id")
@@ -149,6 +155,22 @@ public class RoomTypeEntity extends BaseEntity {
 
 	public void setRooms(List<RoomEntity> rooms) {
 		this.rooms = rooms;
+	}
+
+	public Integer getAcreage() {
+		return acreage;
+	}
+
+	public void setAcreage(Integer acreage) {
+		this.acreage = acreage;
+	}
+
+	public List<FurnitureEntity> getFurnitures() {
+		return furnitures;
+	}
+
+	public void setFurnitures(List<FurnitureEntity> furnitures) {
+		this.furnitures = furnitures;
 	}
 
 	

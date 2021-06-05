@@ -9,8 +9,10 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
 import com.chondo.entity.RoomTypeEntity;
+import com.chondo.entity.ServiceEntity;
 
 public interface RoomTypeRepository extends JpaRepository<RoomTypeEntity, Long>{
+	
 //	@Query("select rt.id , COUNT(r.roomType.id)\r\n" + 
 //			"from RoomTypeEntity rt inner join rt.rooms r\r\n" + 
 //			"where r.hotel.id = :hotelId and r.id not in(\r\n" + 
@@ -37,7 +39,7 @@ public interface RoomTypeRepository extends JpaRepository<RoomTypeEntity, Long>{
 			"and rt.capacity >= :capacity\r\n" + 
 			"GROUP BY r.room_type_id\r\n" + 
 			"having COUNT(room_type_id) >= :roomCount \n#pageable\n", nativeQuery = true)
-		List<RoomTypeEntity> findAvailable(@Param("hotelId") Long hotelId, @Param("roomCount") Integer roomCount,
+	List<RoomTypeEntity> findAvailable(@Param("hotelId") Long hotelId, @Param("roomCount") Integer roomCount,
 				@Param("capacity") Integer capacity, @Param("dateFrom") Date dateFrom, @Param("dateTo") Date dateTo,
 				Pageable pageable);
 	

@@ -26,8 +26,8 @@ public class test {
 //		dateTo = calendar.getTime();
 //		format.format(dateTo);
 //		System.out.println(dateTo);
-		int totalPage; 
-		totalPage = (int) Math.round((double)11/3);
-		System.out.println(Integer.MAX_VALUE);
+
+		 Integer capacity = (int) Math.round((3 + (double) 3/2)/1);
+		 System.out.println(capacity);
 	}
 }

@@ -10,6 +10,8 @@ public class RoomTypeDTO extends AbstractDTO<RoomTypeDTO>{
 	
 	private Integer capacity;
 	
+	private Integer acreage;
+	
 	private Long originalPrice;
 	
 	private Long sellPrice;
@@ -19,8 +21,12 @@ public class RoomTypeDTO extends AbstractDTO<RoomTypeDTO>{
 	private String review;
 	
 	private List<FurnitureDTO> furnitures = new ArrayList<FurnitureDTO>();
+	
+	private List<ServiceDTO> services = new ArrayList<ServiceDTO>();
 
 	private List<RateDTO> rates =  new ArrayList<RateDTO>();
+	
+	private List<ImageDTO> images =  new ArrayList<ImageDTO>();
 	
 	private double averageBadge;
 	
@@ -112,6 +118,30 @@ public class RoomTypeDTO extends AbstractDTO<RoomTypeDTO>{
 
 	public void setRank(String rank) {
 		this.rank = rank;
+	}
+
+	public List<ServiceDTO> getServices() {
+		return services;
+	}
+
+	public void setServices(List<ServiceDTO> services) {
+		this.services = services;
+	}
+
+	public Integer getAcreage() {
+		return acreage;
+	}
+
+	public void setAcreage(Integer acreage) {
+		this.acreage = acreage;
+	}
+
+	public List<ImageDTO> getImages() {
+		return images;
+	}
+
+	public void setImages(List<ImageDTO> images) {
+		this.images = images;
 	}
 	
 }

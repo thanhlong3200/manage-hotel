@@ -23,6 +23,7 @@
     <link rel="stylesheet" href="<c:url value='/template/web/css/responsive.css'/>">
     <!-- customizer style css -->
     <link rel="stylesheet" href="<c:url value='/template/web/css/style-customizer.css'/>">
+   	<link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
    
     <!-- Modernizr JS -->
     <script src="<c:url value='/template/web/js/vendor/jquery-1.12.0.min.js'/>"></script>

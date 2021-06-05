@@ -16,6 +16,7 @@
 			<div class="booking-box">
 				<div class="booking-form">
 					<form:form id="formSubmit" action="${searchAPI}" method="get" modelAttribute="search">			
+						
 						<div class="b-date arrive mb-15">
 							<form:input path="dateFrom" autocomplete="off" data-date-format="dd/mm/yyyy" class="date-picker"  placeholder="Ngày đến"/>
 						</div>
@@ -79,16 +80,21 @@
 						<div class="container-fuild">
 							<div class="row">
 								<div class="col-md-3">
-									<a href="">
+									<a id="roomType${roomType.id}" href = "" class="btnViewRoom">
 										<img alt="" src="<c:url value = "/template/web/images/room/room1.jpg" />">
 									</a>
 								</div>
 								<div class="col-md-6">
-									<a href="" class="h3 roomTitle">${roomType.name} </br>${search.location}</a>
+									<a id="roomType${roomType.id}" href = "" class="h3 roomTitle btnViewRoom">${roomType.name} </br>${search.location}</a>
+									<p style="font-size: 19px;">${roomType.acreage} m<sup>2</sup></p>
 									<c:forEach items="${roomType.furnitures}" var="furnitures">
 										<p>${furnitures.quality} ${furnitures.name}</p>
 									</c:forEach>
-							
+									<h5 style="margin-top: 10px;font-weight:600;">Miễn phí</h5>
+									<c:forEach items="${roomType.services}" var="service">
+										<span style="margin:0px 10px 10px 0px;white-space:nowrap;display:inline-block;">
+										${service.symbol} ${service.name}</span>
+									</c:forEach>
 								</div>	
 								<div class="col-md-3">
 									<div class="roomReview">
@@ -105,9 +111,13 @@
 											</c:if>
 										</p>
 										<p>${search.nightCount} đêm</p>
-										<h4>${PriceUtil.convert(roomType.sellPrice * search.nightCount)} VND</h4>
+										<p>${search.roomCount} phòng</p>
+										<c:if test="${roomType.originalPrice != roomType.sellPrice}">
+										 	<p style="text-decoration-line:line-through;">${PriceUtil.convert(roomType.originalPrice* search.nightCount * search.roomCount)} VND</p>						
+										</c:if>
+										<h4>${PriceUtil.convert(roomType.sellPrice * search.nightCount * search.roomCount)} VND</h4>
 									</div>
-									<a href="" class="btn btn-primary">Xem chi tiết</a>
+									<a id="roomType${roomType.id}" href="" class="btn btn-primary btnViewRoom">Xem chi tiết</a>
 								</div>		
 							</div>	
 						</div>	
@@ -134,6 +144,13 @@
 					$('#formSubmit').submit();
 				}
 			}
+		});
+		$('.btnViewRoom').on('click', function(event) {
+			event.preventDefault();
+			var idStr = $(this).attr('id');
+			var roomTypeId = idStr.substring(8, idStr.length);
+			$('#formSubmit').append("<input type ='hidden' name='roomTypeId' value = '" + roomTypeId + "'/>")
+			$('#formSubmit').submit();
 		});
 
 	</script>

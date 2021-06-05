@@ -12,6 +12,7 @@ public class SearchDTO extends AbstractDTO<SearchDTO>{
 	private Integer roomCount;
 	private long nightCount;
 	private String location;
+	
 
 	public SearchDTO(String dateFromStr, String dateToStr, Integer adult, Integer children, Integer roomCount, String location) {
 		this.dateFrom = dateFromStr;

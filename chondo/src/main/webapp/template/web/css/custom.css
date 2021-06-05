@@ -99,3 +99,64 @@ h1.cd-headline.clip span {
 .roomReviewContent h4 {
     margin: 0;
 }
+
+.roomDetailsPage .filter {
+    width: 25%;
+}
+
+.roomDetailsPage {
+    padding: 25px 80px;
+    display: flex;
+}
+
+.mainRoomDetails {width: 75%;padding: 0px 5%;}
+.mainRoomDetails h3 {
+    text-align: center;
+    font-weight: 600;
+    font-size: 33px;
+    margin-bottom: 20px;
+}
+
+.sliderImage, .sliderServiceImage {
+    width: 100%;
+    margin: auto;
+    margin-bottom: 40px;
+}
+
+.sliderImage img, .sliderServiceImage img {
+    width: 100%;
+    height: 400px;
+    margin-bottom: 10px;
+}
+
+ul#allImage , ul#allServiceImage{
+    padding: 0;
+    display: inline-block;
+}
+ul#allImage li, ul#allServiceImage li  {
+    float: left;
+    width: 95px;
+    height: 80px;
+    margin-right: 7px;
+}
+
+ul#allImage li img , ul#allServiceImage li img {
+    width: 100%;
+    height: 100%;
+    cursor: pointer;
+}
+form#formSubmit p {
+    color: white;
+    font-size: 20px;
+    text-align: center;
+    white-space: nowrap;
+    margin:7px;
+}
+
+form#formSubmit p#orgPrice {text-decoration-line: line-through;color: #949393;font-size: 18px;}
+button#booking {
+    width: 100%;
+    margin-top: 20px;
+    height: 50px;
+    font-size: 19px;
+}
