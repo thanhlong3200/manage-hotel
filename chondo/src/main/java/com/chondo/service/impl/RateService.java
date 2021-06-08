@@ -37,8 +37,10 @@ public class RateService implements IRateService{
 				rank = "Trung bình";
 			} else if (avg >= 6.5 && avg < 8.0) {
 				rank = "Khá tốt";
-			}else if (avg >= 8.0) {
+			}else if (avg >= 8.0 && avg <9.5) {
 				rank = "Tốt";
+			} else if (avg>=9.5) {
+				rank = "Tuyệt vời";
 			}
 			roomTypeDTO.setRank(rank);
 		}

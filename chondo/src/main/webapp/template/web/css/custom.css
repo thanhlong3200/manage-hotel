@@ -160,3 +160,8 @@ button#booking {
     height: 50px;
     font-size: 19px;
 }
+
+.booking-form-list {
+    display: flex;
+    justify-content: center;
+}

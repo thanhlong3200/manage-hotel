@@ -3,6 +3,7 @@ package com.chondo.entity;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -44,12 +45,12 @@ public class ServiceEntity extends BaseEntity{
 	@ManyToMany(fetch = FetchType.LAZY)
 	@JoinTable(name = "user_type_services", joinColumns = @JoinColumn(name = "service_id"), 
 								  inverseJoinColumns = @JoinColumn(name = "user_type_id"))
-	private List<UserTypeEntity> userTypes = new ArrayList<>();
+	private List<UserTypeEntity> userTypes = new ArrayList<UserTypeEntity>();
 	
 	@ManyToMany(fetch = FetchType.LAZY)
 	@JoinTable(name = "room_type_services", joinColumns = @JoinColumn(name = "service_id"), 
 								  inverseJoinColumns = @JoinColumn(name = "room_type_id"))
-	private List<RoomTypeEntity> roomTypes = new ArrayList<>();
+	private List<RoomTypeEntity> roomTypes = new ArrayList<RoomTypeEntity>();
 
 	@OneToMany(mappedBy = "service")
 	private List<BookedServiceEntity> bookedServices = new ArrayList<BookedServiceEntity>();

@@ -81,7 +81,7 @@
 							<div class="row">
 								<div class="col-md-3">
 									<a id="roomType${roomType.id}" href = "" class="btnViewRoom">
-										<img alt="" src="<c:url value = "/template/web/images/room/room1.jpg" />">
+										<img alt="" src="<c:url value='/template/web/images/room/${roomType.image}'/>">
 									</a>
 								</div>
 								<div class="col-md-6">

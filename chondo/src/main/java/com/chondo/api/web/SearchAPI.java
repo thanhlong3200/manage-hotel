@@ -3,9 +3,10 @@ package com.chondo.api.web;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+
+import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.chondo.dto.BookingDTO;
 import com.chondo.dto.HotelDTO;
 import com.chondo.dto.RoomTypeDTO;
 import com.chondo.dto.SearchDTO;
@@ -46,7 +48,7 @@ public class SearchAPI {
 	@Autowired
 	private IImageService imageService;
 
-	@GetMapping(value = {"/tim-kiem","xem-phong"})
+	@GetMapping(value = {"/tim-kiem","/dat-phong"})
 	public ModelAndView searchPage(
 			@RequestParam("dateFrom") String dateFromStr,
 			@RequestParam("dateTo") String dateToStr,
@@ -56,26 +58,27 @@ public class SearchAPI {
 			@RequestParam("location") String location,
 			@RequestParam(value = "page", required = false) Integer page,
 			@RequestParam(value = "limit", required = false) Integer limit,
-			@RequestParam(value = "roomTypeId", required = false) Long roomTypeId) throws ParseException {
+			@RequestParam(value = "roomTypeId", required = false) Long roomTypeId,
+			HttpServletRequest request) throws ParseException {
 		ModelAndView mav = new ModelAndView(); 		
+		String url = request.getServletPath(); 
+		
 		mav.setViewName("web/searchRoom");
-		     
+		
         SearchDTO search = new SearchDTO(dateFromStr, dateToStr, adult, children, roomCount, location);
         List<RoomTypeDTO> list = new ArrayList<RoomTypeDTO>();
         
-        if (roomTypeId == null) {
-        	SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
-            Date dateFrom = format.parse(dateFromStr);
-            Date dateTo = format.parse(dateToStr);
-            
+        SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
+        Date dateFrom = format.parse(dateFromStr);
+        Date dateTo = format.parse(dateToStr);
+        if (roomTypeId == null && url.equalsIgnoreCase("/tim-kiem")) {   	
+           
         	HotelDTO hotel = hotelService.findOneByLocation(location);
           
         	Integer capacity = (int) Math.round((adult + (double) children/2)/roomCount);
-            Pageable pageable = new PageRequest(page-1, limit);
-           
+            Pageable pageable = new PageRequest(page-1, limit);          
             list = roomTypeService.findAvailable(hotel.getId(), roomCount, capacity, dateFrom, dateTo,pageable);
-            Pageable pageable_all = new PageRequest(0, 1000);
-            
+            Pageable pageable_all = new PageRequest(0, 1000);       
             List<RoomTypeDTO> listAll = roomTypeService.findAvailable(hotel.getId(), roomCount, capacity, dateFrom, dateTo,pageable_all);
               
             search.setLimit(limit);
@@ -91,11 +94,18 @@ public class SearchAPI {
 		}
         
         RoomTypeDTO dto = new RoomTypeDTO();
-        furnitureService.setFurnitures(list);
-        service.setServices(list);
         rateService.setRates(list);
         dto.setListResult(list);
-       
+        
+        if (url.equalsIgnoreCase("/dat-phong")) {
+			mav.setViewName("web/bookingRoom");
+			format = new SimpleDateFormat("yyyy-MM-dd");
+	        String dateFromBooking = format.format(dateFrom);
+	        String dateToBooking = format.format(dateTo);
+	        mav.addObject("dateFromBooking", dateFromBooking);
+	        mav.addObject("dateToBooking", dateToBooking);
+		}
+        
         mav.addObject("model", dto);
         mav.addObject("search", search);
         

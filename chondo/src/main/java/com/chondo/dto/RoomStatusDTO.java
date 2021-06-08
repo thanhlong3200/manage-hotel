@@ -1,30 +1,23 @@
-package com.chondo.entity;
+package com.chondo.dto;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.Column;
-import javax.persistence.Entity;
 import javax.persistence.OneToMany;
-import javax.persistence.Table;
 
-@Entity
-@Table(name = "booking_status")
-public class BookingStatusEntity extends BaseEntity {
-	@Column
+import com.chondo.entity.RoomEntity;
+
+public class RoomStatusDTO extends AbstractDTO<RoomStatusDTO>{
 	private String code;
 	
-	@Column
 	private String name;
 	
-	@Column
 	private String description;
 	
-	@Column
 	private Integer active;
 	
-	@OneToMany(mappedBy = "status")
-    private List<BookingEntity> bookings = new ArrayList<BookingEntity>();
+    private List<RoomDTO> rooms = new ArrayList<>();
 
 	public String getCode() {
 		return code;
@@ -58,13 +51,13 @@ public class BookingStatusEntity extends BaseEntity {
 		this.active = active;
 	}
 
-	public List<BookingEntity> getBookings() {
-		return bookings;
+	public List<RoomDTO> getRooms() {
+		return rooms;
 	}
 
-	public void setBookings(List<BookingEntity> bookings) {
-		this.bookings = bookings;
+	public void setRooms(List<RoomDTO> rooms) {
+		this.rooms = rooms;
 	}
-	
-	
+    
+    
 }

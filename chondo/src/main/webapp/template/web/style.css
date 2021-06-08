@@ -328,7 +328,7 @@
     border: none;
 }
 .select-book::before {
-    content: "ï„‡";
+    content: "Ã¯â€žâ€¡";
     font-family: FontAwesome;
     font-size: 18px;
     pointer-events: none;
@@ -899,7 +899,7 @@ p.welcome-desc {
   width: 0;
 }
 .staff-hover-desc::after {
-  content: "ï�¨";
+  content: "Ã¯ï¿½Â¨";
    top: -86px;
 }
 .staff-hover-desc::after,.staff-list span.plus:before {
@@ -917,7 +917,7 @@ p.welcome-desc {
   line-height: 16px
 }
 .staff-list span.plus::before {
-  content: "ï�§";
+  content: "Ã¯ï¿½Â§";
   top: -15px;
   z-index: 999;
 }
@@ -2010,7 +2010,6 @@ h3.news-title {
   border: 1px solid #ddd;
   color: #b3b3b3;
   height: 40px;
-  text-transform: capitalize;
 }
 .booking-box2 .b_date {
   position: relative;
@@ -2045,7 +2044,7 @@ h3.news-title {
 }
 .booking-box3 .select_book::before,.room-booking-box .select-book.room:before,.booking-form-list .single-form-part .select-option:before,.single_form  .select-date:before{
     color: #bababa;
-    content: "ï„‡";
+    content: "Ã¯â€žâ€¡";
     font-family: FontAwesome;
     font-size: 22px;
     position: absolute;
@@ -2231,7 +2230,7 @@ h3.news-title {
 }
 .single-form-part .select-option::before {
     color: #fff;
-    content: "ï„‡";
+    content: "Ã¯â€žâ€¡";
     font-family: FontAwesome;
     font-size: 22px;
     position: absolute;

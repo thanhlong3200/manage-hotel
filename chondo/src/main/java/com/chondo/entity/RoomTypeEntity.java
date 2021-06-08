@@ -36,12 +36,16 @@ public class RoomTypeEntity extends BaseEntity {
 	@Column
 	private String image;
 	
+	@Column
+	private Integer prepayment;
+	
 	@Column(columnDefinition = "TEXT")
 	private String review;
 	
 	@OneToMany(mappedBy = "roomType")
 	private List<RateEntity> rates = new ArrayList<RateEntity>();
 
+	
 	@OneToMany(mappedBy = "roomType")
 	private List<RoomEntity> rooms = new ArrayList<RoomEntity>();
 	
@@ -54,6 +58,9 @@ public class RoomTypeEntity extends BaseEntity {
 	
 	@ManyToMany(mappedBy = "roomTypes")
 	private List<ServiceEntity> services = new ArrayList<ServiceEntity>();
+	
+	@ManyToMany(mappedBy = "roomTypes")
+	private List<RefundEntity> refunds = new ArrayList<RefundEntity>();
 	
 	@OneToMany(mappedBy = "roomType")
 	private List<BookingEntity> bookings = new ArrayList<BookingEntity>();
@@ -83,6 +90,30 @@ public class RoomTypeEntity extends BaseEntity {
 
 	public void setSellPrice(Long sellPrice) {
 		this.sellPrice = sellPrice;
+	}
+	
+	public List<RefundEntity> getRefunds() {
+		return refunds;
+	}
+
+	public void setRefunds(List<RefundEntity> refunds) {
+		this.refunds = refunds;
+	}
+
+	public Integer getPrepayment() {
+		return prepayment;
+	}
+
+	public void setPrepayment(Integer prepayment) {
+		this.prepayment = prepayment;
+	}
+
+	public List<ImageEntity> getImages() {
+		return images;
+	}
+
+	public void setImages(List<ImageEntity> images) {
+		this.images = images;
 	}
 
 	public String getImage() {

@@ -7,6 +7,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import com.chondo.entity.RoomEntity;
 
 public interface RoomRepository extends JpaRepository<RoomEntity, Long>{
-	List<RoomEntity> findByHotelId(Long hotelId);
-	
+	List<RoomEntity> findByRoomTypeIdAndStatusCode(Long roomTypeId, String code);
+	RoomEntity findOneByRoomTypeIdAndStatusCode(Long roomTypeId, String code);
 }

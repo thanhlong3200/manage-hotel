@@ -23,7 +23,7 @@ public class PaymentEntity extends BaseEntity{
 	@Column
 	private String description;
 	
-	@OneToOne
+	@ManyToOne
     @JoinColumn(name = "booking_id")
     private BookingEntity booking;
 	

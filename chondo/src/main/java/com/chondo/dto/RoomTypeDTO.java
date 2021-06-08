@@ -3,6 +3,9 @@ package com.chondo.dto;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.chondo.entity.PromotionEntity;
+import com.chondo.entity.RefundEntity;
+
 public class RoomTypeDTO extends AbstractDTO<RoomTypeDTO>{
 	private String code;
 	
@@ -20,6 +23,10 @@ public class RoomTypeDTO extends AbstractDTO<RoomTypeDTO>{
 	
 	private String review;
 	
+	private Integer prepayment;
+	
+	private PromotionDTO promotion;
+	
 	private List<FurnitureDTO> furnitures = new ArrayList<FurnitureDTO>();
 	
 	private List<ServiceDTO> services = new ArrayList<ServiceDTO>();
@@ -27,6 +34,8 @@ public class RoomTypeDTO extends AbstractDTO<RoomTypeDTO>{
 	private List<RateDTO> rates =  new ArrayList<RateDTO>();
 	
 	private List<ImageDTO> images =  new ArrayList<ImageDTO>();
+	
+	private List<RefundDTO> refunds = new ArrayList<RefundDTO>();
 	
 	private double averageBadge;
 	
@@ -142,6 +151,30 @@ public class RoomTypeDTO extends AbstractDTO<RoomTypeDTO>{
 
 	public void setImages(List<ImageDTO> images) {
 		this.images = images;
+	}
+
+	public List<RefundDTO> getRefunds() {
+		return refunds;
+	}
+
+	public void setRefunds(List<RefundDTO> refunds) {
+		this.refunds = refunds;
+	}
+
+	public Integer getPrepayment() {
+		return prepayment;
+	}
+
+	public void setPrepayment(Integer prepayment) {
+		this.prepayment = prepayment;
+	}
+
+	public PromotionDTO getPromotion() {
+		return promotion;
+	}
+
+	public void setPromotion(PromotionDTO promotion) {
+		this.promotion = promotion;
 	}
 	
 }

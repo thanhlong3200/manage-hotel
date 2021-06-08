@@ -41,6 +41,10 @@ public class BookingEntity extends BaseEntity {
 	private UserEntity user;
 	
 	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "customer_id")
+	private CustomerEntity customer;
+	
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "hotel_id")
 	private HotelEntity hotel;
 	
@@ -48,19 +52,131 @@ public class BookingEntity extends BaseEntity {
 	@JoinColumn(name = "status_id")
 	private BookingStatusEntity status;
 	
-	@ManyToOne(cascade = CascadeType.ALL,fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "room_type_id")
     private RoomTypeEntity roomType;
 	
 	@OneToMany(mappedBy = "booking")
 	private List<BookedRoomEntity> bookedRooms = new ArrayList<BookedRoomEntity>();
 	
-	@OneToOne(mappedBy = "booking")
-	private PaymentEntity payment;
+	@OneToMany(mappedBy = "booking")
+	private List<PaymentEntity> payments = new ArrayList<PaymentEntity>();
 	
 	@OneToOne(mappedBy = "booking")
 	private BillEntity bill;
-	
 
+	public String getCode() {
+		return code;
+	}
+
+	public void setCode(String code) {
+		this.code = code;
+	}
+
+	public Date getDateFrom() {
+		return dateFrom;
+	}
+
+	public void setDateFrom(Date dateFrom) {
+		this.dateFrom = dateFrom;
+	}
+
+	public Date getDateTo() {
+		return dateTo;
+	}
+
+	public void setDateTo(Date dateTo) {
+		this.dateTo = dateTo;
+	}
+
+	public Integer getRoomCount() {
+		return roomCount;
+	}
+
+	public void setRoomCount(Integer roomCount) {
+		this.roomCount = roomCount;
+	}
+
+	public Integer getAdult() {
+		return adult;
+	}
+
+	public void setAdult(Integer adult) {
+		this.adult = adult;
+	}
+
+	public Integer getChildren() {
+		return children;
+	}
+
+	public void setChildren(Integer children) {
+		this.children = children;
+	}
+
+	public UserEntity getUser() {
+		return user;
+	}
+
+	public void setUser(UserEntity user) {
+		this.user = user;
+	}
+
+	public CustomerEntity getCustomer() {
+		return customer;
+	}
+
+	public void setCustomer(CustomerEntity customer) {
+		this.customer = customer;
+	}
+
+	public HotelEntity getHotel() {
+		return hotel;
+	}
+
+	public void setHotel(HotelEntity hotel) {
+		this.hotel = hotel;
+	}
+
+	public BookingStatusEntity getStatus() {
+		return status;
+	}
+
+	public void setStatus(BookingStatusEntity status) {
+		this.status = status;
+	}
+
+	public RoomTypeEntity getRoomType() {
+		return roomType;
+	}
+
+	public void setRoomType(RoomTypeEntity roomType) {
+		this.roomType = roomType;
+	}
+
+	public List<BookedRoomEntity> getBookedRooms() {
+		return bookedRooms;
+	}
+
+	public void setBookedRooms(List<BookedRoomEntity> bookedRooms) {
+		this.bookedRooms = bookedRooms;
+	}
+
+	public List<PaymentEntity> getPayments() {
+		return payments;
+	}
+
+	public void setPayments(List<PaymentEntity> payments) {
+		this.payments = payments;
+	}
+
+	public BillEntity getBill() {
+		return bill;
+	}
+
+	public void setBill(BillEntity bill) {
+		this.bill = bill;
+	}
+	
+	
 		
 }
