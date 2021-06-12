@@ -1,12 +1,15 @@
 package com.chondo.dto;
 
-public class FurnitureDTO extends AbstractDTO<FurnitureDTO>{
+import java.util.ArrayList;
+import java.util.List;
 
+public class PaymentTypeDTO extends AbstractDTO<PaymentTypeDTO>{
 	private String code;
 	
 	private String name;
 	
-	private Integer quality;
+	private Integer active;
+
 
 	public String getCode() {
 		return code;
@@ -24,13 +27,13 @@ public class FurnitureDTO extends AbstractDTO<FurnitureDTO>{
 		this.name = name;
 	}
 
-	public Integer getQuality() {
-		return quality;
+	public Integer getActive() {
+		return active;
 	}
 
-	public void setQuality(Integer quality) {
-		this.quality = quality;
+	public void setActive(Integer active) {
+		this.active = active;
 	}
-	
+
 	
 }

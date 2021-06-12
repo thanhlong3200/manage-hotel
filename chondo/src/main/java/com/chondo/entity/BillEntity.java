@@ -21,9 +21,7 @@ public class BillEntity extends BaseEntity{
 	
 	@Column(name = "total_sell_price")
 	private Long totalSellPrice;
-	
-	@Column(name = "total_price")
-	private Long totalPrice;
+
 	
 	@OneToOne
     @JoinColumn(name = "booking_id")

@@ -1,22 +1,12 @@
 package com.chondo.dto;
 
 public class BookedServiceDTO extends AbstractDTO<BookedServiceDTO> {
-   
-    private BookedRoomDTO booked;
 
     private ServiceDTO service;
 	
 	private Integer used;
 
 	private Integer free;
-
-	public BookedRoomDTO getBooked() {
-		return booked;
-	}
-
-	public void setBooked(BookedRoomDTO booked) {
-		this.booked = booked;
-	}
 
 	public ServiceDTO getService() {
 		return service;

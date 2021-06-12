@@ -72,9 +72,9 @@ public class SearchAPI {
         Date dateFrom = format.parse(dateFromStr);
         Date dateTo = format.parse(dateToStr);
         if (roomTypeId == null && url.equalsIgnoreCase("/tim-kiem")) {   	
-           
+        	
         	HotelDTO hotel = hotelService.findOneByLocation(location);
-          
+        	
         	Integer capacity = (int) Math.round((adult + (double) children/2)/roomCount);
             Pageable pageable = new PageRequest(page-1, limit);          
             list = roomTypeService.findAvailable(hotel.getId(), roomCount, capacity, dateFrom, dateTo,pageable);

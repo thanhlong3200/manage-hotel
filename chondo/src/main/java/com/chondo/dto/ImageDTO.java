@@ -1,7 +1,5 @@
 package com.chondo.dto;
 
-import javax.persistence.Column;
-
 public class ImageDTO extends AbstractDTO<ImageDTO>{
 	private String url;
 	private String name;

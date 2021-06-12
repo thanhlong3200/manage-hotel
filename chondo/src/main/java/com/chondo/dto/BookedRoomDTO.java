@@ -5,21 +5,11 @@ import java.util.List;
 
 public class BookedRoomDTO extends AbstractDTO<BookedRoomDTO> {
 	
-	private BookingDTO booking;
-
 	private RoomDTO room;
 
 	private List<BookedServiceDTO> bookedServices = new ArrayList<BookedServiceDTO>();
 
 	private List<CustomerDTO> customers = new ArrayList<CustomerDTO>();
-
-	public BookingDTO getBooking() {
-		return booking;
-	}
-
-	public void setBooking(BookingDTO booking) {
-		this.booking = booking;
-	}
 
 	public RoomDTO getRoom() {
 		return room;

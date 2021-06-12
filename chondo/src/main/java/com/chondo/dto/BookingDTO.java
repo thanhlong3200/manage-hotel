@@ -26,10 +26,6 @@ public class BookingDTO extends AbstractDTO<BookingDTO>{
 	private CustomerDTO customer;
 	
 	private BookingStatusDTO status;
-	
-	private List<BookedRoomDTO> bookedRooms = new ArrayList<BookedRoomDTO>();
-	
-	
 
 	public String getCode() {
 		return code;
@@ -121,13 +117,5 @@ public class BookingDTO extends AbstractDTO<BookingDTO>{
 		this.status = status;
 	}
 
-	public List<BookedRoomDTO> getBookedRooms() {
-		return bookedRooms;
-	}
-
-	public void setBookedRooms(List<BookedRoomDTO> bookedRooms) {
-		this.bookedRooms = bookedRooms;
-	}
-	
 	
 }

@@ -64,8 +64,8 @@ public class BookedServiceService implements IBookedServiceService{
 				
 				bookedServiceEntity = bookedServiceRepository.save(bookedServiceEntity);
 				
-//				BookedServiceDTO dto =  modelMapper.map(bookedServiceEntity, BookedServiceDTO.class);		s
-//				list.add(dto);
+				BookedServiceDTO dto =  modelMapper.map(bookedServiceEntity, BookedServiceDTO.class);
+				list.add(dto);
 			}	
 		}
 		return list;

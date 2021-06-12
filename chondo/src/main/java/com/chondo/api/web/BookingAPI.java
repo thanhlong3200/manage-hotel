@@ -15,6 +15,8 @@ import com.chondo.service.IBookedRoomService;
 import com.chondo.service.IBookedServiceService;
 import com.chondo.service.IBookingService;
 import com.chondo.service.ICustomerService;
+import com.chondo.service.IPaymentService;
+import com.chondo.service.IRoomService;
 import com.chondo.service.impl.RoomService;
 
 @RestController(value = "bookingAPI")
@@ -33,7 +35,10 @@ public class BookingAPI {
 	private IBookedServiceService bookedServiceService;
 	
 	@Autowired 
-	private RoomService roomService;
+	private IRoomService roomService;
+	
+	@Autowired
+	private IPaymentService paymentService;
 	
 	@PostMapping(value = "/api/booking")
 	@Transactional
@@ -42,6 +47,7 @@ public class BookingAPI {
 		if ((customer = customerService.findOneByEmail(booking.getCustomer().getEmail())) == null) {
 			customer = customerService.save(booking.getCustomer());
 		}
+		
 		booking.setCustomer(customer);
 		
 		booking = bookingService.save(booking);
@@ -50,6 +56,7 @@ public class BookingAPI {
 		
 		bookedServiceService.setBookedServices(bookedRooms);
 		
+		paymentService.createPayment(booking);
 		
 		return booking;
 	}
