@@ -132,12 +132,14 @@ h1.cd-headline.clip span {
 ul#allImage , ul#allServiceImage{
     padding: 0;
     display: inline-block;
+    margin: 0;
 }
 ul#allImage li, ul#allServiceImage li  {
     float: left;
     width: 95px;
     height: 80px;
     margin-right: 7px;
+    list-style: none;
 }
 
 ul#allImage li img , ul#allServiceImage li img {
@@ -164,4 +166,30 @@ button#booking {
 .booking-form-list {
     display: flex;
     justify-content: center;
+}
+.bodyAdmin {width: 85%;float: right;}
+
+div#sidebar {
+    width: 15%;
+}
+div#main-container {
+    overflow: hidden;
+}
+.scrollDiv th {
+    text-align: center;
+}
+.bodyAdmin .roomDetailsPage .mainRoomDetails {
+    width: 100%;
+}
+.bodyAdmin form label {margin-top: 15px;width: 100%;}
+
+.bodyAdmin form input, .bodyAdmin form select {
+    width: 50%;
+}
+
+button#btnEdit {
+    width: 150px;
+    margin-top: 20px;
+    font-size: 18px;
+    display: block;
 }

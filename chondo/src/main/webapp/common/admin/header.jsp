@@ -17,7 +17,7 @@
             <ul class="nav ace-nav">
                 <li class="light-blue dropdown-modal">
                     <a data-toggle="dropdown" href="#" class="dropdown-toggle">
-                        Xin chào, <%=SecurityUtils.getPrincipal().getFullname()%>
+                        <%-- Xin chào, <%=SecurityUtils.getPrincipal().getFullname()%> --%>
                     </a>
                     <li class="light-blue dropdown-modal">
                         <a href='<c:url value='/thoat'/>'>

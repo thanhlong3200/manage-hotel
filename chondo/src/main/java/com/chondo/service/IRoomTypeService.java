@@ -12,5 +12,10 @@ public interface IRoomTypeService {
 			 Integer capacity,  Date dateFrom, Date dateTo, Pageable pageable);
 
 	RoomTypeDTO findOneById(Long roomTypeId);
-	
+
+	List<RoomTypeDTO> findByStatus(Integer status, Pageable pageable);
+
+	Integer countByStatus(Integer status);
+
+	RoomTypeDTO save(RoomTypeDTO dto);
 }

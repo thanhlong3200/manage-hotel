@@ -5,7 +5,7 @@
     <div class="footer-inner">
         <div class="footer-content">
 						<span class="bigger-120">
-							<span class="blue bolder">laptrinhjavaweb.com</span>
+							<span class="blue bolder">Phân tích thiết kế hệ thống thông tin</span>
 						</span>
 
             &nbsp; &nbsp;

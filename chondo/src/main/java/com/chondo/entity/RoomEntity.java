@@ -24,15 +24,15 @@ public class RoomEntity extends BaseEntity {
 	@Column
 	private Integer floor;
 	
-	@ManyToOne()
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "room_type_id")
 	private RoomTypeEntity roomType;
 	
-	@ManyToOne()
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "status_id")
 	private RoomStatusEntity status;
 	
-	@ManyToOne()
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "hotel_id")
 	private HotelEntity hotel;
 	

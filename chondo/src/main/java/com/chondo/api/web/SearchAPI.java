@@ -29,87 +29,87 @@ import com.chondo.service.IServiceService;
 
 @RestController(value = "searchAPI")
 public class SearchAPI {
-	
-	@Autowired
-	private IHotelService hotelService;
-	
-	@Autowired 
-	private IRoomTypeService roomTypeService; 
-	
-	@Autowired
-	private IFurnitureService furnitureService;
-	
-	@Autowired 
-	private IRateService rateService;
-	
-	@Autowired
-	private IServiceService service;
-	
-	@Autowired
-	private IImageService imageService;
-
-	@GetMapping(value = {"/tim-kiem","/dat-phong"})
-	public ModelAndView searchPage(
-			@RequestParam("dateFrom") String dateFromStr,
-			@RequestParam("dateTo") String dateToStr,
-			@RequestParam("adult") Integer adult,
-			@RequestParam("children") Integer children,
-			@RequestParam("roomCount") Integer roomCount,
-			@RequestParam("location") String location,
-			@RequestParam(value = "page", required = false) Integer page,
-			@RequestParam(value = "limit", required = false) Integer limit,
-			@RequestParam(value = "roomTypeId", required = false) Long roomTypeId,
-			HttpServletRequest request) throws ParseException {
-		ModelAndView mav = new ModelAndView(); 		
-		String url = request.getServletPath(); 
-		
-		mav.setViewName("web/searchRoom");
-		
-        SearchDTO search = new SearchDTO(dateFromStr, dateToStr, adult, children, roomCount, location);
-        List<RoomTypeDTO> list = new ArrayList<RoomTypeDTO>();
-        
-        SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
-        Date dateFrom = format.parse(dateFromStr);
-        Date dateTo = format.parse(dateToStr);
-        if (roomTypeId == null && url.equalsIgnoreCase("/tim-kiem")) {   	
-        	
-        	HotelDTO hotel = hotelService.findOneByLocation(location);
-        	
-        	Integer capacity = (int) Math.round((adult + (double) children/2)/roomCount);
-            Pageable pageable = new PageRequest(page-1, limit);          
-            list = roomTypeService.findAvailable(hotel.getId(), roomCount, capacity, dateFrom, dateTo,pageable);
-            Pageable pageable_all = new PageRequest(0, 1000);       
-            List<RoomTypeDTO> listAll = roomTypeService.findAvailable(hotel.getId(), roomCount, capacity, dateFrom, dateTo,pageable_all);
-              
-            search.setLimit(limit);
-            search.setPage(page);
-            search.setTotalPage((int) Math.round((double) listAll.size() / search.getLimit()));
-            search.setTotalItem(listAll.size());
-        } else {
-        	RoomTypeDTO viewRoom = roomTypeService.findOneById(roomTypeId);
-        	list.clear();
-        	list.add(viewRoom);
-        	imageService.setImages(list);
-        	mav.setViewName("web/room-details");
-		}
-        
-        RoomTypeDTO dto = new RoomTypeDTO();
-        rateService.setRates(list);
-        dto.setListResult(list);
-        
-        if (url.equalsIgnoreCase("/dat-phong")) {
-			mav.setViewName("web/bookingRoom");
-			format = new SimpleDateFormat("yyyy-MM-dd");
-	        String dateFromBooking = format.format(dateFrom);
-	        String dateToBooking = format.format(dateTo);
-	        mav.addObject("dateFromBooking", dateFromBooking);
-	        mav.addObject("dateToBooking", dateToBooking);
-		}
-        
-        mav.addObject("model", dto);
-        mav.addObject("search", search);
-        
-        return mav;
-	}
+//	
+//	@Autowired
+//	private IHotelService hotelService;
+//	
+//	@Autowired 
+//	private IRoomTypeService roomTypeService; 
+//	
+//	@Autowired
+//	private IFurnitureService furnitureService;
+//	
+//	@Autowired 
+//	private IRateService rateService;
+//	
+//	@Autowired
+//	private IServiceService service;
+//	
+//	@Autowired
+//	private IImageService imageService;
+//
+//	@GetMapping(value = {"/tim-kiem","/dat-phong"})
+//	public ModelAndView searchPage(
+//			@RequestParam("dateFrom") String dateFromStr,
+//			@RequestParam("dateTo") String dateToStr,
+//			@RequestParam("adult") Integer adult,
+//			@RequestParam("children") Integer children,
+//			@RequestParam("roomCount") Integer roomCount,
+//			@RequestParam("location") String location,
+//			@RequestParam(value = "page", required = false) Integer page,
+//			@RequestParam(value = "limit", required = false) Integer limit,
+//			@RequestParam(value = "roomTypeId", required = false) Long roomTypeId,
+//			HttpServletRequest request) throws ParseException {
+//		ModelAndView mav = new ModelAndView(); 		
+//		String url = request.getServletPath(); 
+//		
+//		mav.setViewName("web/searchRoom");
+//		
+//        SearchDTO search = new SearchDTO(dateFromStr, dateToStr, adult, children, roomCount, location);
+//        List<RoomTypeDTO> list = new ArrayList<RoomTypeDTO>();
+//        
+//        SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
+//        Date dateFrom = format.parse(dateFromStr);
+//        Date dateTo = format.parse(dateToStr);
+//        if (roomTypeId == null && url.equalsIgnoreCase("/tim-kiem")) {   	
+//        	
+//        	HotelDTO hotel = hotelService.findOneByLocation(location);
+//        	
+//        	Integer capacity = (int) Math.round((adult + (double) children/2)/roomCount);
+//            Pageable pageable = new PageRequest(page-1, limit);          
+//            list = roomTypeService.findAvailable(hotel.getId(), roomCount, capacity, dateFrom, dateTo,pageable);
+//            Pageable pageable_all = new PageRequest(0, 1000);       
+//            List<RoomTypeDTO> listAll = roomTypeService.findAvailable(hotel.getId(), roomCount, capacity, dateFrom, dateTo,pageable_all);
+//              
+//            search.setLimit(limit);
+//            search.setPage(page);
+//            search.setTotalPage((int) Math.round((double) listAll.size() / search.getLimit()));
+//            search.setTotalItem(listAll.size());
+//        } else {
+//        	RoomTypeDTO viewRoom = roomTypeService.findOneById(roomTypeId);
+//        	list.clear();
+//        	list.add(viewRoom);
+//        	imageService.setImages(list);
+//        	mav.setViewName("web/room-details");
+//		}
+//        
+//        RoomTypeDTO dto = new RoomTypeDTO();
+//        rateService.setRates(list);
+//        dto.setListResult(list);
+//        
+//        if (url.equalsIgnoreCase("/dat-phong")) {
+//			mav.setViewName("web/bookingRoom");
+//			format = new SimpleDateFormat("yyyy-MM-dd");
+//	        String dateFromBooking = format.format(dateFrom);
+//	        String dateToBooking = format.format(dateTo);
+//	        mav.addObject("dateFromBooking", dateFromBooking);
+//	        mav.addObject("dateToBooking", dateToBooking);
+//		}
+//        
+//        mav.addObject("model", dto);
+//        mav.addObject("search", search);
+//        
+//        return mav;
+//	}
 
 }

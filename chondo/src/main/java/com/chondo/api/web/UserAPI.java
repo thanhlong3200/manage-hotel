@@ -20,22 +20,6 @@ public class UserAPI {
 	@Autowired
 	private IUserService userService;
 	
-	@GetMapping(value = "/thay-doi-thong-tin")
-	public ModelAndView updatePage(@RequestParam("id") Long id) {
-		ModelAndView mav = new ModelAndView("web/change-information");
-		UserDTO userDTO = userService.findOne(id);
-		mav.addObject("model", userDTO);
-		return mav;
-	}
-	
-	@GetMapping(value = "/dang-ky")
-	public ModelAndView registerPage() {
-		ModelAndView mav = new ModelAndView("web/register");
-		UserDTO userDTO = new UserDTO();
-		mav.addObject("model", userDTO);
-		return mav;
-	}
-	
 	@PostMapping(value = "/api/user")
 	@Transactional
 	public ResponseEntity<?> register(@RequestBody UserDTO userDTO) {

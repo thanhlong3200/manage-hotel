@@ -37,6 +37,8 @@ public class RoomTypeDTO extends AbstractDTO<RoomTypeDTO>{
 	
 	private List<RefundDTO> refunds = new ArrayList<RefundDTO>();
 	
+	private List<RoomDTO> rooms = new ArrayList<RoomDTO>();
+	
 	private double averageBadge;
 	
 	private String rank;
@@ -175,6 +177,14 @@ public class RoomTypeDTO extends AbstractDTO<RoomTypeDTO>{
 
 	public void setPromotion(PromotionDTO promotion) {
 		this.promotion = promotion;
+	}
+
+	public List<RoomDTO> getRooms() {
+		return rooms;
+	}
+
+	public void setRooms(List<RoomDTO> rooms) {
+		this.rooms = rooms;
 	}
 	
 }

@@ -25,6 +25,9 @@ public class RoomTypeEntity extends BaseEntity {
 	private Integer capacity;
 	
 	@Column
+	private Integer status;
+	
+	@Column
 	private Integer acreage;
 	
 	@Column(name = "original_price")
@@ -70,6 +73,14 @@ public class RoomTypeEntity extends BaseEntity {
 	
 	public Integer getCapacity() {
 		return capacity;
+	}
+
+	public Integer getStatus() {
+		return status;
+	}
+
+	public void setStatus(Integer status) {
+		this.status = status;
 	}
 
 	public void setCapacity(Integer capacity) {

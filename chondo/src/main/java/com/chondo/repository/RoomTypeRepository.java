@@ -42,6 +42,10 @@ public interface RoomTypeRepository extends JpaRepository<RoomTypeEntity, Long>{
 	List<RoomTypeEntity> findAvailable(@Param("hotelId") Long hotelId, @Param("roomCount") Integer roomCount,
 				@Param("capacity") Integer capacity, @Param("dateFrom") Date dateFrom, @Param("dateTo") Date dateTo,
 				Pageable pageable);
+
+	List<RoomTypeEntity> findByStatus(Integer status, Pageable pageable);
+
+	Integer countByStatus(Integer status);
 	
 	
 }

@@ -46,11 +46,10 @@ public class BookedServiceService implements IBookedServiceService{
 		List<BookedServiceDTO> list = new ArrayList<BookedServiceDTO>();
 		ModelMapper modelMapper = new ModelMapper();
 		for (BookedRoomDTO bookedRoomDTO : bookedRooms) {
-			List<ServiceEntity> serviceEntities = serviceRepository.findByRoomTypesId(bookedRoomDTO.getRoom().getRoomType().getId());
-			List<ServiceDTO> services = modelMapper.map(serviceEntities, new TypeToken<List<ServiceDTO>>(){}.getType());
-			
 			BookedRoomEntity bookedRoomEntity = bookedRoomRepository.findOne(bookedRoomDTO.getId());	
-					
+			List<ServiceEntity> serviceEntities = serviceRepository.findByRoomTypesId(bookedRoomEntity.getRoom().getRoomType().getId());
+			List<ServiceDTO> services = modelMapper.map(serviceEntities, new TypeToken<List<ServiceDTO>>(){}.getType());
+							
 			for (ServiceDTO service : services) {
 				
 				BookedServiceEntity bookedServiceEntity = new BookedServiceEntity();
