@@ -11,26 +11,7 @@
 </head>
 <body>
 	<h3>Danh sách loại phòng</h3>
-	<div class="product-show-option">
-		<div class="row">
-			<div class="col-lg-7 col-md-7">
-				<div class="select-option">
-					<select id="sorting" class="sorting">
-						<option value="">Tên</option>
-						<option value="">Gía cao</option>
-						<option value="">Gía thấp</option>
-						<option value="">Tồn kho</option>
-					</select> <label for="sorting" id="labelForSorting">Sắp xếp theo: </label> <select
-						id="p-show" class="p-show">
-						<option value="">10</option>
-						<option value="">15</option>
-						<option value="">20</option>
-					</select> <label for="p-show" id="labelForTotalItem">Hiển thị:</label>
-				</div>
-			</div>
-		</div>
-	</div>
-
+	
 	<div class="scrollDiv">
 		<table class="table text-center">
 			<thead class="thead-dark">
@@ -43,7 +24,6 @@
 					<th scope="col">Gía đặt</th>
 					<th scope="col">Gía gốc</th>
 					<th scope="col">Sức chứa</th>
-					<th scope="col">Tổng phòng</th>
 					<th scope="col">Chi tiết</th>
 				</tr>
 			</thead>
@@ -61,7 +41,6 @@
 						<td style="line-height: 60px;">${PriceUtil.convert(roomType.sellPrice)}</td>
 						<td style="line-height: 60px;">${PriceUtil.convert(roomType.originalPrice)}</td>
 						<td style="line-height: 60px;">${roomType.capacity}</td>
-						<td style="line-height: 60px;">${roomType.rooms.size()}</td>
 						<td style="line-height: 60px;"><a
 							href="<c:url value ="/quan-tri/loai-phong/danh-sach?roomTypeId=${roomType.id}"/>">Xem</a></td>
 					</tr>

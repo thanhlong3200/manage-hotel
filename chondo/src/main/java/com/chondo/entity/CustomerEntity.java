@@ -21,6 +21,9 @@ public class CustomerEntity extends BaseEntity{
 	
 	@Column(name = "email")
 	private String email;
+	
+	@Column(name = "check_in")
+	private Integer checkIn;
 
 	@Column(name = "phone")
 	private String phone;
@@ -91,6 +94,22 @@ public class CustomerEntity extends BaseEntity{
 
 	public void setBookeds(List<BookedRoomEntity> bookeds) {
 		this.bookeds = bookeds;
+	}
+
+	public Integer getCheckIn() {
+		return checkIn;
+	}
+
+	public void setCheckIn(Integer checkIn) {
+		this.checkIn = checkIn;
+	}
+
+	public List<BookingEntity> getBookings() {
+		return bookings;
+	}
+
+	public void setBookings(List<BookingEntity> bookings) {
+		this.bookings = bookings;
 	}
 	
 	

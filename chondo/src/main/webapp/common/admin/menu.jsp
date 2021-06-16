@@ -34,24 +34,33 @@
         </div>
     </div>
     <ul class="nav nav-list">
-        <li >
+    	<li >
             <a href="#" class="dropdown-toggle">
                 <i class="menu-icon fa fa-list"></i>
                 <span class="menu-text"></span>
-                Quản lý bài viết
+                Đặt phòng
                 <b class="arrow fa fa-angle-down"></b>
             </a>
             <b class="arrow"></b>
             <ul class="submenu">
                 <li>
-                    <a href="<c:url value='/quan-tri/loai-phong/danh-sach?page=1&limit=2'/>">
+                    <a href="<c:url value='/quan-tri/trang-chu'/>">
                         <i class="menu-icon fa fa-caret-right"></i>
-                        DS loại phòng
+                        Tìm phòng
                     </a>
                     <b class="arrow"></b>
                 </li>
             </ul>
         </li>
+        <li >
+            <a href="<c:url value='/quan-tri/loai-phong/danh-sach?page=1&limit=2'/>">
+                        <i class="menu-icon fa fa-caret-right"></i>
+                        Danh sách
+                    </a>
+            <b class="arrow"></b>
+          
+        </li>
+        
     </ul>
     <div class="sidebar-toggle sidebar-collapse">
         <i class="ace-icon fa fa-angle-double-left ace-save-state" data-icon1="ace-icon fa fa-angle-double-left" data-icon2="ace-icon fa fa-angle-double-right">=</i>

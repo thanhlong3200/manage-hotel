@@ -169,6 +169,10 @@ button#booking {
 }
 .bodyAdmin {width: 85%;float: right;}
 
+.bodyAdmin .booking-rooms-tab ul li a {
+    padding: 20px 33px 20px;
+}
+
 div#sidebar {
     width: 15%;
 }
@@ -187,9 +191,73 @@ div#main-container {
     width: 50%;
 }
 
+.bodyAdmin .booking-form form input, .bodyAdmin .booking-form form select {
+    width: 100%;
+}
+
 button#btnEdit {
     width: 150px;
     margin-top: 20px;
     font-size: 18px;
     display: block;
+}
+.homeAdmin .booking-form {
+    width: 40%;
+    margin: auto;
+}
+ul#listNote button {
+    height: 40px;
+    pointer-events: none;
+    font-weight: 6;
+}
+ul#listNote {
+    display: inline;
+    margin-left: 20px;
+}
+
+ul#listRoom li {
+    float: left;
+    width: 100px;
+    height: 100px;
+    margin: 6px;
+    text-align: center;
+    padding: 20px;
+    background: blue;
+    cursor: pointer;
+}
+
+ul#listRoom li h4, ul#listRoom li p {
+    color: white;
+}
+
+ul#listRoom {
+    padding: 25px 20px;
+}
+.bodyAdmin {
+    width: 85%;
+    float: right;
+}
+
+#sidebar.sidebar.responsive.ace-save-state {
+    width: 15%;
+}
+li.btn.btn-success.availableRoom.booked {
+    background: green !important;
+}
+.booking-details {padding-left: 75px;}
+.oneInforCustomer .booking-form-list .single-form-part {
+    display: block;
+    text-align: left;
+}
+
+.oneInforCustomer .booking-form-list .single-form-part {
+    width: 100%;
+    padding-right: 35px;
+}
+.checkInForm .col-3 {
+    margin-right: 50px;
+}
+
+.checkInForm {
+    padding-left: 50px;
 }

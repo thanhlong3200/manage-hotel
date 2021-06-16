@@ -1,12 +1,17 @@
 package com.chondo.service.impl;
 
+import java.util.List;
+
 import org.modelmapper.ModelMapper;
+import org.modelmapper.TypeToken;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.chondo.dto.BookingDTO;
+import com.chondo.dto.ImageDTO;
 import com.chondo.dto.PaymentDTO;
 import com.chondo.entity.BookingEntity;
+import com.chondo.entity.ImageEntity;
 import com.chondo.entity.PaymentEntity;
 import com.chondo.entity.PaymentStatusEntity;
 import com.chondo.entity.PaymentTypeEntity;
@@ -59,6 +64,14 @@ public class PaymentService implements IPaymentService{
 		
 		ModelMapper modelMapper = new ModelMapper();
 		return modelMapper.map(paymentEntity, PaymentDTO.class);
+	}
+
+	@Override
+	public List<PaymentDTO> findByBookingId(Long id) {
+		List<PaymentEntity> entities = paymentRepository.findByBookingId(id);
+		ModelMapper modelMapper = new ModelMapper();
+		List<PaymentDTO> dtos = modelMapper.map(entities, new TypeToken<List<PaymentDTO>>(){}.getType());
+		return dtos;
 	}
 	
 	

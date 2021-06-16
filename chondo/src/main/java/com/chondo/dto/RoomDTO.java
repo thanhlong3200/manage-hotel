@@ -4,6 +4,8 @@ public class RoomDTO extends AbstractDTO<RoomDTO>{
 	private Integer number;
 
 	private Integer floor;
+	
+	private RoomStatusDTO status;
 
 	public Integer getNumber() {
 		return number;
@@ -19,6 +21,14 @@ public class RoomDTO extends AbstractDTO<RoomDTO>{
 
 	public void setFloor(Integer floor) {
 		this.floor = floor;
+	}
+
+	public RoomStatusDTO getStatus() {
+		return status;
+	}
+
+	public void setStatus(RoomStatusDTO status) {
+		this.status = status;
 	}
 
 	

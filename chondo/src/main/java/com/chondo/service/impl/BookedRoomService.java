@@ -11,13 +11,16 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.chondo.dto.BookedRoomDTO;
 import com.chondo.dto.BookingDTO;
+import com.chondo.dto.CustomerDTO;
 import com.chondo.dto.RoomDTO;
 import com.chondo.dto.RoomStatusDTO;
 import com.chondo.entity.BookedRoomEntity;
 import com.chondo.entity.BookingEntity;
+import com.chondo.entity.CustomerEntity;
 import com.chondo.entity.RoomEntity;
 import com.chondo.repository.BookedRoomRepository;
 import com.chondo.repository.BookingRepository;
+import com.chondo.repository.CustomerRepository;
 import com.chondo.repository.RoomRepository;
 import com.chondo.repository.RoomStatusRepository;
 import com.chondo.service.IBookedRoomService;
@@ -27,6 +30,9 @@ public class BookedRoomService implements IBookedRoomService{
 	
 	@Autowired
 	private RoomRepository roomRepository;
+	
+	@Autowired
+	private CustomerRepository customRepository;
 		
 	@Autowired
 	private BookedRoomRepository bookedRoomRepository;
@@ -51,8 +57,18 @@ public class BookedRoomService implements IBookedRoomService{
 		List<BookedRoomDTO> list = new ArrayList<>();
 		BookingEntity bookingEntity = bookingRepository.findOne(booking.getId());
 		ModelMapper modelMapper = new ModelMapper();
-		List<RoomEntity> roomsEntity = roomRepository.findByRoomTypeIdAndStatusCode(booking.getRoomType().getId(), "available");
-		List<RoomDTO> rooms = modelMapper.map(roomsEntity, new TypeToken<List<RoomDTO>>(){}.getType());
+	
+		List<RoomDTO> rooms = new ArrayList<RoomDTO>();
+		if (booking.getIds() == null) {
+			List<RoomEntity> roomsEntity = roomRepository.findByRoomTypeIdAndStatusCode(booking.getRoomType().getId(), "available");
+			rooms = modelMapper.map(roomsEntity, new TypeToken<List<RoomDTO>>(){}.getType());
+		} else {
+			for (long e : booking.getIds()) {
+				RoomDTO roomDTO = modelMapper.map(roomRepository.findOne(e), RoomDTO.class);
+				rooms.add(roomDTO);
+			}
+		}
+			
 		for (int i = 0; i < booking.getRoomCount(); i++) {
 			BookedRoomEntity entity = new BookedRoomEntity();
 			entity.setBooking(bookingEntity);
@@ -65,6 +81,43 @@ public class BookedRoomService implements IBookedRoomService{
 			list.add(bookedRoom);
 		}
 		return list;
+	}
+
+	@Override
+	public List<BookedRoomDTO> findByBookingId(Long id) {
+		ModelMapper modelMapper = new ModelMapper();
+		List<BookedRoomEntity> entities = bookedRoomRepository.findByBookingId(id);
+		return modelMapper.map(entities, new TypeToken<List<BookedRoomDTO>>(){}.getType());
+	}
+
+	@Override
+	public List<BookedRoomDTO> setCustomers(List<BookedRoomDTO> bookedRooms) {
+		ModelMapper modelMapper = new ModelMapper();
+		
+		List<BookedRoomEntity> bookedRoomEntities = new ArrayList<BookedRoomEntity>();
+		
+		for (BookedRoomDTO bookedRoomDTO : bookedRooms) {
+			
+			BookedRoomEntity entity = bookedRoomRepository.findOne(bookedRoomDTO.getId());
+			
+			for (CustomerDTO customer : bookedRoomDTO.getCustomers()) {
+				if (customer.getCmnd() != null) {
+					CustomerEntity customerEntity;
+					if ((customerEntity = customRepository.findOneByCmnd(customer.getCmnd())) == null) {
+						customerEntity = customRepository.save(modelMapper.map(customer, CustomerEntity.class));		
+					}
+					
+					entity.getCustomers().add(customerEntity);
+				}
+						
+			}
+			entity = bookedRoomRepository.save(entity);
+			bookedRoomEntities.add(entity);
+		}
+		
+	
+		
+		return  modelMapper.map(bookedRoomEntities, new TypeToken<List<BookedRoomDTO>>(){}.getType());
 	}
 	
 }

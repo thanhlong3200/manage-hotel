@@ -20,6 +20,8 @@ public class CustomerDTO extends AbstractDTO<CustomerDTO>{
 	private String gender;
 	
 	private String cmnd;
+	
+	private Integer checkIn;
 
 	public String getFirstName() {
 		return firstName;
@@ -67,6 +69,14 @@ public class CustomerDTO extends AbstractDTO<CustomerDTO>{
 
 	public void setCmnd(String cmnd) {
 		this.cmnd = cmnd;
+	}
+
+	public Integer getCheckIn() {
+		return checkIn;
+	}
+
+	public void setCheckIn(Integer checkIn) {
+		this.checkIn = checkIn;
 	}
 	
 	

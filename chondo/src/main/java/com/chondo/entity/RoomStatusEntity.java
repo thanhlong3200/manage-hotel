@@ -18,6 +18,9 @@ public class RoomStatusEntity extends BaseEntity{
 	private String name;
 	
 	@Column
+	private String btnStyle;
+	
+	@Column
 	private String description;
 	
 	@Column
@@ -64,6 +67,14 @@ public class RoomStatusEntity extends BaseEntity{
 
 	public void setRooms(List<RoomEntity> rooms) {
 		this.rooms = rooms;
+	}
+
+	public String getBtnStyle() {
+		return btnStyle;
+	}
+
+	public void setBtnStyle(String btnStyle) {
+		this.btnStyle = btnStyle;
 	}
 	
 	

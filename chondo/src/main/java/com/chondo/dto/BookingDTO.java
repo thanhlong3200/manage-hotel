@@ -4,6 +4,8 @@ import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.chondo.entity.BookedRoomEntity;
+
 public class BookingDTO extends AbstractDTO<BookingDTO>{
 	private String code;
 	
@@ -26,6 +28,8 @@ public class BookingDTO extends AbstractDTO<BookingDTO>{
 	private CustomerDTO customer;
 	
 	private BookingStatusDTO status;
+	
+	private List<BookedRoomDTO> bookedRooms = new ArrayList<BookedRoomDTO>();
 
 	public String getCode() {
 		return code;
@@ -115,6 +119,14 @@ public class BookingDTO extends AbstractDTO<BookingDTO>{
 
 	public void setStatus(BookingStatusDTO status) {
 		this.status = status;
+	}
+
+	public List<BookedRoomDTO> getBookedRooms() {
+		return bookedRooms;
+	}
+
+	public void setBookedRooms(List<BookedRoomDTO> bookedRooms) {
+		this.bookedRooms = bookedRooms;
 	}
 
 	

@@ -17,7 +17,9 @@ public class RoomStatusDTO extends AbstractDTO<RoomStatusDTO>{
 	
 	private Integer active;
 	
-    private List<RoomDTO> rooms = new ArrayList<>();
+	private String btnStyle;
+	
+
 
 	public String getCode() {
 		return code;
@@ -51,12 +53,20 @@ public class RoomStatusDTO extends AbstractDTO<RoomStatusDTO>{
 		this.active = active;
 	}
 
-	public List<RoomDTO> getRooms() {
-		return rooms;
+
+
+
+
+
+
+
+
+	public String getBtnStyle() {
+		return btnStyle;
 	}
 
-	public void setRooms(List<RoomDTO> rooms) {
-		this.rooms = rooms;
+	public void setBtnStyle(String btnStyle) {
+		this.btnStyle = btnStyle;
 	}
     
     
