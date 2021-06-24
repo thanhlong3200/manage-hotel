@@ -38,7 +38,7 @@ public class PaymentService implements IPaymentService{
 	private PaymentTypeRepository paymentTypeRepository;
 	
 	@Override
-	public PaymentDTO createPayment(BookingDTO booking) {
+	public PaymentDTO createPayment(BookingDTO booking, String descriptions) {
 		PaymentEntity paymentEntity = new PaymentEntity();
 		
 		PaymentStatusEntity paymentStatusEntity = paymentStatusRepository.findOneByCode("unpaid");
@@ -58,6 +58,7 @@ public class PaymentService implements IPaymentService{
 		Long sellPrice = bookingEntity.getRoomType().getSellPrice();
 		paymentEntity.setTotalSellPrice(CalculateUtil.totalPrice(roomCount, sellPrice, countNight));
 		
+		paymentEntity.setDescription(descriptions);
 		
 		paymentEntity = paymentRepository.save(paymentEntity);
 		

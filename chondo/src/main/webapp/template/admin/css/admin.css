@@ -1,3 +1,79 @@
 .mainAvailableRoom {
     display: inline-block;
 }
+.search-form-booking h5 {
+    display: inline;
+}
+
+.search-form-booking button {height: 45px;}
+
+.bodyAdmin .search-form-booking input {
+    width: 260px;
+}
+
+.search-form-booking {
+    padding: 0px 0px 25px 25px;
+}
+
+.bodyAdmin h3 {
+    padding: 0px 0px 0px 25px;
+}
+
+.bodyAdmin .booking-details h3 {
+    padding: 0;
+}
+.changeRoom h4 {
+    display: inline-block;
+   
+}
+.popupChooseRoom {
+    position: fixed;
+    height: 100vh;
+    background: white;
+    top: 0;
+    left: 15%;
+    width: 85%;
+    padding-top: 50px;
+    padding-left: 15px;
+    transition: 0.5s;
+    transform: scale(0);
+}
+button#closePopupChooseRoom {
+    float: right;
+    margin-right: 60px;
+    width: 55px;
+    height: 55px;
+    font-size: 25px;
+}
+
+.popupChooseRoom #note {
+    margin-bottom: 25px;
+}
+
+.popupChooseRoom.appear {
+    transform: scale(1);
+}
+div.formRoomNumber {
+    display: none;
+}
+
+div.formRoomNumber.appear {
+    display: inline-block;
+}
+
+
+div.formRoomNumber input {
+    height: 30px;
+    width: 175px;
+}
+
+div.formRoomNumber input::placeholder {
+    color: black;
+    padding-left: 5px;
+}
+button#saveChangeRoom {
+    display: none;
+    width: 150px;
+    margin: auto;
+    height: 50px;
+}

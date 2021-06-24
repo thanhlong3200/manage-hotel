@@ -106,7 +106,8 @@ public class BookedRoomService implements IBookedRoomService{
 					if ((customerEntity = customRepository.findOneByCmnd(customer.getCmnd())) == null) {
 						customerEntity = customRepository.save(modelMapper.map(customer, CustomerEntity.class));		
 					}
-					
+					customerEntity.setCheckIn(1);
+					customRepository.save(customerEntity);
 					entity.getCustomers().add(customerEntity);
 				}
 						
@@ -119,5 +120,52 @@ public class BookedRoomService implements IBookedRoomService{
 		
 		return  modelMapper.map(bookedRoomEntities, new TypeToken<List<BookedRoomDTO>>(){}.getType());
 	}
-	
+
+	@Override
+	public List<BookedRoomDTO> changeRoom(BookingDTO booking) {
+		ModelMapper modelMapper = new ModelMapper();
+		List<BookedRoomEntity> bookedRoomEntities = bookedRoomRepository.findByBookingCode(booking.getCode());
+		List<BookedRoomDTO> listBookedRooms = modelMapper.map(bookedRoomEntities, new TypeToken<List<BookedRoomDTO>>(){}.getType());
+		
+		List<BookedRoomDTO> result = new ArrayList<BookedRoomDTO>();
+		for (int i = 1; i < booking.getIds().length; i+=2) {
+			if (booking.getIds()[i] != booking.getIds()[i-1]) {
+				
+				for (BookedRoomDTO bookedRoomDTO : listBookedRooms) {
+					if (bookedRoomDTO.getRoom().getId() == (booking.getIds()[i-1])) {
+						BookedRoomEntity bookedRoomEntity = bookedRoomRepository.findOne(bookedRoomDTO.getId());
+						
+						RoomEntity roomEntity = roomRepository.findOne(booking.getIds()[i]);
+						bookedRoomEntity.setRoom(roomEntity);
+						roomEntity.setStatus(roomStatusRepository.findOneByCode("booked"));
+						roomRepository.save(roomEntity);
+						
+						RoomEntity oldRoomEntity = roomRepository.findOne(booking.getIds()[i-1]);
+						oldRoomEntity.setStatus(roomStatusRepository.findOneByCode("available"));
+						roomRepository.save(oldRoomEntity);
+						
+						result.add(modelMapper.map((bookedRoomRepository.save(bookedRoomEntity)), BookedRoomDTO.class));
+			
+						
+					}
+				}
+				
+				
+				
+				
+			}
+			
+		}
+		
+		
+		return result;
+	}
+
+	@Override
+	public List<BookedRoomDTO> findByBookingCode(String code) {
+		ModelMapper modelMapper = new ModelMapper();
+		List<BookedRoomEntity> entities = bookedRoomRepository.findByBookingCode(code);
+		return modelMapper.map(entities, new TypeToken<List<BookedRoomDTO>>(){}.getType());
+	}
+
 }

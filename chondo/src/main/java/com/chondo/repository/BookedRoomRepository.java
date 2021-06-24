@@ -9,5 +9,7 @@ import com.chondo.entity.BookedRoomEntity;
 public interface BookedRoomRepository extends JpaRepository<BookedRoomEntity, Long>{
 
 	List<BookedRoomEntity> findByBookingId(Long id);
+
+	List<BookedRoomEntity> findByBookingCode(String code);
 	
 }

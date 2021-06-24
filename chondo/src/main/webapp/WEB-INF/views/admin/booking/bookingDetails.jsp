@@ -35,13 +35,20 @@
 			<h3>Các phòng đã đặt</h3>
 			<c:forEach items="${bookedRooms}" var="bookedRoom">
 				<h4>Phòng ${bookedRoom.room.number} Tầng  ${bookedRoom.room.floor}</h4>
+				
 				<h5>Khách ở: <c:if test="${bookedRoom.customers.size() == 0}">Chưa có</c:if> </h5>
 				<c:forEach items="${bookedRoom.customers}" var="customer">
 					<p>Tên: ${customer.firstName} ${customer.lastName}</p>
 					<p>CMND: ${customer.cmnd}</p>
 				</c:forEach>
+				<c:if test="${bookedRoom.customers.size() == 0}">
+					<a href="<c:url value= '/quan-tri/check-in?bookingCode=${booking.code}'/>" class ="btn btn-success">Check-in ngay</a>
+				</c:if>
+				<c:if test="${bookedRoom.customers.size() > 0}">
+					<a class ="btn btn-secondary">Đã check-in</a>
+				</c:if>
 			</c:forEach>
-			<a href="<c:url value= '/quan-tri/check-in?bookingCode=${booking.code}'/>" class ="btn btn-success">Check-in ngay</a>
+			
 		</div>
 	</div>
 </body>

@@ -56,7 +56,7 @@ public class BookingAPI {
 		
 		bookedServiceService.setBookedServices(bookedRooms);
 		
-		paymentService.createPayment(booking);
+		paymentService.createPayment(booking,"Tiền đặt phòng");
 		
 		return booking;
 	}

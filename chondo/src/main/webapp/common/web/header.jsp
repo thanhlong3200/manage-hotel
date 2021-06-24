@@ -10,13 +10,6 @@
                         <div class="mgea-full-width">
                             <div class="row">
                             
-                            
-                            
-                            <c:url value ='/template/web/images/about.jpg'/>
-                            
-                            
-                            
-                            
                                 <div class="col-md-2 col-sm-2 col-xs-12">
                                     <div class="logo mt-15">
                                         <a href="index.html"><img src="<c:url value ='/template/web/images/logo/logo.png'/>" alt=""></a>

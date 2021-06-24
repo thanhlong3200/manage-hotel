@@ -10,4 +10,6 @@ public interface IBookedRoomService {
 	List<BookedRoomDTO> setBookedRooms(BookingDTO booking);
 	List<BookedRoomDTO> findByBookingId(Long id);
 	List<BookedRoomDTO> setCustomers(List<BookedRoomDTO> bookedRooms);
+	List<BookedRoomDTO> changeRoom(BookingDTO booking);
+	List<BookedRoomDTO> findByBookingCode(String code);
 }

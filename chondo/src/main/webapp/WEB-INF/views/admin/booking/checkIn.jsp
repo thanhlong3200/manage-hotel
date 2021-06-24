@@ -15,7 +15,7 @@
 	<div class="checkInForm">
 		<h2>Mã booking: ${booking.code}</h2>
 		<h3>Các phòng đã đặt</h3>
-		<form action="" id="checkInForm">
+		<form id="checkInForm">
 
 			<c:set var="count" value="1" scope="page" />
 			<c:forEach items="${bookedRooms}" var="bookedRoom">

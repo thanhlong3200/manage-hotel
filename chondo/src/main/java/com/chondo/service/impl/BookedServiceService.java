@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import com.chondo.dto.BookedRoomDTO;
 import com.chondo.dto.BookedServiceDTO;
+import com.chondo.dto.BookingDTO;
 import com.chondo.dto.RoomDTO;
 import com.chondo.dto.ServiceDTO;
 import com.chondo.entity.BookedRoomEntity;
@@ -68,6 +69,32 @@ public class BookedServiceService implements IBookedServiceService{
 			}	
 		}
 		return list;
+	}
+
+	@Override
+	public void replaceService(BookingDTO booking) {
+		ModelMapper modelMapper = new ModelMapper();
+		List<BookedRoomEntity> bookedRoomEntities = bookedRoomRepository.findByBookingCode(booking.getCode());
+		List<BookedRoomDTO> listBookedRooms = modelMapper.map(bookedRoomEntities, new TypeToken<List<BookedRoomDTO>>(){}.getType());
+		for (int i = 0; i < listBookedRooms.size(); i++) {
+			int countDiff = 0;
+			for (int j = 0; j < booking.getIds().length; j++) {
+				if (j%2==1) {
+					if (listBookedRooms.get(i).getRoom().getId()!=booking.getIds()[j]) {
+						countDiff++;
+					}
+				}
+			}
+			if (countDiff == listBookedRooms.size()) {
+				
+				List<BookedServiceEntity> bookedServiceEntities = bookedServiceRepository.findByBookedId(listBookedRooms.get(i).getId());
+				List<BookedServiceDTO> bookedServiceDTOs = modelMapper.map(bookedServiceEntities, new TypeToken<List<BookedServiceDTO>>(){}.getType());
+				for (BookedServiceDTO bookedServiceDTO : bookedServiceDTOs) {
+					bookedServiceRepository.delete(bookedServiceDTO.getId());
+				}
+				
+			}
+		}
 	}
 	
 }

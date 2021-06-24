@@ -33,7 +33,7 @@
 					<li data-id="${available.id}" data-check="false"
 						class="btn btn-success availableRoom">
 						<h4>${available.number}</h4>
-						<p>Lầu ${available.floor}</p>
+						<p>Tầng ${available.floor}</p>
 					</li>
 
 

@@ -6,7 +6,9 @@ import java.util.Date;
 import java.util.List;
 
 import org.modelmapper.ModelMapper;
+import org.modelmapper.TypeToken;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -19,6 +21,7 @@ import com.chondo.entity.BookingEntity;
 import com.chondo.entity.BookingStatusEntity;
 import com.chondo.entity.CustomerEntity;
 import com.chondo.entity.RoomEntity;
+import com.chondo.entity.RoomTypeEntity;
 import com.chondo.repository.BookingRepository;
 import com.chondo.repository.BookingStatusRepository;
 import com.chondo.repository.CustomerRepository;
@@ -92,7 +95,10 @@ public class BookingService implements IBookingService{
 	public BookingDTO findOneByCode(String bookingCode) {
 		ModelMapper modelMapper = new ModelMapper();
 		BookingEntity bookingEntity = bookingRepository.findOneByCode(bookingCode);
-		return	modelMapper.map(bookingEntity,BookingDTO.class);
+		if (bookingEntity!=null) {
+			return	modelMapper.map(bookingEntity,BookingDTO.class);
+		}
+		else return null;
 	}
 
 
@@ -112,7 +118,25 @@ public class BookingService implements IBookingService{
 		BookingEntity bookingEntity = bookingRepository.findOne(booking.getId());
 		BookingStatusEntity status = bookingStatusRepository.findOneByCode(code);
 		bookingEntity.setStatus(status);
+		bookingRepository.save(bookingEntity);
 		return	modelMapper.map(bookingEntity,BookingDTO.class);	
+	}
+
+
+
+	@Override
+	public List<BookingDTO> findAll(Pageable pageable) {
+		List<BookingEntity> entities = bookingRepository.findAll(pageable).getContent();
+		ModelMapper modelMapper = new ModelMapper();
+		List<BookingDTO> dtos = modelMapper.map(entities, new TypeToken<List<BookingDTO>>(){}.getType());
+		return dtos;
+	}
+
+
+
+	@Override
+	public Integer count() {
+		return (int) bookingRepository.count();
 	}
 
 

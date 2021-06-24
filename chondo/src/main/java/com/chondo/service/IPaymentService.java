@@ -7,7 +7,7 @@ import com.chondo.dto.PaymentDTO;
 
 public interface IPaymentService {
 
-	PaymentDTO createPayment(BookingDTO booking);
+	PaymentDTO createPayment(BookingDTO booking, String descriptions);
 
 
 	List<PaymentDTO> findByBookingId(Long id);

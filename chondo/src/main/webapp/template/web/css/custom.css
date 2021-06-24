@@ -221,7 +221,7 @@ ul#listRoom li {
     height: 100px;
     margin: 6px;
     text-align: center;
-    padding: 20px;
+    padding-top: 20px;
     background: blue;
     cursor: pointer;
 }
@@ -230,8 +230,13 @@ ul#listRoom li h4, ul#listRoom li p {
     color: white;
 }
 
+ul#listRoom li p {
+    font-size: 17px;
+}
+
 ul#listRoom {
     padding: 25px 20px;
+    display: inline-block;
 }
 .bodyAdmin {
     width: 85%;

@@ -48,16 +48,8 @@ public class SearchController {
 	private IRoomService roomService;
 
 	@Autowired
-	private IFurnitureService furnitureService;
-
-	@Autowired
 	private IRateService rateService;
 
-	@Autowired
-	private IServiceService service;
-
-	@Autowired
-	private IImageService imageService;
 
 	@RequestMapping(value = { "/quan-tri/tim-kiem" }, method = RequestMethod.GET)
 	public ModelAndView searchPage(@RequestParam("dateFrom") String dateFromStr,
