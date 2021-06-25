@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -59,5 +60,12 @@ public class BookingAPI {
 		paymentService.createPayment(booking,"Tiền đặt phòng");
 		
 		return booking;
+	}
+	
+	@PutMapping(value = "/api/booking")
+	@Transactional
+	public BookingDTO cancel(@RequestBody BookingDTO booking){
+		
+		return bookingService.save(booking);
 	}
 }

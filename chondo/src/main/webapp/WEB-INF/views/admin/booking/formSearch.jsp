@@ -7,6 +7,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Tìm phòng</title>
+
 </head>
 <body>
 	<div class="homeAdmin">
@@ -69,5 +70,18 @@
 			</form>
 		</div>
 	</div>
+
+	<script type="text/javascript">
+		$(document).ready(function(){
+			var today = new Date(); 
+			var tomorrow = new Date(); 
+			tomorrow.setDate(today.getDate()+1);
+			$("#dateFrom").datepicker('setDate', today);
+			$("#dateTo").datepicker('setDate', tomorrow);
+	     
+		})
+
+	
+	</script>
 </body>
 </html>

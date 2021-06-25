@@ -13,4 +13,8 @@ public interface IRoomService {
 	List<RoomDTO> findAvailable(Long hotelId, Long roomTypeId, Date dateFrom, Date dateTo);
 
 	List<RoomDTO> findByRoomTypeId(Long roomTypeId);
+
+	List<RoomDTO> findAll();
+
+	List<RoomDTO> findByRoomTypeCode(String roomTypeCode);
 }

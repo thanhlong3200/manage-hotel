@@ -41,5 +41,20 @@ public class RoomService implements IRoomService{
 		List<RoomDTO> rooms = modelMapper.map(roomsEntity, new TypeToken<List<RoomDTO>>(){}.getType());
 		return rooms;
 	}
+
+	@Override
+	public List<RoomDTO> findAll() {
+		ModelMapper modelMapper = new ModelMapper();
+		List<RoomEntity> roomsEntity = roomRepository.findAll();
+		List<RoomDTO> rooms = modelMapper.map(roomsEntity, new TypeToken<List<RoomDTO>>(){}.getType());
+		return rooms;
+	}
+
+	@Override
+	public List<RoomDTO> findByRoomTypeCode(String roomTypeCode) {
+		ModelMapper modelMapper = new ModelMapper();
+		List<RoomEntity> roomsEntity = roomRepository.findByRoomTypeCode(roomTypeCode);
+		List<RoomDTO> rooms = modelMapper.map(roomsEntity, new TypeToken<List<RoomDTO>>(){}.getType());
+		return rooms;	}
 	
 }

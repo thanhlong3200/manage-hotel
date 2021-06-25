@@ -5,22 +5,23 @@
 <head>
 	<title><dec:title default="Trang chủ" /></title>
 	<link rel="stylesheet" href="<c:url value='/template/web/style.css'/>">
-	<link rel="stylesheet" href="<c:url value='/template/admin/assets/css/bootstrap.min.css' />" />
+
 	<link rel="stylesheet" href="<c:url value='/template/admin/css/admin.css' />" />
-    <link rel="stylesheet" href="<c:url value='/template/admin/font-awesome/4.5.0/css/font-awesome.min.css' />" />
+
     <link rel="stylesheet" href="<c:url value='/template/admin/assets/css/ace.min.css' />" class="ace-main-stylesheet" id="main-ace-style" />
     <script src="<c:url value='/template/admin/assets/js/ace-extra.min.js' />"></script>
-    <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/themes/smoothness/jquery-ui.css">
-    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+   
+
     <link rel="stylesheet" href="<c:url value='/template/web/css/custom.css'/>">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <script type='text/javascript' src='<c:url value="/template/admin/js/jquery-2.2.3.min.js" />'></script>
-    <script src="<c:url value='/template/admin/assets/js/jquery.2.1.1.min.js' />"></script>
+
+
+
+
     <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-    <link href="<c:url value='/template/web/images/apple-touch-icon.png'/>" type="images/x-icon" rel="shortcut icon">
+ 
     <!-- Place favicon.ico in the root directory -->
-    <link rel="stylesheet" href="<c:url value='/template/admin/font-awesome/4.5.0/css/font-awesome.min.css' />" />
+
     <!-- All css files are included here. -->
     <!-- Bootstrap fremwork main css -->
     <link rel="stylesheet" href="<c:url value='/template/web/css/bootstrap.min.css'/>">
@@ -37,14 +38,13 @@
     <link rel="stylesheet" href="<c:url value='/template/web/css/style-customizer.css'/>">
    	<link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
    
-    <!-- Modernizr JS -->
-    <script src="<c:url value='/template/web/js/vendor/jquery-1.12.0.min.js'/>"></script>
+ 	<script src="<c:url value='/template/web/js/vendor/jquery-1.12.0.min.js'/>"></script>
     <script src="<c:url value='/template/web/js/vendor/jquery.min.js'/>"></script>
     <script src="<c:url value='/template/web/js/vendor/modernizr-2.8.3.min.js'/>"></script>
 
-
+    <dec:head></dec:head>
     
-    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
+   
 </head>
 <body class="no-skin">
 	<!-- header -->
@@ -64,19 +64,7 @@
 		
 	</div>
 	
-	
-	<script src="<c:url value='/template/admin/assets/js/bootstrap.min.js' />"></script>
-	<script src="<c:url value='/template/admin/assets/js/jquery-ui.custom.min.js' />"></script>
-	<script src="<c:url value='/template/admin/assets/js/jquery.ui.touch-punch.min.js' />"></script>
-	<script src="<c:url value='/template/admin/assets/js/jquery.easypiechart.min.js' />"></script>
-	<script src="<c:url value='/template/admin/assets/js/jquery.sparkline.min.js' />"></script>
-	<script src="<c:url value='/template/admin/assets/js/jquery.flot.min.js' />"></script>
-	<script src="<c:url value='/template/admin/assets/js/jquery.flot.pie.min.js' />"></script>
-	<script src="<c:url value='/template/admin/assets/js/jquery.flot.resize.min.js' />"></script>
-	<script src="<c:url value='/template/admin/assets/js/ace-elements.min.js' />"></script>
-	<script src="<c:url value='/template/admin/assets/js/ace.min.js' />"></script>
-	<script src="<c:url value='/template/admin/assets/js/bootstrap.min.js'/>"></script>
-	<script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/jquery.validate.min.js"></script>
+	 <script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/jquery.validate.min.js"></script>
     <!-- Bootstrap framework js -->
     <script src="<c:url value='/template/web/js/vendor/bootstrap.min.js'/>"></script>
     <!--counter up js-->
@@ -108,7 +96,5 @@
     <script src="<c:url value='/template/web/js/plugins.js'/>"></script>
     <!-- Main js file that contents all jQuery plugins activation. -->
     <script src="<c:url value='/template/web/js/main.js'/>"></script>
-	<!-- page specific plugin scripts -->
-	<script src="<c:url value='/template/admin/assets/js/jquery-ui.min.js'/>"></script>
 </body>
 </html>

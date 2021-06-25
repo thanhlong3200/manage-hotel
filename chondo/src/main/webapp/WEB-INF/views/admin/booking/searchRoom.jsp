@@ -9,6 +9,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Tìm phòng</title>
+
 </head>
 <body>
 	<div class="searchPage">

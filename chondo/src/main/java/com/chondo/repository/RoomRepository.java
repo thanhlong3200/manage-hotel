@@ -26,4 +26,6 @@ public interface RoomRepository extends JpaRepository<RoomEntity, Long> {
 			@Param("dateFrom") Date dateFrom, @Param("dateTo") Date dateTo);
 
 	List<RoomEntity> findByRoomTypeId(Long roomTypeId);
+
+	List<RoomEntity> findByRoomTypeCode(String roomTypeCode);
 }

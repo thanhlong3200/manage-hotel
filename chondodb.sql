@@ -11,7 +11,7 @@
  Target Server Version : 80013
  File Encoding         : 65001
 
- Date: 13/06/2021 11:24:49
+ Date: 24/06/2021 12:26:31
 */
 
 SET NAMES utf8mb4;
@@ -54,6 +54,10 @@ CREATE TABLE `booked_room_customers`  (
 -- ----------------------------
 -- Records of booked_room_customers
 -- ----------------------------
+INSERT INTO `booked_room_customers` VALUES (42, 46);
+INSERT INTO `booked_room_customers` VALUES (42, 46);
+INSERT INTO `booked_room_customers` VALUES (43, 46);
+INSERT INTO `booked_room_customers` VALUES (43, 46);
 
 -- ----------------------------
 -- Table structure for booked_rooms
@@ -72,11 +76,13 @@ CREATE TABLE `booked_rooms`  (
   INDEX `FK_4v13ujyp4yxetul7emvyvinbt`(`room_id`) USING BTREE,
   CONSTRAINT `FK_4v13ujyp4yxetul7emvyvinbt` FOREIGN KEY (`room_id`) REFERENCES `rooms` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
   CONSTRAINT `FK_k3bcr12d4rm550rousuq4rehm` FOREIGN KEY (`booking_id`) REFERENCES `bookings` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB AUTO_INCREMENT = 30 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 42 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of booked_rooms
 -- ----------------------------
+INSERT INTO `booked_rooms` VALUES (42, 'anonymousUser', '2021-06-24 12:15:27', 'anonymousUser', '2021-06-24 12:19:56', 59, 11);
+INSERT INTO `booked_rooms` VALUES (43, 'anonymousUser', '2021-06-24 12:15:28', 'anonymousUser', '2021-06-24 12:15:28', 59, 2);
 
 -- ----------------------------
 -- Table structure for bookeds_services
@@ -97,11 +103,15 @@ CREATE TABLE `bookeds_services`  (
   INDEX `FK_47n5rgrfbjw7jmgc693uh3r10`(`service_id`) USING BTREE,
   CONSTRAINT `FK_47n5rgrfbjw7jmgc693uh3r10` FOREIGN KEY (`service_id`) REFERENCES `services` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
   CONSTRAINT `FK_85ox78vh7ua57x5w0nqp9d3lq` FOREIGN KEY (`booked_id`) REFERENCES `booked_rooms` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB AUTO_INCREMENT = 20 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 50 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of bookeds_services
 -- ----------------------------
+INSERT INTO `bookeds_services` VALUES (50, 'anonymousUser', '2021-06-24 12:15:28', 'anonymousUser', '2021-06-24 12:15:28', 1, 0, 42, 1);
+INSERT INTO `bookeds_services` VALUES (51, 'anonymousUser', '2021-06-24 12:15:28', 'anonymousUser', '2021-06-24 12:15:28', 1, 0, 42, 2);
+INSERT INTO `bookeds_services` VALUES (52, 'anonymousUser', '2021-06-24 12:15:28', 'anonymousUser', '2021-06-24 12:15:28', 1, 0, 43, 1);
+INSERT INTO `bookeds_services` VALUES (53, 'anonymousUser', '2021-06-24 12:15:28', 'anonymousUser', '2021-06-24 12:15:28', 1, 0, 43, 2);
 
 -- ----------------------------
 -- Table structure for booking_status
@@ -123,7 +133,8 @@ CREATE TABLE `booking_status`  (
 -- ----------------------------
 -- Records of booking_status
 -- ----------------------------
-INSERT INTO `booking_status` VALUES (1, NULL, NULL, NULL, NULL, 1, 'booked', 'a', 'a');
+INSERT INTO `booking_status` VALUES (1, NULL, NULL, NULL, NULL, 1, 'booked', 'a', 'Đã book');
+INSERT INTO `booking_status` VALUES (2, NULL, NULL, NULL, NULL, 1, 'checkin', 'Đã check-in', 'Đã check-in');
 
 -- ----------------------------
 -- Table structure for bookings
@@ -155,11 +166,12 @@ CREATE TABLE `bookings`  (
   CONSTRAINT `FK_6fvpw8kg0dife13ihwncg0lnt` FOREIGN KEY (`hotel_id`) REFERENCES `hotels` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
   CONSTRAINT `FK_figf0x7qk2dk68ew9qmbknka0` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
   CONSTRAINT `FK_ggsh1imrw3ob9p4ufo12l4ehf` FOREIGN KEY (`room_type_id`) REFERENCES `room_types` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB AUTO_INCREMENT = 49 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 59 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of bookings
 -- ----------------------------
+INSERT INTO `bookings` VALUES (59, 'anonymousUser', '2021-06-24 12:15:27', 'anonymousUser', '2021-06-24 12:17:53', 2, 0, '240620213', '2021-06-24', '2021-06-26', 2, 1, 1, 2, NULL, 44);
 
 -- ----------------------------
 -- Table structure for customers
@@ -177,12 +189,16 @@ CREATE TABLE `customers`  (
   `gender` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
   `last_name` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
   `phone` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
+  `check_in` int(1) NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 42 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 47 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of customers
 -- ----------------------------
+INSERT INTO `customers` VALUES (44, 'anonymousUser', '2021-06-15 12:07:57', 'anonymousUser', '2021-06-15 12:07:57', NULL, 'tlsneakershop@gmail.com', 'Thành', NULL, 'Long', '0387127372', NULL);
+INSERT INTO `customers` VALUES (45, 'anonymousUser', '2021-06-15 21:21:36', 'anonymousUser', '2021-06-15 21:21:36', NULL, 'hoapham123haha@gmail.com', 'Thành', NULL, 'Long', '0387127372', NULL);
+INSERT INTO `customers` VALUES (46, 'anonymousUser', '2021-06-16 12:34:21', 'anonymousUser', '2021-06-16 12:34:21', '12354', NULL, 'Long', 'male', 'Nguyen', NULL, NULL);
 
 -- ----------------------------
 -- Table structure for furnitures
@@ -274,7 +290,7 @@ CREATE TABLE `payment_status`  (
   `description` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
   `name` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 4 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of payment_status
@@ -297,7 +313,7 @@ CREATE TABLE `payment_type`  (
   `code` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
   `name` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 3 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of payment_type
@@ -328,11 +344,12 @@ CREATE TABLE `payments`  (
   CONSTRAINT `FK_1lycy3mncxx9x8lhlxfcwsome` FOREIGN KEY (`status_id`) REFERENCES `payment_status` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
   CONSTRAINT `FK_ald5s62tvlf1s3bjped37mohm` FOREIGN KEY (`payment_type_id`) REFERENCES `payment_type` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
   CONSTRAINT `FK_nuscjm6x127hkb15kcb8n56wo` FOREIGN KEY (`booking_id`) REFERENCES `bookings` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 11 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of payments
 -- ----------------------------
+INSERT INTO `payments` VALUES (11, 'anonymousUser', '2021-06-24 12:15:28', 'anonymousUser', '2021-06-24 12:15:28', NULL, 1000000, 1000000, 59, 3, 1);
 
 -- ----------------------------
 -- Table structure for promotions
@@ -423,7 +440,7 @@ CREATE TABLE `roles`  (
   `modifieddate` datetime(0) NULL DEFAULT NULL,
   `code` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of roles
@@ -444,14 +461,16 @@ CREATE TABLE `room_status`  (
   `code` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
   `description` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
   `name` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
+  `btnStyle` varchar(20) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 3 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 4 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of room_status
 -- ----------------------------
-INSERT INTO `room_status` VALUES (1, NULL, NULL, NULL, NULL, 1, 'available', 'a', NULL);
-INSERT INTO `room_status` VALUES (2, NULL, NULL, NULL, NULL, 1, 'booked', '2', '2');
+INSERT INTO `room_status` VALUES (1, NULL, NULL, NULL, NULL, 1, 'available', 'a', 'Trống', 'success');
+INSERT INTO `room_status` VALUES (2, NULL, NULL, NULL, NULL, 1, 'booked', '2', 'Đã đặt', 'dark');
+INSERT INTO `room_status` VALUES (3, NULL, NULL, NULL, NULL, 1, 'clean-up', 'sa', 'Đang dọn dẹp', 'primary');
 
 -- ----------------------------
 -- Table structure for room_type_furniture
@@ -572,15 +591,16 @@ CREATE TABLE `room_types`  (
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `FK_7hsscda8tyqpx58kq0388kpej`(`promotion_id`) USING BTREE,
   CONSTRAINT `FK_7hsscda8tyqpx58kq0388kpej` FOREIGN KEY (`promotion_id`) REFERENCES `promotions` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB AUTO_INCREMENT = 9 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 12 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of room_types
 -- ----------------------------
-INSERT INTO `room_types` VALUES (1, NULL, NULL, NULL, NULL, 2, 'a', 'abc', 'Phòng Standard Chondo', 250000, '<p>Standard Chondo Vũng T&agrave;u</p>\r\n\r\n<p>Nằm trong b&aacute;n k&iacute;nh chỉ 5 ph&uacute;t đi bộ từ B&atilde;i Sau ở th&agrave;nh phố Vũng T&agrave;u, Star Hotel cung cấp Wi-Fi miễn ph&iacute; v&agrave; chỗ đỗ xe ri&ecirc;ng miễn ph&iacute;.</p>\r\n\r\n<p>Mỗi ph&ograve;ng nghỉ tại kh&aacute;ch sạn n&agrave;y đều c&oacute; m&aacute;y điều h&ograve;a, k&ecirc;nh truyền h&igrave;nh c&aacute;p v&agrave; ph&ograve;ng tắm ri&ecirc;ng với v&ograve;i sen.</p>\r\n\r\n<p>Kh&aacute;ch sạn c&oacute; bếp chung.</p>\r\n\r\n<p>Ở khu vực xung quanh c&oacute; rất nhiều nh&agrave; h&agrave;ng v&agrave; qu&aacute;n ăn địa phương. Kh&aacute;ch sạn cũng cung c&acirc;́p dịch vụ cho thu&ecirc; xe m&aacute;y v&agrave; xe hơi. Star Hotel c&aacute;ch Tượng Ch&uacute;a Ki-t&ocirc; Vũng T&agrave;u 1,4 km v&agrave; Ngọn hải đăng Vũng T&agrave;u 1,4 km. S&acirc;n bay gần nhất l&agrave; s&acirc;n bay quốc tế T&acirc;n Sơn Nhất, c&aacute;ch đ&oacute; 72 km.</p>\r\n\r\n<p>C&aacute;c cặp đ&ocirc;i đặc biệt th&iacute;ch địa điểm n&agrave;y &mdash; họ cho điểm&nbsp;<strong>8,3</strong>&nbsp;cho kỳ nghỉ d&agrave;nh cho 2 người.</p>\r\n\r\n<p>Ch&uacute;ng t&ocirc;i sử dụng ng&ocirc;n ngữ của bạn!</p>', 250000, 1, 25, 1, 1);
-INSERT INTO `room_types` VALUES (2, NULL, NULL, NULL, NULL, 4, 'b', 'a', 'Phòng Superior Chondo', 550000, '<p>Standard Chondo Vũng T&agrave;u</p>\r\n\r\n<p>Nằm trong b&aacute;n k&iacute;nh chỉ 5 ph&uacute;t đi bộ từ B&atilde;i Sau ở th&agrave;nh phố Vũng T&agrave;u, Star Hotel cung cấp Wi-Fi miễn ph&iacute; v&agrave; chỗ đỗ xe ri&ecirc;ng miễn ph&iacute;.</p>\r\n\r\n<p>Mỗi ph&ograve;ng nghỉ tại kh&aacute;ch sạn n&agrave;y đều c&oacute; m&aacute;y điều h&ograve;a, k&ecirc;nh truyền h&igrave;nh c&aacute;p v&agrave; ph&ograve;ng tắm ri&ecirc;ng với v&ograve;i sen.</p>\r\n\r\n<p>Kh&aacute;ch sạn c&oacute; bếp chung.</p>\r\n\r\n<p>Ở khu vực xung quanh c&oacute; rất nhiều nh&agrave; h&agrave;ng v&agrave; qu&aacute;n ăn địa phương. Kh&aacute;ch sạn cũng cung c&acirc;́p dịch vụ cho thu&ecirc; xe m&aacute;y v&agrave; xe hơi. Star Hotel c&aacute;ch Tượng Ch&uacute;a Ki-t&ocirc; Vũng T&agrave;u 1,4 km v&agrave; Ngọn hải đăng Vũng T&agrave;u 1,4 km. S&acirc;n bay gần nhất l&agrave; s&acirc;n bay quốc tế T&acirc;n Sơn Nhất, c&aacute;ch đ&oacute; 72 km.</p>\r\n\r\n<p>C&aacute;c cặp đ&ocirc;i đặc biệt th&iacute;ch địa điểm n&agrave;y &mdash; họ cho điểm&nbsp;<strong>8,3</strong>&nbsp;cho kỳ nghỉ d&agrave;nh cho 2 người.</p>\r\n\r\n<p>Ch&uacute;ng t&ocirc;i sử dụng ng&ocirc;n ngữ của bạn!</p>', 550000, 1, 40, 1, 1);
+INSERT INTO `room_types` VALUES (1, NULL, NULL, 'anonymousUser', '2021-06-13 22:35:53', 2, 'aldc2020', 'abc', 'Phòng Standard Chondo', 250000, NULL, 250000, NULL, 25, 1, NULL);
+INSERT INTO `room_types` VALUES (2, NULL, NULL, 'anonymousUser', '2021-06-13 22:38:33', 4, 'black-friday-2020', 'a', 'Phòng Superior Chondo', 550000, NULL, 550000, NULL, 40, 1, NULL);
 INSERT INTO `room_types` VALUES (3, NULL, NULL, NULL, NULL, 4, 'b', 'a', 'Phòng Deluxe Chondo', 700000, '<p>Standard Chondo Vũng T&agrave;u</p>\r\n\r\n<p>Nằm trong b&aacute;n k&iacute;nh chỉ 5 ph&uacute;t đi bộ từ B&atilde;i Sau ở th&agrave;nh phố Vũng T&agrave;u, Star Hotel cung cấp Wi-Fi miễn ph&iacute; v&agrave; chỗ đỗ xe ri&ecirc;ng miễn ph&iacute;.</p>\r\n\r\n<p>Mỗi ph&ograve;ng nghỉ tại kh&aacute;ch sạn n&agrave;y đều c&oacute; m&aacute;y điều h&ograve;a, k&ecirc;nh truyền h&igrave;nh c&aacute;p v&agrave; ph&ograve;ng tắm ri&ecirc;ng với v&ograve;i sen.</p>\r\n\r\n<p>Kh&aacute;ch sạn c&oacute; bếp chung.</p>\r\n\r\n<p>Ở khu vực xung quanh c&oacute; rất nhiều nh&agrave; h&agrave;ng v&agrave; qu&aacute;n ăn địa phương. Kh&aacute;ch sạn cũng cung c&acirc;́p dịch vụ cho thu&ecirc; xe m&aacute;y v&agrave; xe hơi. Star Hotel c&aacute;ch Tượng Ch&uacute;a Ki-t&ocirc; Vũng T&agrave;u 1,4 km v&agrave; Ngọn hải đăng Vũng T&agrave;u 1,4 km. S&acirc;n bay gần nhất l&agrave; s&acirc;n bay quốc tế T&acirc;n Sơn Nhất, c&aacute;ch đ&oacute; 72 km.</p>\r\n\r\n<p>C&aacute;c cặp đ&ocirc;i đặc biệt th&iacute;ch địa điểm n&agrave;y &mdash; họ cho điểm&nbsp;<strong>8,3</strong>&nbsp;cho kỳ nghỉ d&agrave;nh cho 2 người.</p>\r\n\r\n<p>Ch&uacute;ng t&ocirc;i sử dụng ng&ocirc;n ngữ của bạn!</p>', 700000, 1, 55, 1, 1);
 INSERT INTO `room_types` VALUES (4, NULL, NULL, NULL, NULL, 6, 's', 'standard-double-main.jpg', 'Phòng Suite Chondo', 1100000, '<p>Standard Chondo Vũng T&agrave;u</p>\r\n\r\n<p>Nằm trong b&aacute;n k&iacute;nh chỉ 5 ph&uacute;t đi bộ từ B&atilde;i Sau ở th&agrave;nh phố Vũng T&agrave;u, Star Hotel cung cấp Wi-Fi miễn ph&iacute; v&agrave; chỗ đỗ xe ri&ecirc;ng miễn ph&iacute;.</p>\r\n\r\n<p>Mỗi ph&ograve;ng nghỉ tại kh&aacute;ch sạn n&agrave;y đều c&oacute; m&aacute;y điều h&ograve;a, k&ecirc;nh truyền h&igrave;nh c&aacute;p v&agrave; ph&ograve;ng tắm ri&ecirc;ng với v&ograve;i sen.</p>\r\n\r\n<p>Kh&aacute;ch sạn c&oacute; bếp chung.</p>\r\n\r\n<p>Ở khu vực xung quanh c&oacute; rất nhiều nh&agrave; h&agrave;ng v&agrave; qu&aacute;n ăn địa phương. Kh&aacute;ch sạn cũng cung c&acirc;́p dịch vụ cho thu&ecirc; xe m&aacute;y v&agrave; xe hơi. Star Hotel c&aacute;ch Tượng Ch&uacute;a Ki-t&ocirc; Vũng T&agrave;u 1,4 km v&agrave; Ngọn hải đăng Vũng T&agrave;u 1,4 km. S&acirc;n bay gần nhất l&agrave; s&acirc;n bay quốc tế T&acirc;n Sơn Nhất, c&aacute;ch đ&oacute; 72 km.</p>\r\n\r\n<p>C&aacute;c cặp đ&ocirc;i đặc biệt th&iacute;ch địa điểm n&agrave;y &mdash; họ cho điểm&nbsp;<strong>8,3</strong>&nbsp;cho kỳ nghỉ d&agrave;nh cho 2 người.</p>\r\n\r\n<p>Ch&uacute;ng t&ocirc;i sử dụng ng&ocirc;n ngữ của bạn!</p>', 1000000, 1, 75, 1, 1);
+INSERT INTO `room_types` VALUES (11, 'anonymousUser', '2021-06-13 22:39:09', 'anonymousUser', '2021-06-13 22:39:09', 2, 'SPupdate', 'hn', 'Giày MLB', 1, NULL, 1, NULL, 12, 1, NULL);
 
 -- ----------------------------
 -- Table structure for rooms
@@ -604,14 +624,14 @@ CREATE TABLE `rooms`  (
   CONSTRAINT `FK_467p2weununk9uevph0tc1m8n` FOREIGN KEY (`hotel_id`) REFERENCES `hotels` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
   CONSTRAINT `FK_ia9x6rrujdilmb4tk0msn7b8a` FOREIGN KEY (`status_id`) REFERENCES `room_status` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
   CONSTRAINT `FK_iva2ga5xd5u9ylqrke0mykroy` FOREIGN KEY (`room_type_id`) REFERENCES `room_types` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB AUTO_INCREMENT = 11 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 61 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of rooms
 -- ----------------------------
-INSERT INTO `rooms` VALUES (1, NULL, NULL, 'anonymousUser', '2021-06-12 21:15:49', 1, 101, 1, 1, 1);
-INSERT INTO `rooms` VALUES (2, NULL, NULL, 'anonymousUser', '2021-06-12 21:24:00', 1, 102, 1, 1, 1);
-INSERT INTO `rooms` VALUES (3, NULL, NULL, 'anonymousUser', '2021-06-12 21:27:37', 1, 103, 1, 1, 1);
+INSERT INTO `rooms` VALUES (1, NULL, NULL, 'anonymousUser', '2021-06-24 12:19:56', 1, 101, 1, 1, 1);
+INSERT INTO `rooms` VALUES (2, NULL, NULL, 'anonymousUser', '2021-06-24 12:15:28', 1, 102, 1, 1, 2);
+INSERT INTO `rooms` VALUES (3, NULL, NULL, 'anonymousUser', '2021-06-15 21:21:37', 1, 103, 1, 1, 1);
 INSERT INTO `rooms` VALUES (4, NULL, NULL, 'anonymousUser', '2021-06-12 20:07:03', 1, 104, 1, 2, 1);
 INSERT INTO `rooms` VALUES (5, NULL, NULL, 'anonymousUser', '2021-06-12 20:56:09', 1, 105, 1, 2, 1);
 INSERT INTO `rooms` VALUES (6, NULL, NULL, NULL, NULL, 1, 106, 1, 2, 1);
@@ -619,6 +639,57 @@ INSERT INTO `rooms` VALUES (7, NULL, NULL, NULL, NULL, 1, 107, 1, 3, 1);
 INSERT INTO `rooms` VALUES (8, NULL, NULL, NULL, NULL, 1, 108, 1, 3, 1);
 INSERT INTO `rooms` VALUES (9, NULL, NULL, NULL, NULL, 1, 109, 1, 4, 1);
 INSERT INTO `rooms` VALUES (10, NULL, NULL, NULL, NULL, 1, 110, 1, 4, 1);
+INSERT INTO `rooms` VALUES (11, NULL, NULL, 'anonymousUser', '2021-06-24 12:19:56', 2, 201, 1, 1, 2);
+INSERT INTO `rooms` VALUES (12, NULL, NULL, 'anonymousUser', '2021-06-24 12:09:02', 2, 202, 1, 1, 1);
+INSERT INTO `rooms` VALUES (13, NULL, NULL, NULL, NULL, 2, 203, 1, 1, 1);
+INSERT INTO `rooms` VALUES (14, NULL, NULL, NULL, NULL, 2, 204, 1, 2, 1);
+INSERT INTO `rooms` VALUES (15, NULL, NULL, NULL, NULL, 2, 205, 1, 2, 1);
+INSERT INTO `rooms` VALUES (16, NULL, NULL, NULL, NULL, 2, 206, 1, 2, 1);
+INSERT INTO `rooms` VALUES (17, NULL, NULL, NULL, NULL, 2, 207, 1, 3, 1);
+INSERT INTO `rooms` VALUES (18, NULL, NULL, NULL, '2021-06-14 20:48:25', 2, 208, 1, 3, 1);
+INSERT INTO `rooms` VALUES (19, NULL, NULL, NULL, NULL, 2, 209, 1, 4, 1);
+INSERT INTO `rooms` VALUES (20, NULL, NULL, NULL, NULL, 2, 210, 1, 4, 1);
+INSERT INTO `rooms` VALUES (21, NULL, NULL, NULL, NULL, 3, 301, 1, 1, 1);
+INSERT INTO `rooms` VALUES (22, NULL, NULL, NULL, NULL, 3, 302, 1, 1, 1);
+INSERT INTO `rooms` VALUES (23, NULL, NULL, NULL, NULL, 3, 303, 1, 1, 1);
+INSERT INTO `rooms` VALUES (24, NULL, NULL, NULL, NULL, 3, 304, 1, 2, 1);
+INSERT INTO `rooms` VALUES (25, NULL, NULL, NULL, NULL, 3, 305, 1, 2, 1);
+INSERT INTO `rooms` VALUES (26, NULL, NULL, NULL, NULL, 3, 306, 1, 2, 1);
+INSERT INTO `rooms` VALUES (27, NULL, NULL, NULL, NULL, 3, 307, 1, 3, 1);
+INSERT INTO `rooms` VALUES (28, NULL, NULL, NULL, NULL, 3, 308, 1, 3, 1);
+INSERT INTO `rooms` VALUES (29, NULL, NULL, NULL, NULL, 3, 309, 1, 4, 1);
+INSERT INTO `rooms` VALUES (30, NULL, NULL, NULL, NULL, 3, 310, 1, 4, 1);
+INSERT INTO `rooms` VALUES (31, NULL, NULL, 'anonymousUser', '2021-06-15 12:07:58', 4, 401, 1, 1, 1);
+INSERT INTO `rooms` VALUES (32, NULL, NULL, 'anonymousUser', '2021-06-15 12:07:58', 4, 402, 1, 1, 1);
+INSERT INTO `rooms` VALUES (33, NULL, NULL, NULL, NULL, 4, 403, 1, 1, 1);
+INSERT INTO `rooms` VALUES (34, NULL, NULL, NULL, NULL, 4, 404, 1, 2, 1);
+INSERT INTO `rooms` VALUES (35, NULL, NULL, NULL, NULL, 4, 405, 1, 2, 1);
+INSERT INTO `rooms` VALUES (36, NULL, NULL, NULL, NULL, 4, 406, 1, 2, 1);
+INSERT INTO `rooms` VALUES (37, NULL, NULL, NULL, NULL, 4, 407, 1, 3, 1);
+INSERT INTO `rooms` VALUES (38, NULL, NULL, NULL, NULL, 4, 408, 1, 3, 1);
+INSERT INTO `rooms` VALUES (39, NULL, NULL, NULL, NULL, 4, 409, 1, 4, 1);
+INSERT INTO `rooms` VALUES (40, NULL, NULL, NULL, NULL, 4, 410, 1, 4, 1);
+INSERT INTO `rooms` VALUES (41, NULL, NULL, NULL, NULL, 5, 501, 1, 1, 1);
+INSERT INTO `rooms` VALUES (42, NULL, NULL, NULL, NULL, 5, 502, 1, 1, 1);
+INSERT INTO `rooms` VALUES (43, NULL, NULL, NULL, NULL, 5, 503, 1, 1, 1);
+INSERT INTO `rooms` VALUES (44, NULL, NULL, NULL, NULL, 5, 504, 1, 2, 1);
+INSERT INTO `rooms` VALUES (45, NULL, NULL, NULL, NULL, 5, 505, 1, 2, 1);
+INSERT INTO `rooms` VALUES (46, NULL, NULL, NULL, NULL, 5, 506, 1, 2, 1);
+INSERT INTO `rooms` VALUES (47, NULL, NULL, NULL, NULL, 5, 507, 1, 3, 1);
+INSERT INTO `rooms` VALUES (48, NULL, NULL, NULL, NULL, 5, 508, 1, 3, 1);
+INSERT INTO `rooms` VALUES (49, NULL, NULL, NULL, NULL, 5, 509, 1, 4, 1);
+INSERT INTO `rooms` VALUES (50, NULL, NULL, NULL, NULL, 5, 510, 1, 4, 1);
+INSERT INTO `rooms` VALUES (51, NULL, NULL, NULL, NULL, 6, 601, 1, 1, 1);
+INSERT INTO `rooms` VALUES (52, NULL, NULL, NULL, NULL, 6, 602, 1, 1, 1);
+INSERT INTO `rooms` VALUES (53, NULL, NULL, NULL, NULL, 6, 603, 1, 1, 1);
+INSERT INTO `rooms` VALUES (54, NULL, NULL, NULL, NULL, 6, 604, 1, 2, 1);
+INSERT INTO `rooms` VALUES (55, NULL, NULL, NULL, NULL, 6, 605, 1, 2, 1);
+INSERT INTO `rooms` VALUES (56, NULL, NULL, NULL, NULL, 6, 606, 1, 2, 1);
+INSERT INTO `rooms` VALUES (57, NULL, NULL, NULL, NULL, 6, 607, 1, 3, 1);
+INSERT INTO `rooms` VALUES (58, NULL, NULL, NULL, NULL, 6, 608, 1, 3, 1);
+INSERT INTO `rooms` VALUES (59, NULL, NULL, NULL, NULL, 6, 609, 1, 4, 1);
+INSERT INTO `rooms` VALUES (60, NULL, NULL, NULL, NULL, 6, 610, 1, 4, 1);
+INSERT INTO `rooms` VALUES (61, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
 
 -- ----------------------------
 -- Table structure for rooms_services
@@ -748,12 +819,13 @@ CREATE TABLE `users`  (
   INDEX `FK_ayjpho46eaqkqiqai0k4d59ww`(`user_type_id`) USING BTREE,
   CONSTRAINT `FK_ayjpho46eaqkqiqai0k4d59ww` FOREIGN KEY (`user_type_id`) REFERENCES `user_types` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
   CONSTRAINT `FK_fm4cfgdt24toh89yw4rbnu1lb` FOREIGN KEY (`group_id`) REFERENCES `users_group` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 4 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of users
 -- ----------------------------
 INSERT INTO `users` VALUES (2, 'anonymousUser', '2021-06-12 18:27:22', 'anonymousUser', '2021-06-12 18:27:22', 'D5/015 Ấp Lê Lợi 2', '2000-02-03', 'hoapham123haha@gmail.com', 'Thành Long', 'male', 'q', '0387127372', 1, 'long', 1, NULL);
+INSERT INTO `users` VALUES (3, 'anonymousUser', '2021-06-13 18:42:27', 'anonymousUser', '2021-06-13 18:42:27', 'D5/015 Ấp Lê Lợi 2', '2000-12-03', '0929791505', 'Thành Long', 'male', '123', '0387127372', 1, 'longd', 1, NULL);
 
 -- ----------------------------
 -- Table structure for users_group
@@ -768,7 +840,7 @@ CREATE TABLE `users_group`  (
   `code` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
   `name` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of users_group

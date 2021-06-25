@@ -54,17 +54,22 @@ public class BookingService implements IBookingService{
 	@Transactional
 	public BookingDTO save(BookingDTO booking) {
 		ModelMapper modelMapper = new ModelMapper();
+		BookingEntity bookingEntity = new BookingEntity();
+		if (booking.getCode()!=null) {
+			bookingEntity = bookingRepository.findOneByCode(booking.getCode());
+			bookingEntity.setStatus(bookingStatusRepository.findOneByCode("cancel"));
+		}else {
+			bookingEntity = modelMapper.map(booking,BookingEntity.class);
+			
+			CustomerEntity customerEntity = customerRepository.findOne(booking.getCustomer().getId());
+			bookingEntity.setCustomer(customerEntity);
+			
+			bookingEntity.setCode(getCode() + bookingRepository.count());
+			bookingEntity.setStatus(bookingStatusRepository.findOneByCode("booked"));
+			bookingEntity.setRoomType(roomTypeRepository.findOne(booking.getRoomType().getId()));
+			bookingEntity.setHotel(hotelRepository.findOneByLocationAndStatus(booking.getHotel().getLocation(), 1));
+		}
 		
-		BookingEntity bookingEntity = modelMapper.map(booking,BookingEntity.class);
-		
-		CustomerEntity customerEntity = customerRepository.findOne(booking.getCustomer().getId());
-		bookingEntity.setCustomer(customerEntity);
-		
-		bookingEntity.setCode(getCode() + bookingRepository.count());
-		bookingEntity.setStatus(bookingStatusRepository.findOneByCode("booked"));
-		bookingEntity.setRoomType(roomTypeRepository.findOne(booking.getRoomType().getId()));
-		bookingEntity.setHotel(hotelRepository.findOneByLocationAndStatus(booking.getHotel().getLocation(), 1));
-	
 		bookingEntity = bookingRepository.save(bookingEntity);
 		BookingDTO bookingDTO = modelMapper.map(bookingEntity, BookingDTO.class);
 		if (booking.getIds()!=null) {

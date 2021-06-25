@@ -18,4 +18,6 @@ public interface IRoomTypeService {
 	Integer countByStatus(Integer status);
 
 	RoomTypeDTO save(RoomTypeDTO dto);
+
+	List<RoomTypeDTO> findAll();
 }

@@ -53,6 +53,11 @@
             </ul>
         </li> --%>
         <li >
+            <a href="<c:url value='/quan-tri/phong'/>">
+                        Sơ đồ phòng
+                    </a>
+        </li>
+        <li >
             <a href="<c:url value='/quan-tri/trang-chu'/>">
                         Tìm phòng
                     </a>
@@ -63,9 +68,15 @@
                     </a>
         </li>
         <li >
+            <a href="<c:url value='/quan-tri/huy-booking'/>">
+                Hủy booking
+            </a>
+        </li>
+        <li >
             <a href="<c:url value='/quan-tri/doi-phong'/>">
                 Đổi phòng
             </a>
         </li>
+        
     </ul>
 </div>

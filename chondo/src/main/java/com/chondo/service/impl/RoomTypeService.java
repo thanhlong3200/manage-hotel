@@ -70,6 +70,15 @@ public class RoomTypeService implements IRoomTypeService{
 		return modelMapper.map(roomTypeRepository.save(roomTypeEntity), RoomTypeDTO.class);
 	}
 
+
+	@Override
+	public List<RoomTypeDTO> findAll() {
+		List<RoomTypeEntity> entities = roomTypeRepository.findAll();
+		ModelMapper modelMapper = new ModelMapper();
+		List<RoomTypeDTO> dtos = modelMapper.map(entities, new TypeToken<List<RoomTypeDTO>>(){}.getType());
+		return dtos;
+	}
+
 	
 
 	

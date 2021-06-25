@@ -77,3 +77,16 @@ button#saveChangeRoom {
     margin: auto;
     height: 50px;
 }
+.listRoomMain form {
+    display: inline-block;
+    width: 450px;
+    margin-left: 45px;
+}
+
+.listRoomMain #note {
+    display: inline-block;
+}
+
+.filterRoomType h5 {
+    display: inline;
+}

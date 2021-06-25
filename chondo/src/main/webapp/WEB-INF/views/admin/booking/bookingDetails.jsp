@@ -21,6 +21,7 @@
 			<p>Loại phòng: ${booking.roomType.name}</p>
 			<p>Tổng phòng: ${booking.roomCount}</p>
 			<p>Tổng khách: ${booking.adult} người lớn, ${booking.children} trẻ em</p>
+			<h4 style="font-weight:600;">Trạng thái: ${booking.status.name }</h4>
 		</div>
 		<div class= "payments-information col-3">
 			<h3>Các khoản chi trả</h3>
@@ -41,12 +42,15 @@
 					<p>Tên: ${customer.firstName} ${customer.lastName}</p>
 					<p>CMND: ${customer.cmnd}</p>
 				</c:forEach>
-				<c:if test="${bookedRoom.customers.size() == 0}">
-					<a href="<c:url value= '/quan-tri/check-in?bookingCode=${booking.code}'/>" class ="btn btn-success">Check-in ngay</a>
-				</c:if>
-				<c:if test="${bookedRoom.customers.size() > 0}">
-					<a class ="btn btn-secondary">Đã check-in</a>
-				</c:if>
+				<c:if test="${booking.status.code != 'cancel' }">
+					<c:if test="${bookedRoom.customers.size() == 0}">
+						<a style="margin-bottom:20px;" href="<c:url value= '/quan-tri/check-in?bookingCode=${booking.code}'/>" class ="btn btn-success">Check-in ngay</a>
+					</c:if>
+					<c:if test="${bookedRoom.customers.size() > 0}">
+						<a style="margin-bottom:20px;" class ="btn btn-secondary">Đã check-in</a>
+					</c:if>
+					</c:if>
+				
 			</c:forEach>
 			
 		</div>
