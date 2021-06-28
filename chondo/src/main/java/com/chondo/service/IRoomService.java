@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.springframework.data.repository.query.Param;
 
+import com.chondo.dto.BookingDTO;
 import com.chondo.dto.RoomDTO;
 
 public interface IRoomService {
@@ -17,4 +18,6 @@ public interface IRoomService {
 	List<RoomDTO> findAll();
 
 	List<RoomDTO> findByRoomTypeCode(String roomTypeCode);
+
+	List<RoomDTO> findByBookedRoom(Date date);
 }

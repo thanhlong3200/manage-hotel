@@ -55,6 +55,15 @@ public class RoomService implements IRoomService{
 		ModelMapper modelMapper = new ModelMapper();
 		List<RoomEntity> roomsEntity = roomRepository.findByRoomTypeCode(roomTypeCode);
 		List<RoomDTO> rooms = modelMapper.map(roomsEntity, new TypeToken<List<RoomDTO>>(){}.getType());
-		return rooms;	}
+		return rooms;	
+	}
+
+	@Override
+	public List<RoomDTO> findByBookedRoom(Date date) {
+		ModelMapper modelMapper = new ModelMapper();
+		List<RoomEntity> roomsEntity = roomRepository.findByBookedRoom(date);
+		List<RoomDTO> rooms = modelMapper.map(roomsEntity, new TypeToken<List<RoomDTO>>(){}.getType());
+		return rooms;
+	}
 	
 }

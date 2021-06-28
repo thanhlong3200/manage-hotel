@@ -12,6 +12,8 @@ import org.springframework.web.servlet.ModelAndView;
 import com.chondo.dto.BookedRoomDTO;
 import com.chondo.dto.BookingDTO;
 import com.chondo.dto.PaymentDTO;
+import com.chondo.dto.RoomDTO;
+import com.chondo.dto.RoomStatusDTO;
 import com.chondo.service.IBookedRoomService;
 import com.chondo.service.IBookingService;
 import com.chondo.service.IPaymentService;
@@ -26,18 +28,26 @@ public class CheckInController {
 	private IBookedRoomService bookedRoomService;
 	
 	@RequestMapping(value = "/quan-tri/check-in", method = RequestMethod.GET)
-	public ModelAndView checkInPage(@RequestParam(value = "bookingCode", required = false) String bookingCode) {
+	public ModelAndView checkInPage(@RequestParam(value = "code", required = false) String code) {
 		ModelAndView mav = new ModelAndView("admin/booking/checkIn");
-		if (bookingCode != null) {
-			BookingDTO bookingDTO = bookingService.findOneByCode(bookingCode);
+		if (code != null) {
+			BookingDTO booking = bookingService.findOneByCode(code);
+				
+			if (booking != null) {
+				
+				List<BookedRoomDTO> bookedRooms = bookedRoomService.findByBookingId(booking.getId());
+				
+				mav.addObject("booking", booking);
+				mav.addObject("bookedRooms", bookedRooms);
+				
+				mav.addObject("code", code);
+			}else {
+				mav.addObject("error", "Không tìm thấy mã booking này !");
+			}
 			
-			List<BookedRoomDTO> bookedRooms = bookedRoomService.findByBookingId(bookingDTO.getId());
-			
-			
-			
-			mav.addObject("booking", bookingDTO);
-			mav.addObject("bookedRooms", bookedRooms);
 		}
+
+
 		
 		return mav;
 	}

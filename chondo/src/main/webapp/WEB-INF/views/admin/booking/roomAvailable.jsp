@@ -66,7 +66,7 @@
 								</c:if>
 								<c:if test="${roomType.prepayment == 0}">
 									<li><a href="#payment" data-toggle="tab"><span
-											class="tab-border">3</span><span>Thanh Toán Sau</span></a></li>
+											class="tab-border">3</span><span>Thanh Toán</span></a></li>
 								</c:if>
 
 
@@ -145,8 +145,9 @@
 																		${refund.percent}%</p>
 																</c:forEach>
 															</div>
+															
 															<button onclick="information()" style="height: 60px;"
-																href="" class="btn btn-primary">Kế tiếp =>></button>
+																href="" class="btn btn-primary">Kế tiếp</button>
 														</div>
 													</div>
 												</div>
@@ -169,17 +170,18 @@
 												<div class="booking-form-list">
 													<div class="single-form-part">
 														<div class="name mb-15">
-															<input class="mb-10" id="firstName" type="text"
-																placeholder="Họ"> <input class="mb-10"
-																id="lastName" type="text" placeholder="Tên"> <input
-																class="mb-10" id="email" type="text" placeholder="Email">
-															<input class="mb-10" id="phone" type="number"
-																placeholder="Số điện thoại">
+															<input class="mb-10" id="firstName" type="text" placeholder="Họ" style="width:100%;"> 
+															<input class="mb-10" id="lastName" type="text" placeholder="Tên" style="width:100%;"> 
+															<input class="mb-10" id="email" type="text" placeholder="Email" style="width:100%;">
+															<input class="mb-10" id="phone" type="number" placeholder="Số điện thoại" style="width:100%;">
 														</div>
 														<div class="mt-20">
+														<button onclick="roomTypeInfor()"
+																style="height: 60px; float: left;" href=""
+																class="btn btn-secondary">Trở lại</button>
 															<button onclick="payment()"
 																style="height: 60px; float: right;" href=""
-																class="btn btn-primary">Kế tiếp =>></button>
+																class="btn btn-primary">Kế tiếp</button>
 														</div>
 													</div>
 
@@ -194,13 +196,22 @@
 											<h3 style="text-align: center;">Qúy khách sẽ thanh toán
 												sau khi trả phòng</h3>
 											<div class="mt-20">
-												<button id="submit" style="height: 60px; float: right;"
-													href="" class="btn btn-primary">Hoàn tất</button>
+												<button onclick="information()"  style="height: 60px; float: left;"
+													href="" class="btn btn-secondary">Trở lại</button>
+												<button onclick="done()"  style="height: 60px; float: right;"
+													href="" class="btn btn-primary">Kế tiếp</button>
 											</div>
 										</div>
 									</div>
 									<div role="tabpanel" class="tab-pane" id="done">
-										<div class="booking-done"></div>
+										<div class="booking-done">
+										<h3 style="text-align: center;">Hoàn tất đặt phòng</h3>
+											<button onclick="payment()"
+																style="height: 60px; float: left;" href=""
+																class="btn btn-secondary">Trở lại</button>
+											<button id="submit" style="height: 60px; float: right;"
+													href="" class="btn btn-primary">Hoàn tất</button>
+										</div>
 									</div>
 								</div>
 							</div>
@@ -227,6 +238,12 @@
 		$('.chooseRoom button').on('click', function(event) {
 			event.preventDefault();
 		});
+		function roomTypeInfor() {
+			$('.booking-rooms-tab ul li').removeClass('active');
+			$('.tab-pane').removeClass('active');
+			$('.booking-rooms-tab ul li:nth-child(1)').addClass('active');
+			$('.tab-pane:nth-child(1)').addClass('active');
+		}
 		function information() {
 			$('.booking-rooms-tab ul li').removeClass('active');
 			$('.tab-pane').removeClass('active');
@@ -239,6 +256,13 @@
 			$('.tab-pane').removeClass('active');
 			$('.booking-rooms-tab ul li:nth-child(3)').addClass('active');
 			$('.tab-pane:nth-child(3)').addClass('active');
+		}
+		
+		function done(e) {
+			$('.booking-rooms-tab ul li').removeClass('active');
+			$('.tab-pane').removeClass('active');
+			$('.booking-rooms-tab ul li:nth-child(4)').addClass('active');
+			$('.tab-pane:nth-child(4)').addClass('active');
 		}
 
 		$('#submit').on('click', function(event) {

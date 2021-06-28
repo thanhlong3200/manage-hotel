@@ -11,7 +11,7 @@
  Target Server Version : 80013
  File Encoding         : 65001
 
- Date: 28/06/2021 12:27:18
+ Date: 27/06/2021 12:38:31
 */
 
 SET NAMES utf8mb4;
@@ -54,7 +54,6 @@ CREATE TABLE `booked_room_customers`  (
 -- ----------------------------
 -- Records of booked_room_customers
 -- ----------------------------
-INSERT INTO `booked_room_customers` VALUES (1, 49);
 
 -- ----------------------------
 -- Table structure for booked_rooms
@@ -68,17 +67,19 @@ CREATE TABLE `booked_rooms`  (
   `modifieddate` datetime(0) NULL DEFAULT NULL,
   `booking_id` bigint(20) NULL DEFAULT NULL,
   `room_id` bigint(20) NULL DEFAULT NULL,
+  `staff_id` bigint(20) NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `FK_k3bcr12d4rm550rousuq4rehm`(`booking_id`) USING BTREE,
   INDEX `FK_4v13ujyp4yxetul7emvyvinbt`(`room_id`) USING BTREE,
+  INDEX `FK_qkj354cre65wnin5fr2gp4g6y`(`staff_id`) USING BTREE,
   CONSTRAINT `FK_4v13ujyp4yxetul7emvyvinbt` FOREIGN KEY (`room_id`) REFERENCES `rooms` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
-  CONSTRAINT `FK_k3bcr12d4rm550rousuq4rehm` FOREIGN KEY (`booking_id`) REFERENCES `bookings` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = DYNAMIC;
+  CONSTRAINT `FK_k3bcr12d4rm550rousuq4rehm` FOREIGN KEY (`booking_id`) REFERENCES `bookings` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
+  CONSTRAINT `FK_qkj354cre65wnin5fr2gp4g6y` FOREIGN KEY (`staff_id`) REFERENCES `staffs` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
+) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of booked_rooms
 -- ----------------------------
-INSERT INTO `booked_rooms` VALUES (1, 'anonymousUser', '2021-06-27 19:26:27', 'anonymousUser', '2021-06-27 19:26:27', 63, 1);
 
 -- ----------------------------
 -- Table structure for bookeds_services
@@ -99,13 +100,11 @@ CREATE TABLE `bookeds_services`  (
   INDEX `FK_47n5rgrfbjw7jmgc693uh3r10`(`service_id`) USING BTREE,
   CONSTRAINT `FK_47n5rgrfbjw7jmgc693uh3r10` FOREIGN KEY (`service_id`) REFERENCES `services` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
   CONSTRAINT `FK_85ox78vh7ua57x5w0nqp9d3lq` FOREIGN KEY (`booked_id`) REFERENCES `booked_rooms` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB AUTO_INCREMENT = 62 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 60 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of bookeds_services
 -- ----------------------------
-INSERT INTO `bookeds_services` VALUES (60, 'anonymousUser', '2021-06-27 19:26:28', 'anonymousUser', '2021-06-27 19:26:28', 1, 0, 1, 1);
-INSERT INTO `bookeds_services` VALUES (61, 'anonymousUser', '2021-06-27 19:26:28', 'anonymousUser', '2021-06-27 19:26:28', 1, 0, 1, 2);
 
 -- ----------------------------
 -- Table structure for booking_status
@@ -161,12 +160,11 @@ CREATE TABLE `bookings`  (
   CONSTRAINT `FK_6fvpw8kg0dife13ihwncg0lnt` FOREIGN KEY (`hotel_id`) REFERENCES `hotels` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
   CONSTRAINT `FK_figf0x7qk2dk68ew9qmbknka0` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
   CONSTRAINT `FK_ggsh1imrw3ob9p4ufo12l4ehf` FOREIGN KEY (`room_type_id`) REFERENCES `room_types` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB AUTO_INCREMENT = 64 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 63 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of bookings
 -- ----------------------------
-INSERT INTO `bookings` VALUES (63, 'anonymousUser', '2021-06-27 19:26:27', 'anonymousUser', '2021-06-28 09:18:47', 1, 0, '270620210', '2021-06-27', '2021-06-28', 1, 1, 1, 2, NULL, 45);
 
 -- ----------------------------
 -- Table structure for customers
@@ -191,12 +189,6 @@ CREATE TABLE `customers`  (
 -- ----------------------------
 -- Records of customers
 -- ----------------------------
-INSERT INTO `customers` VALUES (44, 'anonymousUser', '2021-06-15 12:07:57', 'anonymousUser', '2021-06-15 12:07:57', NULL, 'tlsneakershop@gmail.com', 'Thành', NULL, 'Long', '0387127372', NULL);
-INSERT INTO `customers` VALUES (45, 'anonymousUser', '2021-06-15 21:21:36', 'anonymousUser', '2021-06-15 21:21:36', NULL, 'hoapham123haha@gmail.com', 'Thành', NULL, 'Long', '0387127372', NULL);
-INSERT INTO `customers` VALUES (46, 'anonymousUser', '2021-06-16 12:34:21', 'anonymousUser', '2021-06-27 10:22:07', '12354', NULL, 'Long', 'male', 'Nguyen', NULL, 1);
-INSERT INTO `customers` VALUES (47, 'anonymousUser', '2021-06-27 10:22:07', 'anonymousUser', '2021-06-27 10:22:07', '', NULL, '', '', '', NULL, 1);
-INSERT INTO `customers` VALUES (48, 'anonymousUser', '2021-06-27 10:41:59', 'anonymousUser', '2021-06-27 10:41:59', NULL, 'nguyenthisoi41ll@gmail.com', 'Thành', NULL, 'Long', '0387127372', NULL);
-INSERT INTO `customers` VALUES (49, 'anonymousUser', '2021-06-27 10:43:06', 'anonymousUser', '2021-06-27 10:43:06', '123456', NULL, 'Thành', 'male', 'Long', NULL, 1);
 
 -- ----------------------------
 -- Table structure for furnitures
@@ -342,12 +334,11 @@ CREATE TABLE `payments`  (
   CONSTRAINT `FK_1lycy3mncxx9x8lhlxfcwsome` FOREIGN KEY (`status_id`) REFERENCES `payment_status` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
   CONSTRAINT `FK_ald5s62tvlf1s3bjped37mohm` FOREIGN KEY (`payment_type_id`) REFERENCES `payment_type` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
   CONSTRAINT `FK_nuscjm6x127hkb15kcb8n56wo` FOREIGN KEY (`booking_id`) REFERENCES `bookings` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB AUTO_INCREMENT = 16 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 15 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of payments
 -- ----------------------------
-INSERT INTO `payments` VALUES (15, 'anonymousUser', '2021-06-27 19:26:28', 'anonymousUser', '2021-06-27 19:26:28', 'Tiền đặt phòng', 250000, 250000, 63, 3, 1);
 
 -- ----------------------------
 -- Table structure for promotions
@@ -625,7 +616,7 @@ CREATE TABLE `rooms`  (
 -- ----------------------------
 -- Records of rooms
 -- ----------------------------
-INSERT INTO `rooms` VALUES (1, NULL, NULL, 'anonymousUser', '2021-06-27 19:31:22', 1, 101, 1, 1, 4);
+INSERT INTO `rooms` VALUES (1, NULL, NULL, 'anonymousUser', '2021-06-27 10:43:06', 1, 101, 1, 1, 1);
 INSERT INTO `rooms` VALUES (2, NULL, NULL, 'anonymousUser', '2021-06-24 12:15:28', 1, 102, 1, 1, 1);
 INSERT INTO `rooms` VALUES (3, NULL, NULL, 'anonymousUser', '2021-06-15 21:21:37', 1, 103, 1, 1, 1);
 INSERT INTO `rooms` VALUES (4, NULL, NULL, 'anonymousUser', '2021-06-12 20:07:03', 1, 104, 1, 2, 1);
@@ -687,6 +678,23 @@ INSERT INTO `rooms` VALUES (59, NULL, NULL, NULL, NULL, 6, 609, 1, 4, 1);
 INSERT INTO `rooms` VALUES (60, NULL, NULL, NULL, NULL, 6, 610, 1, 4, 1);
 
 -- ----------------------------
+-- Table structure for rooms_services
+-- ----------------------------
+DROP TABLE IF EXISTS `rooms_services`;
+CREATE TABLE `rooms_services`  (
+  `service_id` bigint(20) NOT NULL,
+  `room_id` bigint(20) NOT NULL,
+  INDEX `FK_bnuhlwg8mtrek4l165a5qllgt`(`room_id`) USING BTREE,
+  INDEX `FK_cdxl8vdsy85qpt3e3f2u3pabr`(`service_id`) USING BTREE,
+  CONSTRAINT `FK_bnuhlwg8mtrek4l165a5qllgt` FOREIGN KEY (`room_id`) REFERENCES `rooms` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
+  CONSTRAINT `FK_cdxl8vdsy85qpt3e3f2u3pabr` FOREIGN KEY (`service_id`) REFERENCES `services` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
+) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = DYNAMIC;
+
+-- ----------------------------
+-- Records of rooms_services
+-- ----------------------------
+
+-- ----------------------------
 -- Table structure for services
 -- ----------------------------
 DROP TABLE IF EXISTS `services`;
@@ -731,17 +739,12 @@ CREATE TABLE `staff_status`  (
   `code` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
   `description` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
   `name` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `btnStyle` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 5 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of staff_status
 -- ----------------------------
-INSERT INTO `staff_status` VALUES (1, NULL, NULL, NULL, NULL, 1, 'available', 'Đang rảnh', 'Đang rảnh', 'success');
-INSERT INTO `staff_status` VALUES (2, NULL, NULL, NULL, NULL, 1, 'guide-guest', 'Đang đón khách ', 'Đang đón khách ', 'warning');
-INSERT INTO `staff_status` VALUES (3, NULL, NULL, NULL, NULL, 1, 'clean-room', 'Đang dọn phòng', 'Đang dọn phòng', 'warning');
-INSERT INTO `staff_status` VALUES (4, NULL, NULL, NULL, NULL, 1, 'busy', 'Đang bận', 'Đang bận', 'danger');
 
 -- ----------------------------
 -- Table structure for staffs
@@ -761,79 +764,12 @@ CREATE TABLE `staffs`  (
   `status_id` bigint(20) NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `FK_e78q07fe8qcama4qrir99sx95`(`status_id`) USING BTREE,
-  CONSTRAINT `FK_e78q07fe8qcama4qrir99sx95` FOREIGN KEY (`status_id`) REFERENCES `staff_status` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB AUTO_INCREMENT = 21 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = DYNAMIC;
+  CONSTRAINT `FK_e78q07fe8qcama4qrir99sx95` FOREIGN KEY (`status_id`) REFERENCES `staffs` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
+) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of staffs
 -- ----------------------------
-INSERT INTO `staffs` VALUES (1, '', NULL, NULL, NULL, 1, '2000-06-07', 'Nhân viên 1', 'male', '016989516', 1);
-INSERT INTO `staffs` VALUES (2, '', NULL, NULL, NULL, 1, '2000-06-07', 'Nhân viên 2', 'male', '016989516', 1);
-INSERT INTO `staffs` VALUES (3, '', NULL, NULL, NULL, 1, '2000-06-07', 'Nhân viên 3', 'male', '016989516', 1);
-INSERT INTO `staffs` VALUES (4, '', NULL, NULL, NULL, 1, '2000-06-07', 'Nhân viên 4', 'male', '016989516', 1);
-INSERT INTO `staffs` VALUES (5, '', NULL, NULL, NULL, 1, '2000-06-07', 'Nhân viên 5', 'male', '016989516', 1);
-INSERT INTO `staffs` VALUES (6, '', NULL, NULL, NULL, 1, '2000-06-07', 'Nhân viên 6', 'male', '016989516', 1);
-INSERT INTO `staffs` VALUES (7, '', NULL, NULL, NULL, 1, '2000-06-07', 'Nhân viên 7', 'male', '016989516', 1);
-INSERT INTO `staffs` VALUES (8, '', NULL, NULL, NULL, 1, '2000-06-07', 'Nhân viên 8', 'male', '016989516', 1);
-INSERT INTO `staffs` VALUES (9, '', NULL, NULL, NULL, 1, '2000-06-07', 'Nhân viên 9', 'male', '016989516', 1);
-INSERT INTO `staffs` VALUES (10, '', NULL, NULL, NULL, 1, '2000-06-07', 'Nhân viên 10', 'male', '016989516', 1);
-INSERT INTO `staffs` VALUES (11, '', NULL, NULL, NULL, 1, '2000-06-07', 'Nhân viên 11', 'male', '016989516', 1);
-INSERT INTO `staffs` VALUES (12, '', NULL, NULL, NULL, 1, '2000-06-07', 'Nhân viên 12', 'male', '016989516', 1);
-INSERT INTO `staffs` VALUES (13, '', NULL, NULL, NULL, 1, '2000-06-07', 'Nhân viên 13', 'male', '016989516', 1);
-INSERT INTO `staffs` VALUES (14, '', NULL, NULL, NULL, 1, '2000-06-07', 'Nhân viên 14', 'male', '016989516', 1);
-INSERT INTO `staffs` VALUES (15, '', NULL, NULL, NULL, 1, '2000-06-07', 'Nhân viên 15', 'male', '016989516', 1);
-INSERT INTO `staffs` VALUES (16, '', NULL, NULL, NULL, 1, '2000-06-07', 'Nhân viên 16', 'male', '016989516', 1);
-INSERT INTO `staffs` VALUES (17, '', NULL, NULL, NULL, 1, '2000-06-07', 'Nhân viên 17', 'male', '016989516', 1);
-INSERT INTO `staffs` VALUES (18, '', NULL, NULL, NULL, 1, '2000-06-07', 'Nhân viên 18', 'male', '016989516', 1);
-INSERT INTO `staffs` VALUES (19, '', NULL, NULL, NULL, 1, '2000-06-07', 'Nhân viên 19', 'male', '016989516', 1);
-INSERT INTO `staffs` VALUES (20, '', NULL, NULL, NULL, 1, '2000-06-07', 'Nhân viên 20', 'male', '016989516', 1);
-
--- ----------------------------
--- Table structure for staffs_tasks
--- ----------------------------
-DROP TABLE IF EXISTS `staffs_tasks`;
-CREATE TABLE `staffs_tasks`  (
-  `id` bigint(20) NOT NULL AUTO_INCREMENT,
-  `createdby` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `createddate` datetime(0) NULL DEFAULT NULL,
-  `modifiedby` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `modifieddate` datetime(0) NULL DEFAULT NULL,
-  `room_id` bigint(20) NULL DEFAULT NULL,
-  `staff_id` bigint(20) NULL DEFAULT NULL,
-  `task_id` bigint(20) NULL DEFAULT NULL,
-  PRIMARY KEY (`id`) USING BTREE,
-  INDEX `FK_b6odi1cnpswvhg71eyte1epyk`(`room_id`) USING BTREE,
-  INDEX `FK_1n6vm56u4jeny8grmcs082f31`(`staff_id`) USING BTREE,
-  INDEX `FK_mpc38w5yniph8yxiio0uri7o0`(`task_id`) USING BTREE,
-  CONSTRAINT `FK_1n6vm56u4jeny8grmcs082f31` FOREIGN KEY (`staff_id`) REFERENCES `staffs` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
-  CONSTRAINT `FK_b6odi1cnpswvhg71eyte1epyk` FOREIGN KEY (`room_id`) REFERENCES `rooms` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
-  CONSTRAINT `FK_mpc38w5yniph8yxiio0uri7o0` FOREIGN KEY (`task_id`) REFERENCES `tasks` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
-
--- ----------------------------
--- Records of staffs_tasks
--- ----------------------------
-
--- ----------------------------
--- Table structure for tasks
--- ----------------------------
-DROP TABLE IF EXISTS `tasks`;
-CREATE TABLE `tasks`  (
-  `id` bigint(20) NOT NULL AUTO_INCREMENT,
-  `createdby` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `createddate` datetime(0) NULL DEFAULT NULL,
-  `modifiedby` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `modifieddate` datetime(0) NULL DEFAULT NULL,
-  `code` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `name` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
-
--- ----------------------------
--- Records of tasks
--- ----------------------------
-INSERT INTO `tasks` VALUES (1, NULL, NULL, NULL, NULL, 'guide-guest', 'Đón khách');
-INSERT INTO `tasks` VALUES (2, NULL, NULL, NULL, NULL, 'clean-room', 'Dọn phòng');
 
 -- ----------------------------
 -- Table structure for user_group_role
@@ -846,11 +782,12 @@ CREATE TABLE `user_group_role`  (
   INDEX `FK_jbdedxsdqq6b7mdxnnk3ae8m5`(`user_group_id`) USING BTREE,
   CONSTRAINT `FK_jbdedxsdqq6b7mdxnnk3ae8m5` FOREIGN KEY (`user_group_id`) REFERENCES `users_group` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
   CONSTRAINT `FK_tnop1adlw50efa315eyyhg1mw` FOREIGN KEY (`role_id`) REFERENCES `roles` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of user_group_role
 -- ----------------------------
+INSERT INTO `user_group_role` VALUES (1, 1);
 
 -- ----------------------------
 -- Table structure for user_type_services
@@ -863,7 +800,7 @@ CREATE TABLE `user_type_services`  (
   INDEX `FK_43pix0iq1gq3xf2f4f0renaae`(`service_id`) USING BTREE,
   CONSTRAINT `FK_43pix0iq1gq3xf2f4f0renaae` FOREIGN KEY (`service_id`) REFERENCES `services` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
   CONSTRAINT `FK_iyco8v2jt2n16r20iip2q3adh` FOREIGN KEY (`user_type_id`) REFERENCES `user_types` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of user_type_services
@@ -882,7 +819,7 @@ CREATE TABLE `user_types`  (
   `code` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
   `name` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of user_types
@@ -914,11 +851,13 @@ CREATE TABLE `users`  (
   INDEX `FK_ayjpho46eaqkqiqai0k4d59ww`(`user_type_id`) USING BTREE,
   CONSTRAINT `FK_ayjpho46eaqkqiqai0k4d59ww` FOREIGN KEY (`user_type_id`) REFERENCES `user_types` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
   CONSTRAINT `FK_fm4cfgdt24toh89yw4rbnu1lb` FOREIGN KEY (`group_id`) REFERENCES `users_group` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 4 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of users
 -- ----------------------------
+INSERT INTO `users` VALUES (2, 'anonymousUser', '2021-06-12 18:27:22', 'anonymousUser', '2021-06-12 18:27:22', 'D5/015 Ấp Lê Lợi 2', '2000-02-03', 'hoapham123haha@gmail.com', 'Thành Long', 'male', 'q', '0387127372', 1, 'long', 1, NULL);
+INSERT INTO `users` VALUES (3, 'anonymousUser', '2021-06-13 18:42:27', 'anonymousUser', '2021-06-13 18:42:27', 'D5/015 Ấp Lê Lợi 2', '2000-12-03', '0929791505', 'Thành Long', 'male', '123', '0387127372', 1, 'longd', 1, NULL);
 
 -- ----------------------------
 -- Table structure for users_group
@@ -933,10 +872,11 @@ CREATE TABLE `users_group`  (
   `code` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
   `name` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of users_group
 -- ----------------------------
+INSERT INTO `users_group` VALUES (1, NULL, NULL, NULL, NULL, 'customer', 'Khách hàng');
 
 SET FOREIGN_KEY_CHECKS = 1;

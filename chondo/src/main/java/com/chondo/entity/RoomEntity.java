@@ -36,8 +36,21 @@ public class RoomEntity extends BaseEntity {
 	@JoinColumn(name = "hotel_id")
 	private HotelEntity hotel;
 	
+	
+	
 	@OneToMany(mappedBy = "room")
 	private	List<BookedRoomEntity> bookeds = new ArrayList<BookedRoomEntity>();
+	
+	@OneToMany(mappedBy = "task")
+	private List<StaffTaskEntity> staffTasks = new ArrayList<StaffTaskEntity>();
+
+	public List<StaffTaskEntity> getStaffTasks() {
+		return staffTasks;
+	}
+
+	public void setStaffTasks(List<StaffTaskEntity> staffTasks) {
+		this.staffTasks = staffTasks;
+	}
 
 	public Integer getNumber() {
 		return number;
@@ -86,6 +99,8 @@ public class RoomEntity extends BaseEntity {
 	public void setHotel(HotelEntity hotel) {
 		this.hotel = hotel;
 	}
+
+
 	
 	
 	

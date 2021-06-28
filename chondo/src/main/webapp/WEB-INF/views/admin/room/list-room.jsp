@@ -18,7 +18,7 @@
 		<div class="listRoomMain">
 			<form id="formSubmit" action="<c:url value = "/quan-tri/phong"/>">
 				<div class="filterRoomType">
-					<h5>Loại phòng</h5>
+
 					<select id="roomTypes" name="roomTypeCode">
 						<option value="all">--Tất cả--</option>
 						<c:forEach items="${roomTypes}" var="roomType" > 
@@ -46,13 +46,13 @@
 			<ul id="listRoom">
 
 				<c:forEach items="${allRoom}" var="room">
-
-					<li data-id="${room.id}" data-check="false"
-						class="btn btn-${room.status.btnStyle} availableRoom">
-						<h4>${room.number}</h4>
-						<p>Tầng ${room.floor}</p>
-					</li>
-
+					<a href="<c:url value = "/quan-tri/phong?number=${room.number}"/>">
+						<li data-id="${room.id}" data-check="false"
+							class="btn btn-${room.status.btnStyle} availableRoom">
+							<h4>${room.number}</h4>
+							<p>Tầng ${room.floor}</p>
+						</li>
+					</a>
 
 
 

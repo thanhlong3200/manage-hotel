@@ -47,5 +47,4 @@ public interface RoomTypeRepository extends JpaRepository<RoomTypeEntity, Long>{
 
 	Integer countByStatus(Integer status);
 	
-	
 }

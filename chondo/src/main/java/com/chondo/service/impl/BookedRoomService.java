@@ -43,6 +43,9 @@ public class BookedRoomService implements IBookedRoomService{
 	@Autowired
 	private BookingRepository bookingRepository;
 	
+	@Autowired
+	private RoomRepository roomRespository;
+	
 	@Override
 	public BookedRoomDTO save(BookedRoomDTO bookedRoom) {
 		ModelMapper modelMapper = new ModelMapper();
@@ -101,7 +104,7 @@ public class BookedRoomService implements IBookedRoomService{
 			BookedRoomEntity entity = bookedRoomRepository.findOne(bookedRoomDTO.getId());
 			
 			for (CustomerDTO customer : bookedRoomDTO.getCustomers()) {
-				if (customer.getCmnd() != null) {
+				if (customer.getCmnd() != null && customer.getCmnd() != "") {
 					CustomerEntity customerEntity;
 					if ((customerEntity = customRepository.findOneByCmnd(customer.getCmnd())) == null) {
 						customerEntity = customRepository.save(modelMapper.map(customer, CustomerEntity.class));		
@@ -112,6 +115,10 @@ public class BookedRoomService implements IBookedRoomService{
 				}
 						
 			}
+			RoomEntity roomEntity = entity.getRoom();
+			roomEntity.setStatus(roomStatusRepository.findOneByCode("owned"));
+			roomRespository.save(roomEntity);
+			
 			entity = bookedRoomRepository.save(entity);
 			bookedRoomEntities.add(entity);
 		}

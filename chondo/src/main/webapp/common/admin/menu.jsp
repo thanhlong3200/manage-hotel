@@ -59,13 +59,18 @@
         </li>
         <li >
             <a href="<c:url value='/quan-tri/trang-chu'/>">
-                        Tìm phòng
+                        Đặt phòng
                     </a>
         </li>
         <li >
             <a href="<c:url value='/quan-tri/booking?page=1&limit=2'/>">
                         Danh sách booking
                     </a>
+        </li>
+        <li >
+            <a href="<c:url value='/quan-tri/check-in'/>">
+                Check in
+            </a>
         </li>
         <li >
             <a href="<c:url value='/quan-tri/huy-booking'/>">
@@ -77,6 +82,15 @@
                 Đổi phòng
             </a>
         </li>
-        
+        <li >
+            <a href="<c:url value='/quan-tri/tinh-hinh-dat-phong'/>">
+               	Tình hình đặt phòng
+            </a>
+        </li>
+        <li >
+            <a href="<c:url value='/quan-tri/phan-cong?page=1&limit=2'/>">
+               	Phân công
+            </a>
+        </li>
     </ul>
 </div>

@@ -52,6 +52,7 @@ button#closePopupChooseRoom {
 
 .popupChooseRoom.appear {
     transform: scale(1);
+    z-index: 99;
 }
 div.formRoomNumber {
     display: none;
@@ -79,7 +80,7 @@ button#saveChangeRoom {
 }
 .listRoomMain form {
     display: inline-block;
-    width: 450px;
+    width: 300px;
     margin-left: 45px;
 }
 
@@ -88,5 +89,19 @@ button#saveChangeRoom {
 }
 
 .filterRoomType h5 {
+    display: inline;
+}
+.filterRoomType select#roomTypes {
+    width: 90%;
+}
+.booking-rooms-tab li {
+    pointer-events: none;
+}
+.reservation #dateFrom {
+    width: 200px;
+    display: inline;
+}
+.reservation #submit {
+    width: 100px;
     display: inline;
 }

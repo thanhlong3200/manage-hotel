@@ -20,4 +20,6 @@ public interface IBookingService {
 	List<BookingDTO> findAll(Pageable pageable);
 
 	Integer count();
+
+	List<BookingDTO> getBookingOfRoom(Integer number);
 }

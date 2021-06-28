@@ -28,4 +28,11 @@ public interface RoomRepository extends JpaRepository<RoomEntity, Long> {
 	List<RoomEntity> findByRoomTypeId(Long roomTypeId);
 
 	List<RoomEntity> findByRoomTypeCode(String roomTypeCode);
+
+	@Query(value = "select r.* from rooms r join booked_rooms br on br.room_id = r.id\r\n" + 
+			"			join room_status rs on rs.id = r.status_id \r\n" + 
+			"			join bookings b on b.id = br.booking_id \r\n" + 
+			"			where r.hotel_id = 1 and rs.code = 'booked'\r\n" + 
+			"			and b.date_from = :date", nativeQuery = true)
+	List<RoomEntity> findByBookedRoom(@Param("date") Date date);
 }

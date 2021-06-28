@@ -16,9 +16,14 @@ import com.chondo.dto.BookingDTO;
 import com.chondo.dto.PaymentDTO;
 import com.chondo.dto.RoomDTO;
 import com.chondo.dto.RoomStatusDTO;
+import com.chondo.dto.StaffDTO;
+import com.chondo.dto.StaffStatusDTO;
+import com.chondo.entity.StaffEntity;
 import com.chondo.service.IBookedRoomService;
 import com.chondo.service.IBookingService;
 import com.chondo.service.IPaymentService;
+import com.chondo.service.IStaffService;
+import com.chondo.service.IStaffStatusService;
 import com.chondo.service.impl.BookingService;
 
 @Controller(value = "bookingControllerAdmin")
@@ -32,6 +37,12 @@ public class BookingController {
 
 	@Autowired
 	private IBookedRoomService bookedRoomService;
+	
+	@Autowired
+	private IStaffStatusService staffStatusService;
+	
+	@Autowired
+	private IStaffService staffService;
 
 	@RequestMapping(value = "/quan-tri/booking", method = RequestMethod.GET)
 	public ModelAndView homePage(@RequestParam(value = "page", required = false) Integer page,
@@ -46,10 +57,16 @@ public class BookingController {
 			List<PaymentDTO> payments = paymentService.findByBookingId(bookingDTO.getId());
 
 			List<BookedRoomDTO> bookedRooms = bookedRoomService.findByBookingId(bookingDTO.getId());
+			
+			List<StaffStatusDTO> listStatus = staffStatusService.findByActive(1);
+			
+			List<StaffDTO> availableStaff = staffService.findByStatusCode("available");
 
 			mav.addObject("booking", bookingDTO);
 			mav.addObject("payments", payments);
 			mav.addObject("bookedRooms", bookedRooms);
+			mav.addObject("listStatus", listStatus);
+			mav.addObject("availableStaff", availableStaff);
 			mav.setViewName("admin/booking/bookingDetails");
 		} else {
 			Pageable pageable = new PageRequest(page - 1, limit);

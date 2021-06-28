@@ -16,6 +16,7 @@ import com.chondo.dto.BookedRoomDTO;
 import com.chondo.dto.BookingDTO;
 import com.chondo.dto.BookingStatusDTO;
 import com.chondo.dto.HotelDTO;
+import com.chondo.dto.RoomDTO;
 import com.chondo.dto.RoomTypeDTO;
 import com.chondo.entity.BookingEntity;
 import com.chondo.entity.BookingStatusEntity;
@@ -142,6 +143,15 @@ public class BookingService implements IBookingService{
 	@Override
 	public Integer count() {
 		return (int) bookingRepository.count();
+	}
+
+
+	@Override
+	public List<BookingDTO> getBookingOfRoom(Integer number) {
+		ModelMapper modelMapper = new ModelMapper();
+		List<BookingEntity> entities = bookingRepository.getBookingOfRoom(number);
+		List<BookingDTO> bookings = modelMapper.map(entities, new TypeToken<List<BookingDTO>>(){}.getType());
+		return bookings;
 	}
 
 

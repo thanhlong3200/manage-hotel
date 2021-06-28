@@ -11,6 +11,6 @@ public class test {
 		SimpleDateFormat formatter = new SimpleDateFormat("ddMMyyyy");  
 	    Date date = new Date();  
 	    System.out.println(formatter.format(date));  
-
+	    
 	}
 }

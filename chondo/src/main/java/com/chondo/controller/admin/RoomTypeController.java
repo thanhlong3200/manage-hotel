@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.chondo.dto.RoomTypeDTO;
+import com.chondo.repository.RoomTypeRepository;
 import com.chondo.service.IFurnitureService;
 import com.chondo.service.IHotelService;
 import com.chondo.service.IImageService;
@@ -37,6 +38,7 @@ public class RoomTypeController {
 	
 	@Autowired
 	private IServiceService service;
+	
 	
 	@Autowired
 	private IImageService imageService;

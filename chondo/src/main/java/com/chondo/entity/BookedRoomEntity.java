@@ -25,7 +25,8 @@ public class BookedRoomEntity extends BaseEntity {
 	@ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "room_id")
     private RoomEntity room;
-		
+	
+
 	@OneToMany(mappedBy = "booked")
 	private List<BookedServiceEntity> bookedServices = new ArrayList<BookedServiceEntity>();
 	
@@ -33,6 +34,8 @@ public class BookedRoomEntity extends BaseEntity {
 	@JoinTable(name = "booked_room_customers", joinColumns = @JoinColumn(name = "booked_room_id"), 
 								  inverseJoinColumns = @JoinColumn(name = "customer_id"))
 	private List<CustomerEntity> customers = new ArrayList<CustomerEntity>();
+
+	
 
 	public BookingEntity getBooking() {
 		return booking;
