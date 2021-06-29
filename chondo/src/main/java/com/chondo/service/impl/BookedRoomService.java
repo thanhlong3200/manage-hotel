@@ -10,19 +10,25 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.chondo.dto.BookedRoomDTO;
+import com.chondo.dto.BookedServiceDTO;
 import com.chondo.dto.BookingDTO;
 import com.chondo.dto.CustomerDTO;
 import com.chondo.dto.RoomDTO;
-import com.chondo.dto.RoomStatusDTO;
+import com.chondo.dto.RoomTypeDTO;
+import com.chondo.dto.ServiceDTO;
 import com.chondo.entity.BookedRoomEntity;
+import com.chondo.entity.BookedServiceEntity;
 import com.chondo.entity.BookingEntity;
 import com.chondo.entity.CustomerEntity;
 import com.chondo.entity.RoomEntity;
+import com.chondo.entity.ServiceEntity;
 import com.chondo.repository.BookedRoomRepository;
+import com.chondo.repository.BookedServiceRepository;
 import com.chondo.repository.BookingRepository;
 import com.chondo.repository.CustomerRepository;
 import com.chondo.repository.RoomRepository;
 import com.chondo.repository.RoomStatusRepository;
+import com.chondo.repository.ServiceRepository;
 import com.chondo.service.IBookedRoomService;
 
 @Service
@@ -45,6 +51,12 @@ public class BookedRoomService implements IBookedRoomService{
 	
 	@Autowired
 	private RoomRepository roomRespository;
+	
+	@Autowired
+	private BookedServiceRepository bookedServiceRepository;
+	
+	@Autowired
+	private ServiceRepository serviceRepository;
 	
 	@Override
 	public BookedRoomDTO save(BookedRoomDTO bookedRoom) {
@@ -151,8 +163,14 @@ public class BookedRoomService implements IBookedRoomService{
 						oldRoomEntity.setStatus(roomStatusRepository.findOneByCode("available"));
 						roomRepository.save(oldRoomEntity);
 						
+						
 						result.add(modelMapper.map((bookedRoomRepository.save(bookedRoomEntity)), BookedRoomDTO.class));
 			
+
+						if ((modelMapper.map(roomEntity.getRoomType(), RoomTypeDTO.class)).getCode()
+								!= (modelMapper.map(oldRoomEntity.getRoomType(), RoomTypeDTO.class)).getCode()) {
+							upgradeBookedService(bookedRoomDTO.getId());
+						}
 						
 					}
 				}
@@ -166,6 +184,38 @@ public class BookedRoomService implements IBookedRoomService{
 		
 		
 		return result;
+	}
+
+	private void upgradeBookedService(Long id) {
+		ModelMapper modelMapper = new ModelMapper(); 
+		
+		List<BookedServiceEntity> bookedServiceEntities = bookedServiceRepository.findByBookedId(id);
+		List<BookedServiceDTO> bookedServiceDTOs = modelMapper.map(bookedServiceEntities, new TypeToken<List<BookedServiceDTO>>(){}.getType());
+		
+		BookingDTO bookingDTO = modelMapper.map(bookingRepository.findOneByBookedRoomsId(id), BookingDTO.class);
+		
+		List<ServiceEntity> serviceEntities = serviceRepository.findByRoomTypesId(bookingDTO.getRoomType().getId());
+		List<ServiceDTO> serviceDTOs = modelMapper.map(serviceEntities, new TypeToken<List<ServiceDTO>>(){}.getType());
+		
+		List<Long> createdServicesId = new ArrayList<Long>();	
+		for (BookedServiceDTO bookedServiceDTO : bookedServiceDTOs) {
+			createdServicesId.add(bookedServiceDTO.getService().getId());
+		}
+			
+		for (ServiceDTO serviceDTO : serviceDTOs) {
+			
+			if (!createdServicesId.contains(serviceDTO.getId())) {
+				BookedServiceEntity bookedServiceEntity = new BookedServiceEntity();
+				bookedServiceEntity.setBooked(bookedRoomRepository.findOne(id));
+				bookedServiceEntity.setFree(1);
+				bookedServiceEntity.setUsed(0);
+				bookedServiceEntity.setService(serviceRepository.findOne(serviceDTO.getId()));
+
+				bookedServiceRepository.save(bookedServiceEntity);
+			}
+			
+			
+		}
 	}
 
 	@Override

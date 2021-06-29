@@ -83,6 +83,11 @@
             </a>
         </li>
         <li >
+            <a href="<c:url value='/quan-tri/nang-cap-booking'/>">
+                Upgrade booking
+            </a>
+        </li>
+        <li >
             <a href="<c:url value='/quan-tri/tinh-hinh-dat-phong'/>">
                	Tình hình đặt phòng
             </a>

@@ -36,6 +36,9 @@ public class BookingEntity extends BaseEntity {
 	@Column(name = "children")
 	private Integer children;
 	
+	@Column
+	private Integer upgraded;
+	
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "user_id")
 	private UserEntity user;
@@ -64,6 +67,9 @@ public class BookingEntity extends BaseEntity {
 	
 	@OneToOne(mappedBy = "booking")
 	private BillEntity bill;
+	
+	@OneToOne(mappedBy = "booking")
+	private UpgradeEntity upgrade;
 
 	public String getCode() {
 		return code;
@@ -175,6 +181,22 @@ public class BookingEntity extends BaseEntity {
 
 	public void setBill(BillEntity bill) {
 		this.bill = bill;
+	}
+
+	public Integer getUpgraded() {
+		return upgraded;
+	}
+
+	public void setUpgraded(Integer upgraded) {
+		this.upgraded = upgraded;
+	}
+
+	public UpgradeEntity getUpgrade() {
+		return upgrade;
+	}
+
+	public void setUpgrade(UpgradeEntity upgrade) {
+		this.upgrade = upgrade;
 	}
 	
 	

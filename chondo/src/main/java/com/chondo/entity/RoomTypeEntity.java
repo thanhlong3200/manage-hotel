@@ -10,6 +10,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -44,6 +45,9 @@ public class RoomTypeEntity extends BaseEntity {
 	
 	@Column(columnDefinition = "TEXT")
 	private String review;
+	
+	@OneToOne(mappedBy = "initRoomType")
+	private UpgradeEntity upgrade;
 	
 	@OneToMany(mappedBy = "roomType")
 	private List<RateEntity> rates = new ArrayList<RateEntity>();

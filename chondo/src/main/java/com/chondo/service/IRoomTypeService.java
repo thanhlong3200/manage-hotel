@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.springframework.data.domain.Pageable;
 
+import com.chondo.dto.BookingDTO;
 import com.chondo.dto.RoomTypeDTO;
 
 public interface IRoomTypeService {
@@ -20,4 +21,6 @@ public interface IRoomTypeService {
 	RoomTypeDTO save(RoomTypeDTO dto);
 
 	List<RoomTypeDTO> findAll();
+
+	List<RoomTypeDTO> findAvailableUpgrade(BookingDTO booking);
 }

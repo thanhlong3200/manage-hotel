@@ -261,8 +261,6 @@ li.btn.btn-success.availableRoom.booked {
 }
 .checkInForm .col-3 {
     margin-right: 50px;
+    padding-left: 30px;
 }
 
-.checkInForm {
-    padding-left: 50px;
-}

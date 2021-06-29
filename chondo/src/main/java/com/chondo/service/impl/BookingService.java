@@ -69,6 +69,7 @@ public class BookingService implements IBookingService{
 			bookingEntity.setStatus(bookingStatusRepository.findOneByCode("booked"));
 			bookingEntity.setRoomType(roomTypeRepository.findOne(booking.getRoomType().getId()));
 			bookingEntity.setHotel(hotelRepository.findOneByLocationAndStatus(booking.getHotel().getLocation(), 1));
+			bookingEntity.setUpgraded(0);
 		}
 		
 		bookingEntity = bookingRepository.save(bookingEntity);
