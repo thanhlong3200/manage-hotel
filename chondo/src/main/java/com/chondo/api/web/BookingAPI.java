@@ -53,9 +53,9 @@ public class BookingAPI {
 		
 		booking = bookingService.save(booking);
 		
-		List<BookedRoomDTO> bookedRooms = bookedRoomService.setBookedRooms(booking);
+		bookedRoomService.setBookedRooms(booking);
 		
-		bookedServiceService.setBookedServices(bookedRooms);
+//		bookedServiceService.setBookedServices(bookedRooms);
 		
 		paymentService.createPayment(booking,"Tiền đặt phòng");
 		

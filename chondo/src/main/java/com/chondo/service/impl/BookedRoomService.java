@@ -168,11 +168,11 @@ public class BookedRoomService implements IBookedRoomService{
 						result.add(modelMapper.map((bookedRoomRepository.save(bookedRoomEntity)), BookedRoomDTO.class));
 			
 
-						if ((modelMapper.map(roomEntity.getRoomType(), RoomTypeDTO.class)).getCode()
-								!= (modelMapper.map(oldRoomEntity.getRoomType(), RoomTypeDTO.class)).getCode()) {
-							upgradeBookedService(bookedRoomDTO.getId());
-						}
-						
+//						if ((modelMapper.map(roomEntity.getRoomType(), RoomTypeDTO.class)).getCode()
+//								!= (modelMapper.map(oldRoomEntity.getRoomType(), RoomTypeDTO.class)).getCode()) {
+//							upgradeBookedService(bookedRoomDTO.getId());
+//						}
+//						
 						BookingEntity bookingEntity = bookingRepository.findOneByCode(booking.getCode());
 						bookingEntity.setLogs(bookingEntity.getLogs() + "Change room " + booking.getIds()[i-1]+ "->" +booking.getIds()[i] +"</br>");
 						bookingRepository.save(bookingEntity);
@@ -190,43 +190,50 @@ public class BookedRoomService implements IBookedRoomService{
 		return result;
 	}
 
-	private void upgradeBookedService(Long id) {
-		ModelMapper modelMapper = new ModelMapper(); 
-		
-		List<BookedServiceEntity> bookedServiceEntities = bookedServiceRepository.findByBookedId(id);
-		List<BookedServiceDTO> bookedServiceDTOs = modelMapper.map(bookedServiceEntities, new TypeToken<List<BookedServiceDTO>>(){}.getType());
-		
-		BookingDTO bookingDTO = modelMapper.map(bookingRepository.findOneByBookedRoomsId(id), BookingDTO.class);
-		
-		List<ServiceEntity> serviceEntities = serviceRepository.findByRoomTypesId(bookingDTO.getRoomType().getId());
-		List<ServiceDTO> serviceDTOs = modelMapper.map(serviceEntities, new TypeToken<List<ServiceDTO>>(){}.getType());
-		
-		List<Long> createdServicesId = new ArrayList<Long>();	
-		for (BookedServiceDTO bookedServiceDTO : bookedServiceDTOs) {
-			createdServicesId.add(bookedServiceDTO.getService().getId());
-		}
-			
-		for (ServiceDTO serviceDTO : serviceDTOs) {
-			
-			if (!createdServicesId.contains(serviceDTO.getId())) {
-				BookedServiceEntity bookedServiceEntity = new BookedServiceEntity();
-				bookedServiceEntity.setBooked(bookedRoomRepository.findOne(id));
-				bookedServiceEntity.setFree(1);
-				bookedServiceEntity.setUsed(0);
-				bookedServiceEntity.setService(serviceRepository.findOne(serviceDTO.getId()));
-
-				bookedServiceRepository.save(bookedServiceEntity);
-			}
-			
-			
-		}
-	}
+//	private void upgradeBookedService(Long id) {
+//		ModelMapper modelMapper = new ModelMapper(); 
+//		
+//		List<BookedServiceEntity> bookedServiceEntities = bookedServiceRepository.findByBookedId(id);
+//		List<BookedServiceDTO> bookedServiceDTOs = modelMapper.map(bookedServiceEntities, new TypeToken<List<BookedServiceDTO>>(){}.getType());
+//		
+//		BookingDTO bookingDTO = modelMapper.map(bookingRepository.findOneByBookedRoomsId(id), BookingDTO.class);
+//		
+//		List<ServiceEntity> serviceEntities = serviceRepository.findByRoomTypesId(bookingDTO.getRoomType().getId());
+//		List<ServiceDTO> serviceDTOs = modelMapper.map(serviceEntities, new TypeToken<List<ServiceDTO>>(){}.getType());
+//		
+//		List<Long> createdServicesId = new ArrayList<Long>();	
+//		for (BookedServiceDTO bookedServiceDTO : bookedServiceDTOs) {
+//			createdServicesId.add(bookedServiceDTO.getService().getId());
+//		}
+//			
+//		for (ServiceDTO serviceDTO : serviceDTOs) {
+//			
+//			if (!createdServicesId.contains(serviceDTO.getId())) {
+//				BookedServiceEntity bookedServiceEntity = new BookedServiceEntity();
+//				bookedServiceEntity.setBooked(bookedRoomRepository.findOne(id));
+//				bookedServiceEntity.setFree(1);
+//				bookedServiceEntity.setUsed(0);
+//				bookedServiceEntity.setService(serviceRepository.findOne(serviceDTO.getId()));
+//
+//				bookedServiceRepository.save(bookedServiceEntity);
+//			}
+//			
+//			
+//		}
+//	}
 
 	@Override
 	public List<BookedRoomDTO> findByBookingCode(String code) {
 		ModelMapper modelMapper = new ModelMapper();
 		List<BookedRoomEntity> entities = bookedRoomRepository.findByBookingCode(code);
 		return modelMapper.map(entities, new TypeToken<List<BookedRoomDTO>>(){}.getType());
+	}
+
+	@Override
+	public BookedRoomDTO findOneByRoomNumber(Long id) {
+		ModelMapper modelMapper = new ModelMapper();
+		BookedRoomEntity entity = bookedRoomRepository.findOneByRoomNumber(id);
+		return modelMapper.map(entity, BookedRoomDTO.class);
 	}
 
 }

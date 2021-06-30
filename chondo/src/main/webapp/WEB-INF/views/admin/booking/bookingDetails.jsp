@@ -28,8 +28,8 @@
 			<h3>Các khoản chi trả</h3>
 			<c:forEach items="${payments}" var="payment">
 				<h4>${payment.description}</h4>
-				<p>Tổng giá gốc: ${payment.totalOriginalPrice} VND</p>
-				<p>Tổng thanh toán: ${payment.totalSellPrice} VND</p>
+				<p>Tổng giá gốc: ${PriceUtil.convert(payment.totalOriginalPrice)} VND</p>
+				<p>Tổng thanh toán: ${PriceUtil.convert(payment.totalSellPrice)} VND</p>
 				<p>Thanh toán: ${payment.status.name}</p>
 			</c:forEach>
 			<h3>Lịch sử</h3>

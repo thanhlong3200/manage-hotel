@@ -87,6 +87,11 @@
                 Đổi phòng
             </a>
         </li>
+         <li >
+            <a href="<c:url value='/quan-tri/dich-vu'/>">
+                Dịch vụ
+            </a>
+        </li>
         <li >
             <a href="<c:url value='/quan-tri/nang-cap-booking'/>">
                 Upgrade booking

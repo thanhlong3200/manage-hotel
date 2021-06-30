@@ -42,34 +42,34 @@ public class BookedServiceService implements IBookedServiceService{
 		return modelMapper.map(entity, BookedServiceDTO.class);
 	}
 
-	@Override
-	public List<BookedServiceDTO> setBookedServices(List<BookedRoomDTO> bookedRooms) {
-		List<BookedServiceDTO> list = new ArrayList<BookedServiceDTO>();
-		ModelMapper modelMapper = new ModelMapper();
-		for (BookedRoomDTO bookedRoomDTO : bookedRooms) {
-			BookedRoomEntity bookedRoomEntity = bookedRoomRepository.findOne(bookedRoomDTO.getId());	
-			List<ServiceEntity> serviceEntities = serviceRepository.findByRoomTypesId(bookedRoomEntity.getRoom().getRoomType().getId());
-			List<ServiceDTO> services = modelMapper.map(serviceEntities, new TypeToken<List<ServiceDTO>>(){}.getType());
-							
-			for (ServiceDTO service : services) {
-				
-				BookedServiceEntity bookedServiceEntity = new BookedServiceEntity();
-				
-				bookedServiceEntity.setBooked(bookedRoomEntity);
-				bookedServiceEntity.setFree(1);
-				bookedServiceEntity.setUsed(0);	
-				
-				ServiceEntity serviceEntity = serviceRepository.findOne(service.getId());
-				bookedServiceEntity.setService(serviceEntity);
-				
-				bookedServiceEntity = bookedServiceRepository.save(bookedServiceEntity);
-				
-				BookedServiceDTO dto =  modelMapper.map(bookedServiceEntity, BookedServiceDTO.class);
-				list.add(dto);
-			}	
-		}
-		return list;
-	}
+//	@Override
+//	public List<BookedServiceDTO> setBookedServices(List<BookedRoomDTO> bookedRooms) {
+//		List<BookedServiceDTO> list = new ArrayList<BookedServiceDTO>();
+//		ModelMapper modelMapper = new ModelMapper();
+//		for (BookedRoomDTO bookedRoomDTO : bookedRooms) {
+//			BookedRoomEntity bookedRoomEntity = bookedRoomRepository.findOne(bookedRoomDTO.getId());	
+//			List<ServiceEntity> serviceEntities = serviceRepository.findByRoomTypesId(bookedRoomEntity.getRoom().getRoomType().getId());
+//			List<ServiceDTO> services = modelMapper.map(serviceEntities, new TypeToken<List<ServiceDTO>>(){}.getType());
+//							
+//			for (ServiceDTO service : services) {
+//				
+//				BookedServiceEntity bookedServiceEntity = new BookedServiceEntity();
+//				
+//				bookedServiceEntity.setBooked(bookedRoomEntity);
+//				bookedServiceEntity.setFree(1);
+//				bookedServiceEntity.setUsed(0);	
+//				
+//				ServiceEntity serviceEntity = serviceRepository.findOne(service.getId());
+//				bookedServiceEntity.setService(serviceEntity);
+//				
+//				bookedServiceEntity = bookedServiceRepository.save(bookedServiceEntity);
+//				
+//				BookedServiceDTO dto =  modelMapper.map(bookedServiceEntity, BookedServiceDTO.class);
+//				list.add(dto);
+//			}	
+//		}
+//		return list;
+//	}
 
 	@Override
 	public void replaceService(BookingDTO booking) {

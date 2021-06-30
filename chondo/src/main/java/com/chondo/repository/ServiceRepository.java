@@ -8,4 +8,7 @@ import com.chondo.entity.ServiceEntity;
 
 public interface ServiceRepository extends JpaRepository<ServiceEntity, Long>{
 	List<ServiceEntity> findByRoomTypesId(Long roomTypeId);
+
+	ServiceEntity findOneByCode(String code);
+	
 }

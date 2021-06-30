@@ -8,6 +8,6 @@ import com.chondo.dto.BookingDTO;
 
 public interface IBookedServiceService {
 	BookedServiceDTO save(BookedServiceDTO dto);
-	List<BookedServiceDTO> setBookedServices(List<BookedRoomDTO> bookedRooms);
+//	List<BookedServiceDTO> setBookedServices(List<BookedRoomDTO> bookedRooms);
 	void replaceService(BookingDTO booking);
 }

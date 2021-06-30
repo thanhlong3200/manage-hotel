@@ -18,9 +18,7 @@ public class BookedServiceEntity extends BaseEntity{
 	@ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "service_id")
     private ServiceEntity service;
-	
-	@Column
-	private Integer used;
+
 	
 	@Column
 	private Integer free;
@@ -39,14 +37,6 @@ public class BookedServiceEntity extends BaseEntity{
 
 	public void setService(ServiceEntity service) {
 		this.service = service;
-	}
-
-	public Integer getUsed() {
-		return used;
-	}
-
-	public void setUsed(Integer used) {
-		this.used = used;
 	}
 
 	public Integer getFree() {
