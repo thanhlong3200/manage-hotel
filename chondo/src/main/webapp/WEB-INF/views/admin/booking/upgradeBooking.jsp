@@ -31,27 +31,32 @@
 		</c:if>
 		
 		<c:if test="${not empty code}">
-				
-			<div class="upgradeBooking" style="padding-left:25px;" >
-				<p>Mã booking: ${booking.code}</p>
-				<p>Ngày đặt: ${booking.createdDate}</p>
-				<p>Ngày nhận phòng: ${booking.dateFrom}</p>
-				<p>Ngày trả phòng: ${booking.dateTo}</p>
-				<p>Loại phòng: ${booking.roomType.name}</p>
-				<select id="roomTypeIdChoosed" required>
-					<option value = "">--Chọn loại phòng nâng cấp--</option>
-					<c:forEach items="${roomTypes}" var="roomType">
-						<option value = "${roomType.id}">${roomType.name}</option>	
-					</c:forEach>
-				</select>
-				<select id="freeUpgrade" required>
-					<option value = "">--Chọn hình thức--</option>
-					<option value = "0">Có phí</option>
-					<option value = "1">Miễn phí</option>
-				</select>
-				<input type="hidden" id="bookingCode" value="${booking.code}">
-				<button id="saveUpgrade" type="submit" class="btn btn-primary" >Nâng cấp</button>
-			</div>
+			<c:if test="${booking.status.code != 'booked' }">
+				<h4 style="font-weight:600;padding-left:30px;">Booking này đang trong trạng thái <b>${booking.status.name}</b> , không thể upgrade</h4>
+			</c:if>
+			<c:if test="${booking.status.code == 'booked' }">
+				<div class="upgradeBooking" style="padding-left:25px;" >
+					<p>Mã booking: ${booking.code}</p>
+					<p>Ngày đặt: ${booking.createdDate}</p>
+					<p>Ngày nhận phòng: ${booking.dateFrom}</p>
+					<p>Ngày trả phòng: ${booking.dateTo}</p>
+					<p>Loại phòng: ${booking.roomType.name}</p>
+					<select id="roomTypeIdChoosed" required>
+						<option value = "">--Chọn loại phòng nâng cấp--</option>
+						<c:forEach items="${roomTypes}" var="roomType">
+							<option value = "${roomType.id}">${roomType.name}</option>	
+						</c:forEach>
+					</select>
+					<select id="freeUpgrade" required>
+						<option value = "">--Chọn hình thức--</option>
+						<option value = "0">Có phí</option>
+						<option value = "1">Miễn phí</option>
+					</select>
+					<input type="hidden" id="bookingCode" value="${booking.code}">
+					<button id="saveUpgrade" type="submit" class="btn btn-primary" >Nâng cấp</button>
+				</div>
+			</c:if>
+			
 		
 		</c:if>
 	</form>

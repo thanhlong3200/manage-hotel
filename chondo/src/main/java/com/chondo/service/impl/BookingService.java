@@ -1,7 +1,6 @@
 package com.chondo.service.impl;
 
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -14,15 +13,11 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.chondo.dto.BookedRoomDTO;
 import com.chondo.dto.BookingDTO;
-import com.chondo.dto.BookingStatusDTO;
-import com.chondo.dto.HotelDTO;
-import com.chondo.dto.RoomDTO;
-import com.chondo.dto.RoomTypeDTO;
+import com.chondo.entity.BookedRoomEntity;
 import com.chondo.entity.BookingEntity;
 import com.chondo.entity.BookingStatusEntity;
 import com.chondo.entity.CustomerEntity;
 import com.chondo.entity.RoomEntity;
-import com.chondo.entity.RoomTypeEntity;
 import com.chondo.repository.BookingRepository;
 import com.chondo.repository.BookingStatusRepository;
 import com.chondo.repository.CustomerRepository;
@@ -31,6 +26,7 @@ import com.chondo.repository.RoomRepository;
 import com.chondo.repository.RoomStatusRepository;
 import com.chondo.repository.RoomTypeRepository;
 import com.chondo.service.IBookingService;
+import com.chondo.util.LogUtil;
 
 @Service
 public class BookingService implements IBookingService{
@@ -50,6 +46,11 @@ public class BookingService implements IBookingService{
 	@Autowired
 	private CustomerRepository customerRepository;
 	
+	@Autowired
+	private RoomRepository roomRepository;
+	
+	@Autowired
+	private RoomStatusRepository roomStatusRepository;
 	
 	@Override
 	@Transactional
@@ -59,6 +60,14 @@ public class BookingService implements IBookingService{
 		if (booking.getCode()!=null) {
 			bookingEntity = bookingRepository.findOneByCode(booking.getCode());
 			bookingEntity.setStatus(bookingStatusRepository.findOneByCode("cancel"));
+			List<BookedRoomEntity> bookedRoomEntities = bookingEntity.getBookedRooms();
+			List<BookedRoomDTO> bookedRoomDTOs = modelMapper.map(bookedRoomEntities, new TypeToken<List<BookedRoomDTO>>(){}.getType());
+			for (BookedRoomDTO bookedRoomDTO : bookedRoomDTOs) {
+				RoomEntity roomEntity = roomRepository.findOne(bookedRoomDTO.getRoom().getId());
+				roomEntity.setStatus(roomStatusRepository.findOneByCode("available"));
+				roomRepository.save(roomEntity);
+			}
+			bookingEntity.setLogs(bookingEntity.getLogs() + LogUtil.createLog("cancel"));
 		}else {
 			bookingEntity = modelMapper.map(booking,BookingEntity.class);
 			
@@ -70,6 +79,8 @@ public class BookingService implements IBookingService{
 			bookingEntity.setRoomType(roomTypeRepository.findOne(booking.getRoomType().getId()));
 			bookingEntity.setHotel(hotelRepository.findOneByLocationAndStatus(booking.getHotel().getLocation(), 1));
 			bookingEntity.setUpgraded(0);
+			bookingEntity.setLogs(LogUtil.createLog("booked"));
+			
 		}
 		
 		bookingEntity = bookingRepository.save(bookingEntity);
@@ -125,6 +136,7 @@ public class BookingService implements IBookingService{
 		BookingEntity bookingEntity = bookingRepository.findOne(booking.getId());
 		BookingStatusEntity status = bookingStatusRepository.findOneByCode(code);
 		bookingEntity.setStatus(status);
+		bookingEntity.setLogs(bookingEntity.getLogs() + LogUtil.createLog(code));
 		bookingRepository.save(bookingEntity);
 		return	modelMapper.map(bookingEntity,BookingDTO.class);	
 	}

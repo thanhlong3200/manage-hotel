@@ -31,84 +31,88 @@
 		</c:if>
 		
 		<c:if test="${not empty bookingCode}">
-				
-			<div class="changeRoom" style="padding-left:25px;" >
+			<c:if test="${booking.status.code=='cancel'}">
+				<h4 style="font-weight:600;padding-left:30px;">Booking này đang trong trạng thái <b>${booking.status.name}</b> , không thể Đổi phòng</h4>
+			</c:if>
+			<c:if test="${booking.status.code!='cancel'}">
 			
-		
-				<div id="roomsBooked" style="margin-bottom:25px;">
-					<h2>Các phòng đã đặt</h2>
-					<c:forEach items="${bookedRooms}" var="bookedRoom">
-						<h4 style="margin-right: 20px;">Phòng ${bookedRoom.room.number} Tầng  ${bookedRoom.room.floor}</h4>		
-						<input type="hidden" name = "roomChoosed" value="${bookedRoom.room.id}"/>
-						<input type="hidden" name = "roomChoosed" value="${bookedRoom.room.id}" data-room-id="roomId${bookedRoom.room.id}" class="roomChoosed"/>
-						
-						<button data-room-id="roomId${bookedRoom.room.id}"  class="btn btn-primary btnChange">Đổi</button>
-						
-						<div class="formRoomNumber" data-room-id="roomId${bookedRoom.room.id}">
-							<input type="text" data-room-id="roomId${bookedRoom.room.id}" class="displayRoomNumber" placeholder ="Phòng ${bookedRoom.room.number} Tầng ${bookedRoom.room.floor}" disabled/>
-							<button data-room-id="roomId${bookedRoom.room.id}" data-check="false" class="btn btn-primary btnChooseRoom">Chọn phòng</button>
-						</div>
-						
-						<c:if test="${bookedRoom.customers.size() > 0}"><h5>Khách ở: ${bookedRoom.customers.size()} người</h5></c:if>
-					</c:forEach>
-					<c:if test="${bookedRoom.customers.size() == 0}">
-						<a href="<c:url value= '/quan-tri/check-in?bookingCode=${booking.code}'/>" class ="btn btn-success">Check-in ngay</a>
-					</c:if>
-					<c:if test="${bookedRoom.customers.size() > 0}">
-						<a class ="btn btn-secondary">Đã check-in</a>
-					</c:if>
-					<button id="submit" class="btn btn-danger" data-toggle="modal" data-target="#exampleModal">Lưu</button>
-				</div>
+				<div class="changeRoom" style="padding-left:25px;" >
 					
-				<c:if test="${not empty availableRoom}">
-				
-					<div class="popupChooseRoom">
-				
-						<div class="chooseRoom">
-				
-							<div class="mainAvailableRoom" id="exampleModal" style="" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-								<div id="note">
-									<h4 style="display: inline-block;">Trạng thái phòng</h4>
-									<ul id="listNote">
-										<c:forEach items="${listStatus}" var="status">
-											<button class="btn btn-${status.btnStyle}">
-												${status.name}</button>
+			
+					<div id="roomsBooked" style="margin-bottom:25px;">
+						<h2>Các phòng đã đặt</h2>
+						<c:forEach items="${bookedRooms}" var="bookedRoom">
+							<h4 style="margin-right: 20px;">Phòng ${bookedRoom.room.number} Tầng  ${bookedRoom.room.floor}</h4>		
+							<input type="hidden" name = "roomChoosed" value="${bookedRoom.room.id}"/>
+							<input type="hidden" name = "roomChoosed" value="${bookedRoom.room.id}" data-room-id="roomId${bookedRoom.room.id}" class="roomChoosed"/>
+							
+							<button data-room-id="roomId${bookedRoom.room.id}"  class="btn btn-primary btnChange">Đổi</button>
+							
+							<div class="formRoomNumber" data-room-id="roomId${bookedRoom.room.id}">
+								<input type="text" data-room-id="roomId${bookedRoom.room.id}" class="displayRoomNumber" placeholder ="Phòng ${bookedRoom.room.number} Tầng ${bookedRoom.room.floor}" disabled/>
+								<button data-room-id="roomId${bookedRoom.room.id}" data-check="false" class="btn btn-primary btnChooseRoom">Chọn phòng</button>
+							</div>
+							
+							<c:if test="${bookedRoom.customers.size() > 0}"><h5>Khách ở: ${bookedRoom.customers.size()} người</h5></c:if>
+						</c:forEach>
+						<c:if test="${bookedRoom.customers.size() == 0}">
+							<a href="<c:url value= '/quan-tri/check-in?bookingCode=${booking.code}'/>" class ="btn btn-success">Check-in ngay</a>
+						</c:if>
+						<c:if test="${bookedRoom.customers.size() > 0}">
+							<a class ="btn btn-secondary">Đã check-in</a>
+						</c:if>
+						<button id="submit" class="btn btn-danger" data-toggle="modal" data-target="#exampleModal">Lưu</button>
+					</div>
+						
+					<c:if test="${not empty availableRoom}">
 					
+						<div class="popupChooseRoom">
+					
+							<div class="chooseRoom">
+					
+								<div class="mainAvailableRoom" id="exampleModal" style="" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+									<div id="note">
+										<h4 style="display: inline-block;">Trạng thái phòng</h4>
+										<ul id="listNote">
+											<c:forEach items="${listStatus}" var="status">
+												<button class="btn btn-${status.btnStyle}">
+													${status.name}</button>
+						
+											</c:forEach>
+										</ul>
+											<button class="btn btn-danger" id="closePopupChooseRoom">X</button>
+									</div>
+									
+									
+									
+									<ul id="listRoom">
+						
+										<c:forEach items="${availableRoom}" var="available">
+						
+											<li data-id="${available.id}" data-room-id="roomId${available.id}" data-check="false"
+												class="btn btn-success availableRoom" >
+												<h4>${available.number}</h4>
+												<p>Tầng ${available.floor}</p>
+											</li>
+						
 										</c:forEach>
 									</ul>
-										<button class="btn btn-danger" id="closePopupChooseRoom">X</button>
+									
+									
+									<button class="btn btn-danger" id="saveChangeRoom">Lưu</button>
+									
+									
 								</div>
-								
-								
-								
-								<ul id="listRoom">
-					
-									<c:forEach items="${availableRoom}" var="available">
-					
-										<li data-id="${available.id}" data-room-id="roomId${available.id}" data-check="false"
-											class="btn btn-success availableRoom" >
-											<h4>${available.number}</h4>
-											<p>Tầng ${available.floor}</p>
-										</li>
-					
-									</c:forEach>
-								</ul>
-								
-								
-								<button class="btn btn-danger" id="saveChangeRoom">Lưu</button>
-								
-								
-							</div>
-						</div>	
+							</div>	
+							
 						
-					
+							
+						</div>
 						
-					</div>
-					
-			
-				</c:if>
-			</div>
-		
+				
+					</c:if>
+				</div>
+			</c:if>
 		</c:if>
 	</form>
 	

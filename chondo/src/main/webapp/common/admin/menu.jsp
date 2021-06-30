@@ -73,6 +73,11 @@
             </a>
         </li>
         <li >
+            <a href="<c:url value='/quan-tri/check-out'/>">
+                Check out
+            </a>
+        </li>
+        <li >
             <a href="<c:url value='/quan-tri/huy-booking'/>">
                 Hủy booking
             </a>

@@ -52,6 +52,7 @@ public class ChangeRoomController {
 				mav.addObject("availableRoom", availableRoom);
 				
 				mav.addObject("bookingCode", bookingCode);
+				mav.addObject("booking", booking);
 			}else {
 				mav.addObject("error", "Không tìm thấy mã booking này !");
 			}

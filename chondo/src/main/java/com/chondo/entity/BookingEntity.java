@@ -39,6 +39,9 @@ public class BookingEntity extends BaseEntity {
 	@Column
 	private Integer upgraded;
 	
+	@Column
+	private String logs;
+	
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "user_id")
 	private UserEntity user;
@@ -197,6 +200,14 @@ public class BookingEntity extends BaseEntity {
 
 	public void setUpgrade(UpgradeEntity upgrade) {
 		this.upgrade = upgrade;
+	}
+
+	public String getLogs() {
+		return logs;
+	}
+
+	public void setLogs(String logs) {
+		this.logs = logs;
 	}
 	
 	

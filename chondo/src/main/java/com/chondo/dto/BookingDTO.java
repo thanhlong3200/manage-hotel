@@ -19,6 +19,8 @@ public class BookingDTO extends AbstractDTO<BookingDTO>{
 	
 	private Integer children;
 	
+	private String logs;
+	
 	private HotelDTO hotel;
 	
 	private RoomTypeDTO roomType;
@@ -127,6 +129,14 @@ public class BookingDTO extends AbstractDTO<BookingDTO>{
 
 	public void setBookedRooms(List<BookedRoomDTO> bookedRooms) {
 		this.bookedRooms = bookedRooms;
+	}
+
+	public String getLogs() {
+		return logs;
+	}
+
+	public void setLogs(String logs) {
+		this.logs = logs;
 	}
 
 	

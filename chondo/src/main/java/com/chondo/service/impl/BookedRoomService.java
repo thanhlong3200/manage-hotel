@@ -30,6 +30,7 @@ import com.chondo.repository.RoomRepository;
 import com.chondo.repository.RoomStatusRepository;
 import com.chondo.repository.ServiceRepository;
 import com.chondo.service.IBookedRoomService;
+import com.chondo.util.LogUtil;
 
 @Service
 public class BookedRoomService implements IBookedRoomService{
@@ -172,6 +173,9 @@ public class BookedRoomService implements IBookedRoomService{
 							upgradeBookedService(bookedRoomDTO.getId());
 						}
 						
+						BookingEntity bookingEntity = bookingRepository.findOneByCode(booking.getCode());
+						bookingEntity.setLogs(bookingEntity.getLogs() + "Change room " + booking.getIds()[i-1]+ "->" +booking.getIds()[i] +"</br>");
+						bookingRepository.save(bookingEntity);
 					}
 				}
 				

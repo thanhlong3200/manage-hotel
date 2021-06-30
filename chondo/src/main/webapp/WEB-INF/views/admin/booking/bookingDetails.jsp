@@ -32,6 +32,8 @@
 				<p>Tổng thanh toán: ${payment.totalSellPrice} VND</p>
 				<p>Thanh toán: ${payment.status.name}</p>
 			</c:forEach>
+			<h3>Lịch sử</h3>
+			<p>${booking.logs}</p>
 		</div>
 		<div class= "payments-information col-3">
 			<form id="formSubmit">
