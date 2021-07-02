@@ -131,8 +131,8 @@
 																				, ${search.children} trẻ em
 																			</c:if>
 																</p>
-																<p>${search.nightCount}đêm</p>
-																<p>${search.roomCount}phòng</p>
+																<p>${search.nightCount} đêm</p>
+																<p>${search.roomCount} phòng</p>
 																<c:if
 																	test="${roomType.originalPrice != roomType.sellPrice}">
 																	<p style="text-decoration-line: line-through;">${PriceUtil.convert(roomType.originalPrice* search.nightCount * search.roomCount)}

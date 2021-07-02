@@ -12,5 +12,5 @@ public interface IBookedRoomService {
 	List<BookedRoomDTO> setCustomers(List<BookedRoomDTO> bookedRooms);
 	List<BookedRoomDTO> changeRoom(BookingDTO booking);
 	List<BookedRoomDTO> findByBookingCode(String code);
-	BookedRoomDTO findOneByRoomNumber(Long id);
+	BookedRoomDTO findOneByRoomId(Long id);
 }

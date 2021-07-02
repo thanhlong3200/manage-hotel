@@ -19,6 +19,6 @@ public interface BookedRoomRepository extends JpaRepository<BookedRoomEntity, Lo
 			"join booking_status bs on bs.id = b.status_id\r\n" + 
 			"join rooms r on br.room_id = r.id\r\n" + 
 			"where bs.code = 'checkin' and r.id = :id", nativeQuery = true)
-	BookedRoomEntity findOneByRoomNumber(@Param("id") Long id);
+	BookedRoomEntity findOneByRoomId(@Param("id") Long id);
 	
 }

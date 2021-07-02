@@ -3,6 +3,7 @@ package com.chondo.service;
 import java.util.List;
 
 import com.chondo.dto.BookedRoomDTO;
+import com.chondo.dto.BookedServiceDTO;
 import com.chondo.dto.RoomTypeDTO;
 import com.chondo.dto.ServiceDTO;
 
@@ -13,5 +14,5 @@ public interface IServiceService {
 
 	ServiceDTO findOneByCode(String code);
 
-	void createBookedService(BookedRoomDTO bookedRoomDTO, String serviceCode);
+	BookedServiceDTO createBookedService(BookedRoomDTO bookedRoomDTO, String serviceCode);
 }

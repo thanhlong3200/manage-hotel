@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.chondo.dto.BookedRoomDTO;
+import com.chondo.dto.BookedServiceDTO;
 import com.chondo.dto.BookingDTO;
 import com.chondo.dto.CustomerDTO;
 import com.chondo.dto.RoomTypeDTO;
@@ -16,6 +17,7 @@ import com.chondo.dto.ServiceDTO;
 import com.chondo.service.IBookedRoomService;
 import com.chondo.service.IBookingService;
 import com.chondo.service.ICustomerService;
+import com.chondo.service.IPaymentService;
 import com.chondo.service.IServiceService;
 
 @RestController(value = "serviceAPI")
@@ -26,14 +28,17 @@ public class ServiceAPI {
 	@Autowired
 	private IBookedRoomService bookedRoomService;
 	
+	@Autowired
+	private IPaymentService paymentService;
+	
 	@PostMapping(value = "/api/service")
 	@Transactional
 	public ServiceDTO saveCustomerCheckIn(@RequestBody ServiceDTO dto){
 		
-		BookedRoomDTO bookedRoomDTO = bookedRoomService.findOneByRoomNumber(dto.getId());
+		BookedRoomDTO bookedRoomDTO = bookedRoomService.findOneByRoomId(dto.getId());
 		
-		service.createBookedService(bookedRoomDTO,dto.getCode());
-		
+		BookedServiceDTO bookedServiceDTO = service.createBookedService(bookedRoomDTO,dto.getCode());
+
 		return dto;
 	}
 }

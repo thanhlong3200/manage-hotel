@@ -7,4 +7,6 @@ public interface IUpgradeService {
 
 	void upgrade(UpgradeDTO dto);
 
+	UpgradeDTO findOneByBookingId(Long id);
+
 }

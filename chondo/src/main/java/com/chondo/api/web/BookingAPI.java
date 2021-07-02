@@ -1,7 +1,5 @@
 package com.chondo.api.web;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -9,7 +7,6 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.chondo.dto.BookedRoomDTO;
 import com.chondo.dto.BookingDTO;
 import com.chondo.dto.CustomerDTO;
 import com.chondo.service.IBookedRoomService;
@@ -18,7 +15,7 @@ import com.chondo.service.IBookingService;
 import com.chondo.service.ICustomerService;
 import com.chondo.service.IPaymentService;
 import com.chondo.service.IRoomService;
-import com.chondo.service.impl.RoomService;
+import com.chondo.util.SendMailUtil;
 
 @RestController(value = "bookingAPI")
 public class BookingAPI {
@@ -53,11 +50,13 @@ public class BookingAPI {
 		
 		booking = bookingService.save(booking);
 		
+		SendMailUtil.sendMail(customer.getEmail(), booking);
+		
 		bookedRoomService.setBookedRooms(booking);
 		
 //		bookedServiceService.setBookedServices(bookedRooms);
 		
-		paymentService.createPayment(booking,"Tiền đặt phòng");
+//		paymentService.createPayment(booking,"Tiền đặt phòng");
 		
 		return booking;
 	}

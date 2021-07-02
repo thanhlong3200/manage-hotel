@@ -8,15 +8,24 @@ import org.modelmapper.TypeToken;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.chondo.dto.BookingDTO;
 import com.chondo.dto.RoomDTO;
+import com.chondo.entity.BookingEntity;
+import com.chondo.entity.BookingStatusEntity;
 import com.chondo.entity.RoomEntity;
+import com.chondo.entity.RoomStatusEntity;
 import com.chondo.repository.RoomRepository;
+import com.chondo.repository.RoomStatusRepository;
 import com.chondo.service.IRoomService;
+import com.chondo.util.LogUtil;
 
 @Service
 public class RoomService implements IRoomService{
 	@Autowired
 	private RoomRepository roomRepository;
+	
+	@Autowired
+	private RoomStatusRepository roomStatusRepository;
 	
 	@Override
 	public List<RoomDTO> findByRoomTypeIdAndStatusCode(Long id, String code) {
@@ -64,6 +73,16 @@ public class RoomService implements IRoomService{
 		List<RoomEntity> roomsEntity = roomRepository.findByBookedRoom(date);
 		List<RoomDTO> rooms = modelMapper.map(roomsEntity, new TypeToken<List<RoomDTO>>(){}.getType());
 		return rooms;
+	}
+
+	@Override
+	public RoomDTO changeStatus(RoomDTO room, String statusCode) {
+		ModelMapper modelMapper = new ModelMapper();
+		RoomEntity entity = roomRepository.findOne(room.getId());
+		RoomStatusEntity status = roomStatusRepository.findOneByCode(statusCode);
+		entity.setStatus(status);
+		roomRepository.save(entity);
+		return	modelMapper.map(entity,RoomDTO.class);	
 	}
 	
 }

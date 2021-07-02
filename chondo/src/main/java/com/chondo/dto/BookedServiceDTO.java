@@ -4,7 +4,6 @@ public class BookedServiceDTO extends AbstractDTO<BookedServiceDTO> {
 
     private ServiceDTO service;
 	
-
 	private Integer free;
 
 	public ServiceDTO getService() {

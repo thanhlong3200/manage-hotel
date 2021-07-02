@@ -11,8 +11,13 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.chondo.dto.BookedRoomDTO;
 import com.chondo.dto.BookingDTO;
+import com.chondo.dto.RoomDTO;
+import com.chondo.dto.RoomStatusDTO;
 import com.chondo.service.IBookedRoomService;
 import com.chondo.service.IBookingService;
+import com.chondo.service.IRoomService;
+import com.chondo.service.IRoomStatusService;
+import com.chondo.service.IServiceService;
 
 @Controller(value = "checkOutController")
 public class CheckOutController {
@@ -23,27 +28,33 @@ public class CheckOutController {
 	@Autowired
 	private IBookedRoomService bookedRoomService;
 	
+	@Autowired
+	private IServiceService service;
+	
+	@Autowired
+	private IRoomStatusService roomStatusService;
+
+	@Autowired
+	private IRoomService roomService;
+	
 	@RequestMapping(value = "/quan-tri/check-out", method = RequestMethod.GET)
-	public ModelAndView checkInPage(@RequestParam(value = "code", required = false) String code) {
-		ModelAndView mav = new ModelAndView("admin/booking/checkIn");
-		if (code != null) {
-			BookingDTO booking = bookingService.findOneByCode(code);
-				
-			if (booking != null) {
-				
-				List<BookedRoomDTO> bookedRooms = bookedRoomService.findByBookingId(booking.getId());
-				
-				mav.addObject("booking", booking);
-				mav.addObject("bookedRooms", bookedRooms);
-				
-				mav.addObject("code", code);
-			}else {
-				mav.addObject("error", "Không tìm thấy mã booking này !");
-			}
+	public ModelAndView checkInPage(@RequestParam(value = "id", required = false) Long id) {
+		ModelAndView mav = new ModelAndView();
+	
+		if (id==null) {
+			List<RoomDTO> listRooms = roomService.findAll();
+
+			List<RoomStatusDTO> listStatus = roomStatusService.findByActive(1);
+
+			mav.addObject("listStatus", listStatus);
+			mav.addObject("listRooms", listRooms);	
+			mav.setViewName("admin/booking/checkOut");
+		}else {
+			BookedRoomDTO bookedRoomDTO = bookedRoomService.findOneByRoomId(id);
+			BookingDTO bookingDTO = bookingService.findOneByBookedRoomsId(bookedRoomDTO.getId());
+			return new ModelAndView("redirect:/quan-tri/booking?id="+bookingDTO.getId());
 			
 		}
-
-
 		
 		return mav;
 	}

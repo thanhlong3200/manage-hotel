@@ -46,8 +46,8 @@ public class RoomTypeEntity extends BaseEntity {
 	@Column(columnDefinition = "TEXT")
 	private String review;
 	
-	@OneToOne(mappedBy = "initRoomType")
-	private UpgradeEntity upgrade;
+	@OneToMany(mappedBy = "initRoomType")
+	private List<UpgradeEntity> upgrades = new ArrayList<UpgradeEntity>();
 	
 	@OneToMany(mappedBy = "roomType")
 	private List<RateEntity> rates = new ArrayList<RateEntity>();
@@ -217,6 +217,14 @@ public class RoomTypeEntity extends BaseEntity {
 
 	public void setFurnitures(List<FurnitureEntity> furnitures) {
 		this.furnitures = furnitures;
+	}
+
+	public List<UpgradeEntity> getUpgrades() {
+		return upgrades;
+	}
+
+	public void setUpgrades(List<UpgradeEntity> upgrades) {
+		this.upgrades = upgrades;
 	}
 
 	

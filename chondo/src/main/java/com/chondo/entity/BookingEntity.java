@@ -65,8 +65,8 @@ public class BookingEntity extends BaseEntity {
 	@OneToMany(mappedBy = "booking")
 	private List<BookedRoomEntity> bookedRooms = new ArrayList<BookedRoomEntity>();
 	
-	@OneToMany(mappedBy = "booking")
-	private List<PaymentEntity> payments = new ArrayList<PaymentEntity>();
+	@OneToOne(mappedBy = "booking")
+	private PaymentEntity payment;
 	
 	@OneToOne(mappedBy = "booking")
 	private BillEntity bill;
@@ -170,12 +170,14 @@ public class BookingEntity extends BaseEntity {
 		this.bookedRooms = bookedRooms;
 	}
 
-	public List<PaymentEntity> getPayments() {
-		return payments;
+	
+
+	public PaymentEntity getPayment() {
+		return payment;
 	}
 
-	public void setPayments(List<PaymentEntity> payments) {
-		this.payments = payments;
+	public void setPayment(PaymentEntity payment) {
+		this.payment = payment;
 	}
 
 	public BillEntity getBill() {

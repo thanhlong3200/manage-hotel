@@ -31,6 +31,15 @@ public class CustomerService implements ICustomerService{
 		entity = customerRepository.save(entity);
 		return modelMapper.map(entity, CustomerDTO.class);
 	}
+
+	@Override
+	public CustomerDTO changeStatus(CustomerDTO customer) {
+		ModelMapper modelMapper = new ModelMapper();
+		CustomerEntity entity = customerRepository.findOne(customer.getId());
+		entity.setCheckIn(0);
+		entity = customerRepository.save(entity);
+		return modelMapper.map(entity, CustomerDTO.class);
+	}
 	
 	
 }

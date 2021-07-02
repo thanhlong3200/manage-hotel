@@ -6,4 +6,5 @@ import com.chondo.entity.CustomerEntity;
 public interface ICustomerService {
 	CustomerDTO findOneByEmail(String email);
 	CustomerDTO save(CustomerDTO customer);
+	CustomerDTO changeStatus(CustomerDTO customer);
 }

@@ -8,6 +8,6 @@ import com.chondo.entity.PaymentEntity;
 
 public interface PaymentRepository extends JpaRepository<PaymentEntity, Long>{
 
-	List<PaymentEntity> findByBookingId(Long id);
+	PaymentEntity findOneByBookingId(Long id);
 
 }

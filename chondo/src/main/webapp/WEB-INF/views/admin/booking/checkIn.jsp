@@ -70,7 +70,7 @@
 								</c:forEach>
 							</div>
 						</c:forEach>
-						<button id="submit">Hoàn tất</button>	
+						<button class="btn btn-primary"  id="submit">Hoàn tất</button>	
 						
 					</c:if>
 					

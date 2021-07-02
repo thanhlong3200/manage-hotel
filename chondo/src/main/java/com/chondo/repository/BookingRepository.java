@@ -1,7 +1,9 @@
 package com.chondo.repository;
 
+import java.util.Date;
 import java.util.List;
 
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -20,5 +22,13 @@ public interface BookingRepository extends JpaRepository<BookingEntity, Long>{
 			"where r.hotel_id = 1 and rs.code <> 'available' and r.number = :number\r\n" + 
 			"and b.date_from >= CURDATE()", nativeQuery = true)
 	List<BookingEntity> getBookingOfRoom(@Param("number") Integer number);
+
+	List<BookingEntity> findByDateFrom(Date dateFilter, Pageable pageable);
+
+	double countByDateFrom(Date dateFilter);
+
+	double countByStatusCode(String code);
+
+	List<BookingEntity> findByStatusCode(String statusCode, Pageable pageable);
 	
 }

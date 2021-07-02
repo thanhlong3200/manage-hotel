@@ -6,4 +6,6 @@ import com.chondo.entity.UpgradeEntity;
 
 public interface UpgradeRepository extends JpaRepository<UpgradeEntity, Long>{
 
+	UpgradeEntity findOneByBookingId(Long id);
+
 }

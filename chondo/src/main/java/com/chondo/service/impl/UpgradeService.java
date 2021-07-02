@@ -1,9 +1,11 @@
 package com.chondo.service.impl;
 
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
 import com.chondo.dto.BookingDTO;
+import com.chondo.dto.CustomerDTO;
 import com.chondo.dto.UpgradeDTO;
 import com.chondo.entity.BookingEntity;
 import com.chondo.entity.UpgradeEntity;
@@ -43,6 +45,16 @@ public class UpgradeService implements IUpgradeService{
 		upgradeRepository.save(upgradeEntity);
 		
 		
+	}
+
+	@Override
+	public UpgradeDTO findOneByBookingId(Long id) {
+		ModelMapper modelMapper = new ModelMapper();
+		UpgradeEntity entity = upgradeRepository.findOneByBookingId(id);
+		if (entity==null) {
+			return null;
+		}
+		return modelMapper.map(entity, UpgradeDTO.class);
 	}
 
 }

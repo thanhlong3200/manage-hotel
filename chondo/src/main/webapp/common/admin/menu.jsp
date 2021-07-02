@@ -98,7 +98,7 @@
             </a>
         </li>
         <li >
-            <a href="<c:url value='/quan-tri/tinh-hinh-dat-phong'/>">
+            <a href="<c:url value='/quan-tri/tinh-hinh-dat-phong?page=1&limit=2'/>">
                	Tình hình đặt phòng
             </a>
         </li>

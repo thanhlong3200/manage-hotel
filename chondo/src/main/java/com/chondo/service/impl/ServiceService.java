@@ -67,7 +67,7 @@ public class ServiceService implements IServiceService{
 	}
 
 	@Override
-	public void createBookedService(BookedRoomDTO bookedRoomDTO, String serviceCode) {
+	public BookedServiceDTO createBookedService(BookedRoomDTO bookedRoomDTO, String serviceCode) {
 		BookingEntity bookingEntity = bookingRepository.findOneByBookedRoomsId(bookedRoomDTO.getId());
 		
 		ModelMapper modelMapper = new ModelMapper();
@@ -95,7 +95,9 @@ public class ServiceService implements IServiceService{
 		}
 		
 
-		bookedServiceRepository.save(bookedServiceEntity);
+		bookedServiceEntity = bookedServiceRepository.save(bookedServiceEntity);
+		
+		return modelMapper.map(bookedServiceEntity, BookedServiceDTO.class);
 	}
 	
 }

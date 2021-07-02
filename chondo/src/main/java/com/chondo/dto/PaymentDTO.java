@@ -1,41 +1,15 @@
 package com.chondo.dto;
 
 public class PaymentDTO extends AbstractDTO<PaymentDTO>{
-	private Long totalOriginalPrice;
 	
-	private Long totalSellPrice;
-	
-	private String description;
 	
     private BookingDTO booking;
 
 	private PaymentTypeDTO paymentType;
 
 	private PaymentStatusDTO status;
+	private Integer refund;
 
-	public Long getTotalOriginalPrice() {
-		return totalOriginalPrice;
-	}
-
-	public void setTotalOriginalPrice(Long totalOriginalPrice) {
-		this.totalOriginalPrice = totalOriginalPrice;
-	}
-
-	public Long getTotalSellPrice() {
-		return totalSellPrice;
-	}
-
-	public void setTotalSellPrice(Long totalSellPrice) {
-		this.totalSellPrice = totalSellPrice;
-	}
-
-	public String getDescription() {
-		return description;
-	}
-
-	public void setDescription(String description) {
-		this.description = description;
-	}
 
 	public BookingDTO getBooking() {
 		return booking;
@@ -61,6 +35,14 @@ public class PaymentDTO extends AbstractDTO<PaymentDTO>{
 
 	public void setPaymentType(PaymentTypeDTO paymentType) {
 		this.paymentType = paymentType;
+	}
+
+	public Integer getRefund() {
+		return refund;
+	}
+
+	public void setRefund(Integer refund) {
+		this.refund = refund;
 	}
 
 	

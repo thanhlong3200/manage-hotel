@@ -230,9 +230,9 @@ public class BookedRoomService implements IBookedRoomService{
 	}
 
 	@Override
-	public BookedRoomDTO findOneByRoomNumber(Long id) {
+	public BookedRoomDTO findOneByRoomId(Long id) {
 		ModelMapper modelMapper = new ModelMapper();
-		BookedRoomEntity entity = bookedRoomRepository.findOneByRoomNumber(id);
+		BookedRoomEntity entity = bookedRoomRepository.findOneByRoomId(id);
 		return modelMapper.map(entity, BookedRoomDTO.class);
 	}
 

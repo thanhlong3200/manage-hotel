@@ -1,6 +1,6 @@
 package com.chondo.util;
 
-import java.sql.Date;
+import java.util.Date;
 
 public class CalculateUtil {
 	public static Long countNight(Date dateFrom, Date dateTo) {

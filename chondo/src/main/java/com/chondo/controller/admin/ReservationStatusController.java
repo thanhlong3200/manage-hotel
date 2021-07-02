@@ -41,20 +41,33 @@ public class ReservationStatusController {
 	
 	@RequestMapping(value = "/quan-tri/tinh-hinh-dat-phong", method = RequestMethod.GET)
 	public ModelAndView reservationStatusPage(
+			@RequestParam(value = "page", required = false) Integer page,
+			@RequestParam(value = "limit", required = false) Integer limit,
 			@RequestParam(value = "date", required = false) String date) throws ParseException {
 		ModelAndView mav = new ModelAndView("admin/room/reservation-status");
-		List<RoomDTO> listRooms = new ArrayList<RoomDTO>();
+		List<BookingDTO> bookings = new ArrayList<BookingDTO>();
+		Pageable pageable = new PageRequest(page - 1, limit);
+		
+		BookingDTO dto = new BookingDTO();
+		dto.setLimit(limit);
+		dto.setPage(page);
+		
 		if (date != null) {
 			SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
 			Date dateFilter = format.parse(date);
-			listRooms = roomService.findByBookedRoom(dateFilter); 
+			bookings = bookingService.findByDateFrom(dateFilter,pageable); 			
+			dto.setListResult(bookings);
+			dto.setTotalPage((int) Math.round((double) bookingService.countByDateFrom(dateFilter) / dto.getLimit()));
 			mav.addObject("date",date);
-		}else {
-			listRooms = roomService.findAll();
-		}
-		 
+		}else {		
+			bookings = bookingService.findByStatusCode("booked",pageable);
+			dto.setListResult(bookings);
+			dto.setTotalPage((int) Math.round((double) bookingService.countByStatusCode("booked") / dto.getLimit()));
 		
-		mav.addObject("listRooms",listRooms);
+		}
+		
+
+		mav.addObject("model",dto);
 		return mav;
 	}
 }

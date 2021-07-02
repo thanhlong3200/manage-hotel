@@ -33,9 +33,6 @@ public class BookingController {
 	private IBookingService bookingService;
 
 	@Autowired
-	private IPaymentService paymentService;
-
-	@Autowired
 	private IBookedRoomService bookedRoomService;
 	
 	@Autowired
@@ -54,7 +51,6 @@ public class BookingController {
 		if (id != null) {
 			BookingDTO bookingDTO = bookingService.findOne(id);
 
-			List<PaymentDTO> payments = paymentService.findByBookingId(bookingDTO.getId());
 
 			List<BookedRoomDTO> bookedRooms = bookedRoomService.findByBookingId(bookingDTO.getId());
 			
@@ -63,7 +59,6 @@ public class BookingController {
 			List<StaffDTO> availableStaff = staffService.findByStatusCode("available");
 
 			mav.addObject("booking", bookingDTO);
-			mav.addObject("payments", payments);
 			mav.addObject("bookedRooms", bookedRooms);
 			mav.addObject("listStatus", listStatus);
 			mav.addObject("availableStaff", availableStaff);
@@ -79,7 +74,7 @@ public class BookingController {
 			dto.setPage(page);
 
 			dto.setTotalPage((int) Math.round((double) bookingService.count() / dto.getLimit()));
-			dto.setTotalItem(dto.getListResult().size());
+
 
 			if (bookingCode != null) {
 				BookingDTO search = bookingService.findOneByCode(bookingCode);
@@ -114,12 +109,10 @@ public class BookingController {
 
 			BookingDTO booking = bookingService.findOneByCode(code);
 			if (booking != null) {
-				List<PaymentDTO> payments = paymentService.findByBookingId(booking.getId());
 
 				List<BookedRoomDTO> bookedRooms = bookedRoomService.findByBookingId(booking.getId());
 
 				mav.addObject("booking", booking);
-				mav.addObject("payments", payments);
 				mav.addObject("bookedRooms", bookedRooms);
 				
 
@@ -128,6 +121,19 @@ public class BookingController {
 			}
 		}
 		mav.addObject("code", code);
+		return mav;
+	}
+	
+	@RequestMapping(value = "/quan-tri/xac-nhan-booking", method = RequestMethod.GET)
+	public ModelAndView verifyBooking(@RequestParam(value = "code") String code,
+			@RequestParam(value = "manipulation", required = false) String manipulation) {
+		ModelAndView mav = new ModelAndView("admin/booking/verify-booking");
+		BookingDTO booking = bookingService.findOneByCode(code);
+		if (manipulation!=null) {
+			bookingService.createLog(code,"verify");
+			mav.setViewName("/quan-tri/xac-nhan-booking?code="+code);
+		}
+		mav.addObject("booking", booking);
 		return mav;
 	}
 

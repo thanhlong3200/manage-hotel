@@ -31,6 +31,21 @@ public class BookingDTO extends AbstractDTO<BookingDTO>{
 	
 	private BookingStatusDTO status;
 	
+	private Long sellPriceBooked;
+	
+	private Long sellPriceUpgrade;
+	
+	private Long originalPriceBooked;
+	
+	private Long originalPriceUpgrade;
+	
+	private Long priceService;
+	
+	private Long totalPrice;
+	
+	private Long nightCount;
+	private boolean refund;
+
 	private List<BookedRoomDTO> bookedRooms = new ArrayList<BookedRoomDTO>();
 
 	public String getCode() {
@@ -97,7 +112,7 @@ public class BookingDTO extends AbstractDTO<BookingDTO>{
 		this.roomType = roomType;
 	}
 
-
+	
 
 	public CustomerDTO getCustomer() {
 		return customer;
@@ -137,6 +152,83 @@ public class BookingDTO extends AbstractDTO<BookingDTO>{
 
 	public void setLogs(String logs) {
 		this.logs = logs;
+	}
+
+	public Long getSellPriceBooked() {
+		return sellPriceBooked;
+	}
+
+	public void setSellPriceBooked(Long sellPriceBooked) {
+		this.sellPriceBooked = sellPriceBooked;
+	}
+
+	public Long getSellPriceUpgrade() {
+		return sellPriceUpgrade;
+	}
+
+	public void setSellPriceUpgrade(Long sellPriceUpgrade) {
+		this.sellPriceUpgrade = sellPriceUpgrade;
+	}
+
+	public Long getOriginalPriceBooked() {
+		return originalPriceBooked;
+	}
+
+	public void setOriginalPriceBooked(Long originalPriceBooked) {
+		this.originalPriceBooked = originalPriceBooked;
+	}
+
+	public Long getOriginalPriceUpgrade() {
+		return originalPriceUpgrade;
+	}
+
+	public void setOriginalPriceUpgrade(Long originalPriceUpgrade) {
+		this.originalPriceUpgrade = originalPriceUpgrade;
+	}
+
+	public Long getPriceService() {
+		return priceService;
+	}
+
+	public void setPriceService(Long priceService) {
+		this.priceService = priceService;
+	}
+
+	public Long getTotalPrice() {
+		return totalPrice;
+	}
+
+	public void setTotalPrice(Long totalPrice) {
+		this.totalPrice = totalPrice;
+	}
+
+	public Long getNightCount() {
+		return nightCount;
+	}
+
+	public void setNightCount(Long nightCount) {
+		this.nightCount = nightCount;
+	}
+
+	public String toStringBooking() {
+		StringBuilder toString = new StringBuilder();
+		toString.append("Ma booking: " + getCode() + "\n");
+		toString.append("Khach hang: " + getCustomer().getFirstName() + " " + getCustomer().getLastName() + "\n");
+		toString.append("Loai phong: " + getRoomType().getName() + "\n");
+		toString.append("Ngay nhan phong: " + getDateFrom() + "\n");
+		toString.append("Ngay tra phong: " + getDateTo() + "\n");
+		toString.append("So phong: " + getRoomCount() + "\n");
+		toString.append("So khach: " + getAdult() + " nguoi lon, " + getChildren() + " tre em" +"\n");
+		toString.append("Gio đat: " + getCreatedDate() + "\n");
+		return toString.toString();
+	}
+
+	public boolean isRefund() {
+		return refund;
+	}
+
+	public void setRefund(boolean refund) {
+		this.refund = refund;
 	}
 
 	

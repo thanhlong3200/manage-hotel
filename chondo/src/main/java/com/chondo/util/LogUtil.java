@@ -27,6 +27,9 @@ public class LogUtil {
 		case "cancel":
 			log = "Cancel: " + currentTime+ "</br>";
 			break;
+		case "verify":
+			log = "Verify: " + currentTime+ "</br>";
+			break;
 		default:
 			break;
 		}
