@@ -8,10 +8,10 @@ import com.chondo.dto.StaffTaskDTO;
 
 public interface IStaffTaskService {
 
-	List<StaffTaskDTO> assignTask(long[] ids, String code);
-
 	List<StaffTaskDTO> findAll(Pageable pageable);
 
 	Long count();
+
+	StaffTaskDTO assignTask(StaffTaskDTO dto);
 
 }

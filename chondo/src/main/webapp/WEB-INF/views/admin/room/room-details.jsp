@@ -3,56 +3,129 @@
 <%@ include file="/common/taglib.jsp"%>
 <%@ page import="com.chondo.util.SecurityUtils"%>
 <%@page import="com.chondo.util.PriceUtil"%>
-
+<c:url var="assignAPI" value="/api/assign" />
+<c:url var="roomURL" value="/quan-tri/phong" />
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Chi tiết Phòng</title>
+<title>Phòng ${room.number}</title>
 </head>
 <body>
+	<h2>Phòng ${room.number}</h2>
 
-	<h3>Danh sách Booking phòng ${number }</h3>
+		<div class="listRoom">
 
-	<div class="scrollDiv">
-		<table class="table text-center">
-			<thead class="thead-dark">
-				<tr>
-					<!-- <th scope="col">Xóa</th> -->
-					<!-- <th scope="col">Cập nhật</th> -->
-					<th scope="col">Mã</th>
-					<th scope="col">Nhận phòng</th>
-					<th scope="col">Trả phòng</th>
-					<th scope="col">Số phòng</th>
-					<th scope="col">Người lớn</th>
-					<th scope="col">Trẻ em</th>
-					<th scope="col">Trạng thái</th>
-					<th scope="col">Chi tiết</th>
-				</tr>
-			</thead>
-			<tbody class="scrollDiv">
-				<c:forEach items="${bookings}" var="booking">
-					<tr>
-						<!-- <td style="line-height: 60px;"><input type="checkbox"
-							name="delete"></td> -->
-						<!-- 	<td style="line-height: 60px;"><a href=""><i
-								class="fa fa-edit"></i></a></td> -->
-						<td style="line-height: 60px;">${booking.code}</td>
-						<td style="line-height: 60px;">${booking.dateFrom}</td>
-						<td style="line-height: 60px;">${booking.dateTo}</td>
-						<td style="line-height: 60px;">${booking.roomCount}</td>
-						<td style="line-height: 60px;">${booking.adult}</td>
-						<td style="line-height: 60px;">${booking.children}</td>
-						<td style="line-height: 60px;">${booking.status.name}</td>
-						<td style="line-height: 60px;"><a
-							href="<c:url value ="/quan-tri/booking?id=${booking.id}"/>">Xem</a></td>
-					</tr>
 
-				</c:forEach>
+			<div class="listRoomMain">
 
-			</tbody>
-		</table>
 
-	</div>
+
+				<div id="note">
+					<h4 style="display: inline-block;">Trạng thái nhân viên</h4>
+					<ul id="listNote">
+						<c:forEach items="${listStatus}" var="status">
+							<button class="btn btn-${status.btnStyle}">
+								${status.name}</button>
+
+						</c:forEach>
+					</ul>
+				</div>
+				<ul id="listRoom">
+
+					<c:forEach items="${availableStaff}" var="staff">
+							
+							<li style="width:155px;" data-id="${staff.id}" data-check="false"
+							class="btn btn-${staff.status.btnStyle} availableRoom">
+								<p>${staff.fullname}</p>
+							</li>
+
+
+
+
+
+
+
+					</c:forEach>
+				</ul>
+				
+					<div class="taskMain">
+						<h2></h2>
+						<c:forEach items="${tasks}" var="task">
+							<h4 class="task" data-id="${task.id}" data-check="false">${task.name}</h4>
+						</c:forEach>
+						<button class="btn btn-primary" id="assignBtn">Giao</button>
+						<button style="display: block;margin:auto;margin-top:10px;" class="btn btn-danger" id="close">Trở về</button>
+					</div>
+			</div>
+		</div>
+		<script type="text/javascript">
+			var staffName;
+			var roomId='${room.id}';
+			var staffId;
+			var taskId;
+			$('.availableRoom').on('click', function(event) {
+				$('.taskMain').addClass('appear');
+				staffName = $(this).find('p').text();
+				$('.taskMain').find('h2').text(staffName);
+				$(this).attr('data-check','true');
+				staffId = $(this).attr('data-id');
+			});
+			$('#close').on('click', function(event) {
+				$('.taskMain').removeClass('appear');
+			});
+			
+			var choosed = false;
+			$('.task').on('click', function(event) {
+				var checked = $(this).attr('data-check');
+				if (checked == 'false' && !choosed) {
+					$(this).addClass('choosed');
+					$(this).attr('data-check', 'true');		
+					taskId = $(this).attr('data-id');	
+					choosed = true;
+				} else if (checked == 'true') {
+					$(this).removeClass('choosed');
+					$(this).attr('data-check', 'false');
+					choosed = false;
+				}
+			});
+			
+			$('#assignBtn').on('click', function(event) {
+				if (!choosed) {
+					alert("Vui lòng chọn công việc !");
+				}else{
+					
+					var data = {};
+					data["staff"] =  {
+							"id": staffId
+					}
+					data["room"] =  {
+							"id": roomId
+					}
+					data["task"] =  {
+							"id": taskId
+					}
+					console.log(data);
+					assign(data);		
+				}
+			});
+			function assign(data) {
+				$.ajax({
+					url : '${assignAPI}',
+					type : 'POST',
+					contentType : 'application/json',
+					data : JSON.stringify(data),
+					dataType : 'json',
+					success : function(result) {
+						alert("Thành công");
+						window.location.href = '${roomURL}?number=' +result["room"]["number"];
+					},
+					error : function(error) {
+						alert("Thất bại");
+					}
+				});
+			}
+				
+		</script>
 </body>
 </html>

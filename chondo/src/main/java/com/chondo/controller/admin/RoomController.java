@@ -14,10 +14,16 @@ import com.chondo.dto.BookingDTO;
 import com.chondo.dto.RoomDTO;
 import com.chondo.dto.RoomStatusDTO;
 import com.chondo.dto.RoomTypeDTO;
+import com.chondo.dto.StaffDTO;
+import com.chondo.dto.StaffStatusDTO;
+import com.chondo.dto.TaskDTO;
 import com.chondo.service.IBookingService;
 import com.chondo.service.IRoomService;
 import com.chondo.service.IRoomStatusService;
 import com.chondo.service.IRoomTypeService;
+import com.chondo.service.IStaffService;
+import com.chondo.service.IStaffStatusService;
+import com.chondo.service.ITaskService;
 
 @Controller(value = "roomControllerAdmin")
 public class RoomController {
@@ -33,7 +39,15 @@ public class RoomController {
 	
 	@Autowired
 	private IBookingService bookingService;
-
+	
+	@Autowired
+	private IStaffStatusService staffStatusService;
+	
+	@Autowired
+	private IStaffService staffService;
+	
+	@Autowired
+	private ITaskService taskService;
 
 	@RequestMapping(value = "/quan-tri/phong", method = RequestMethod.GET)
 	public ModelAndView homePage
@@ -42,9 +56,18 @@ public class RoomController {
 		ModelAndView mav = new ModelAndView();	
 		if (number != null) {
 			
-			List<BookingDTO> bookings = bookingService.getBookingOfRoom(number);
-			mav.addObject("number", number);
-			mav.addObject("bookings", bookings);
+			List<StaffStatusDTO> listStatus = staffStatusService.findByActive(1);
+			
+			List<StaffDTO> availableStaff = staffService.findByStatusCode("available");
+			
+			List<TaskDTO> tasks = taskService.findAll();
+			
+			RoomDTO roomDTO = roomService.findOneByNumber(number);
+			
+			mav.addObject("listStatus", listStatus);
+			mav.addObject("availableStaff", availableStaff);
+			mav.addObject("tasks", tasks);
+			mav.addObject("room", roomDTO);
 			mav.setViewName("admin/room/room-details");
 		} else {
 			List<RoomDTO> allRoom = new ArrayList<RoomDTO>();

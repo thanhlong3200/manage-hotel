@@ -7,7 +7,6 @@
 <c:url var="paymentDetails" value="/quan-tri/thanh-toan" />
 <c:url var="upgrade" value="/quan-tri/nang-cap-booking" />
 <c:url var="bill" value="/quan-tri/hoa-don" />
-<c:url var="assignAPI" value="/api/assign" />
 <c:url var="paymentAPI" value="/api/checkout" />
 <!DOCTYPE html>
 <html>

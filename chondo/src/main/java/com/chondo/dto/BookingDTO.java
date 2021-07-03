@@ -219,7 +219,7 @@ public class BookingDTO extends AbstractDTO<BookingDTO>{
 		toString.append("Ngay tra phong: " + getDateTo() + "\n");
 		toString.append("So phong: " + getRoomCount() + "\n");
 		toString.append("So khach: " + getAdult() + " nguoi lon, " + getChildren() + " tre em" +"\n");
-		toString.append("Gio đat: " + getCreatedDate() + "\n");
+		toString.append("Gio dat: " + getCreatedDate() + "\n");
 		return toString.toString();
 	}
 

@@ -121,3 +121,25 @@ select#freeUpgrade {
 button#saveUpgrade {
     height: 42px;
 }
+.taskMain {position: fixed;top:10%;left: 44%;text-align: center;background: #f5f4f4;padding: 50px;transition:0.5s;transform:scale(0);}
+.taskMain.appear{
+	transform:scale(1);
+	z-index:999;
+}
+.taskMain h4 {
+    padding: 20px;
+    cursor: pointer;
+    border: 1px solid black;
+    background: white;
+    transition: 0.2s;
+}
+
+.taskMain h4.choosed {
+    background: #246514ad;
+    color: white;
+}
+button#assignBtn {
+    width: 100px;
+    height: 45px;
+    font-size: 18px;
+}

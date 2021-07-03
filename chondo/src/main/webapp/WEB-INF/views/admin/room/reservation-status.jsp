@@ -25,14 +25,8 @@
 			</c:if>
 			<input id="page" type="hidden" name="page" value="${model.page}"/>
 			<input id="limit" type="hidden" name="limit" value="${model.limit}"/>
-			<input id="submit" type ="submit"value="Lọc"/>
+			<input style="width: 70px;" type ="submit" value="Lọc"/>
 			
-	
-			<c:if test="${not empty date }">
-				<a style="height:40px;" href="<c:url value = "/quan-tri/tinh-hinh-dat-phong?page=${model.page}&limit=${model.limit}"/>" class="btn btn-primary" >Tất cả</a>
-			</c:if>
-	
-		
 			<h3>Danh sách Booking</h3>
 			
 			<div class="scrollDiv">
@@ -76,24 +70,21 @@
 		
 					</tbody>
 				</table>
-			</div>
-			<ul id="pagination-demo" class="pagination-lg"></ul>
+				<ul id="pagination-demo" class="pagination-lg"></ul>
+			</div>		
 		</form>
+		
 	</div>
 	<script src="<c:url value = "/template/pagination/jquery.twbsPagination.js" />"></script>
 	<script type="text/javascript">
 		var totalPage = ${model.totalPage};
 		var currentPage = ${model.page};
 		var limit = ${model.limit};
-		
-		
 		$('#pagination-demo').twbsPagination({
 			totalPages: totalPage,
 			visiblePages: 5,
 			startPage : currentPage,
 			onPageClick: function(event, page) {
-				console.log(currentPage);
-
 				if (page!=currentPage) {
 					$('#page').val(page);
 					$('#limit').val(limit);

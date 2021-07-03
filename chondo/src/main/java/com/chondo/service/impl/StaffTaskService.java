@@ -38,34 +38,6 @@ public class StaffTaskService implements IStaffTaskService{
 	@Autowired
 	private StaffTaskRepository staffTaskRepository;
 	
-	@Override
-	public List<StaffTaskDTO> assignTask(long[] ids, String code) {
-		List<StaffTaskDTO> result = new ArrayList<StaffTaskDTO>();
-		
-		for (int i = 0; i < ids.length; i+=2) {
-			StaffTaskEntity entity = new StaffTaskEntity();
-			
-			StaffEntity staffEntity = staffRepository.findOne(ids[i+1]);
-			entity.setStaff(staffEntity);
-			
-			RoomEntity roomEntity = roomRepository.findOne(ids[i]);
-			entity.setRoom(roomEntity);
-			
-			TaskEntity taskEntity = taskRepository.findOneByCode(code);
-			entity.setTask(taskEntity);
-			
-			entity = staffTaskRepository.save(entity);
-			
-			ModelMapper modelMapper = new ModelMapper();
-			StaffTaskDTO dto = modelMapper.map(entity, StaffTaskDTO.class);
-			
-			result.add(dto);
-		}
-		
-		
-		
-		return result;
-	}
 
 	@Override
 	public List<StaffTaskDTO> findAll(Pageable pageable) {
@@ -78,6 +50,29 @@ public class StaffTaskService implements IStaffTaskService{
 	@Override
 	public Long count() {
 		return staffTaskRepository.count();
+	}
+
+	@Override
+	public StaffTaskDTO assignTask(StaffTaskDTO dto) {
+
+		StaffTaskEntity entity = new StaffTaskEntity();
+		
+		StaffEntity staffEntity = staffRepository.findOne(dto.getStaff().getId());
+		entity.setStaff(staffEntity);
+		
+		RoomEntity roomEntity = roomRepository.findOne(dto.getRoom().getId());
+		entity.setRoom(roomEntity);
+		
+		TaskEntity taskEntity = taskRepository.findOne(dto.getTask().getId());
+		entity.setTask(taskEntity);
+		
+		entity.setDone(0);
+		
+		entity = staffTaskRepository.save(entity);
+		
+		ModelMapper modelMapper = new ModelMapper();
+	
+		return  modelMapper.map(entity, StaffTaskDTO.class);
 	}
 
 }

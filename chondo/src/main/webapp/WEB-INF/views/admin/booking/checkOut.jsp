@@ -26,7 +26,6 @@
 		
 							</c:forEach>
 						</ul>
-							<button class="btn btn-danger" id="closePopupChooseRoom">X</button>
 					</div>
 					
 					

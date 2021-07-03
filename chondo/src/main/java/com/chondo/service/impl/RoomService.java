@@ -84,5 +84,13 @@ public class RoomService implements IRoomService{
 		roomRepository.save(entity);
 		return	modelMapper.map(entity,RoomDTO.class);	
 	}
+
+	@Override
+	public RoomDTO findOneByNumber(Integer number) {
+		ModelMapper modelMapper = new ModelMapper();
+		RoomEntity entity = roomRepository.findOneByNumber(number);
+		roomRepository.save(entity);
+		return	modelMapper.map(entity,RoomDTO.class);	
+	}
 	
 }

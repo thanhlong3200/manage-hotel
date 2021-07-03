@@ -22,4 +22,6 @@ public interface IRoomService {
 	List<RoomDTO> findByBookedRoom(Date date);
 
 	RoomDTO changeStatus(RoomDTO room, String statusCode);
+
+	RoomDTO findOneByNumber(Integer number);
 }

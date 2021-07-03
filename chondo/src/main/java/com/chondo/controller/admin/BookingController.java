@@ -35,11 +35,7 @@ public class BookingController {
 	@Autowired
 	private IBookedRoomService bookedRoomService;
 	
-	@Autowired
-	private IStaffStatusService staffStatusService;
-	
-	@Autowired
-	private IStaffService staffService;
+
 
 	@RequestMapping(value = "/quan-tri/booking", method = RequestMethod.GET)
 	public ModelAndView homePage(@RequestParam(value = "page", required = false) Integer page,
@@ -54,14 +50,11 @@ public class BookingController {
 
 			List<BookedRoomDTO> bookedRooms = bookedRoomService.findByBookingId(bookingDTO.getId());
 			
-			List<StaffStatusDTO> listStatus = staffStatusService.findByActive(1);
-			
-			List<StaffDTO> availableStaff = staffService.findByStatusCode("available");
+		
 
 			mav.addObject("booking", bookingDTO);
 			mav.addObject("bookedRooms", bookedRooms);
-			mav.addObject("listStatus", listStatus);
-			mav.addObject("availableStaff", availableStaff);
+			
 			mav.setViewName("admin/booking/bookingDetails");
 		} else {
 			Pageable pageable = new PageRequest(page - 1, limit);
@@ -131,7 +124,7 @@ public class BookingController {
 		BookingDTO booking = bookingService.findOneByCode(code);
 		if (manipulation!=null) {
 			bookingService.createLog(code,"verify");
-			mav.setViewName("/quan-tri/xac-nhan-booking?code="+code);
+			mav.setViewName("redirect:/quan-tri/xac-nhan-booking?code="+code);
 		}
 		mav.addObject("booking", booking);
 		return mav;

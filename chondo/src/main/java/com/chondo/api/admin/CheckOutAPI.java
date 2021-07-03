@@ -41,7 +41,7 @@ public class CheckOutAPI {
 		bookingService.changeStatus(bookingDTO, "checkout");
 		
 		for (BookedRoomDTO bookedRoomDTO : bookingDTO.getBookedRooms()) {
-			roomService.changeStatus(bookedRoomDTO.getRoom(), "available");
+			roomService.changeStatus(bookedRoomDTO.getRoom(), "dirty");
 			for (CustomerDTO customer : bookedRoomDTO.getCustomers()) {
 				customerService.changeStatus(customer);
 			}

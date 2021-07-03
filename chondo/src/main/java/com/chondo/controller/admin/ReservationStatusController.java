@@ -50,8 +50,7 @@ public class ReservationStatusController {
 		
 		BookingDTO dto = new BookingDTO();
 		dto.setLimit(limit);
-		dto.setPage(page);
-		
+		dto.setPage(page);	
 		if (date != null) {
 			SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
 			Date dateFilter = format.parse(date);
@@ -60,10 +59,13 @@ public class ReservationStatusController {
 			dto.setTotalPage((int) Math.round((double) bookingService.countByDateFrom(dateFilter) / dto.getLimit()));
 			mav.addObject("date",date);
 		}else {		
-			bookings = bookingService.findByStatusCode("booked",pageable);
+		    Date dateFilter = new Date();  
+			bookings = bookingService.findByDateFrom(dateFilter,pageable); 			
 			dto.setListResult(bookings);
-			dto.setTotalPage((int) Math.round((double) bookingService.countByStatusCode("booked") / dto.getLimit()));
-		
+			dto.setTotalPage((int) Math.round((double) bookingService.countByDateFrom(dateFilter) / dto.getLimit()));
+			SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");  
+			  
+			mav.addObject("date",format.format(dateFilter));
 		}
 		
 

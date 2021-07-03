@@ -35,4 +35,6 @@ public interface RoomRepository extends JpaRepository<RoomEntity, Long> {
 			"			where r.hotel_id = 1 and rs.code = 'booked'\r\n" + 
 			"			and b.date_from = :date", nativeQuery = true)
 	List<RoomEntity> findByBookedRoom(@Param("date") Date date);
+
+	RoomEntity findOneByNumber(Integer number);
 }
