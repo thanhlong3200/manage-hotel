@@ -40,11 +40,11 @@ public class CheckInController {
 				mav.addObject("booking", booking);
 				mav.addObject("bookedRooms", bookedRooms);
 				
-				mav.addObject("code", code);
+				
 			}else {
 				mav.addObject("error", "Không tìm thấy mã booking này !");
 			}
-			
+			mav.addObject("code", code);
 		}
 
 

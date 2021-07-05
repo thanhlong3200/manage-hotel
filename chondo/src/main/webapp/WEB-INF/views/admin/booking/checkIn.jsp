@@ -13,7 +13,7 @@
 </head>
 <body>
 	<div class="checkInForm">
-		
+		<h2 style="padding-left:30px;">Check-in</h2>
 		<form id="checkInForm">
 			<div class="search-form-booking">
 				<h5>Nhập mã booking</h5>

@@ -2,7 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ include file="/common/taglib.jsp"%>
 <%@page import="com.chondo.util.PriceUtil"%>
-<c:url var="roomtypeAPI" value="/api/booking" />
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -26,6 +26,11 @@
 			<input id="page" type="hidden" name="page" value="${model.page}"/>
 			<input id="limit" type="hidden" name="limit" value="${model.limit}"/>
 			<input style="width: 70px;" type ="submit" value="Lọc"/>
+			<select id="bookingStatus" name= "status" style="width: 120px;">
+				<option value="checkin">Check-in</option>
+				<option value="checkout">Check-out</option>
+			</select>
+			
 			
 			<h3>Danh sách Booking</h3>
 			
@@ -92,7 +97,15 @@
 				}
 			}
 		});
-		
+		 $('#bookingStatus').change(function() {
+				$('#formSubmit').submit();
+		  });
+		 $('#bookingStatus option').each(function(){
+				if ($(this).val() == '${statusCode}') {
+					$(this).attr("selected","selected");
+				}
+				
+			})
 	</script>
 </body>
 </html>

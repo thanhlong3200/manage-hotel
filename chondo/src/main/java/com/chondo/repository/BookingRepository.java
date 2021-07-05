@@ -23,12 +23,16 @@ public interface BookingRepository extends JpaRepository<BookingEntity, Long>{
 			"and b.date_from >= CURDATE()", nativeQuery = true)
 	List<BookingEntity> getBookingOfRoom(@Param("number") Integer number);
 
-	List<BookingEntity> findByDateFrom(Date dateFilter, Pageable pageable);
-
-	double countByDateFrom(Date dateFilter);
-
 	double countByStatusCode(String code);
 
 	List<BookingEntity> findByStatusCode(String statusCode, Pageable pageable);
+
+	List<BookingEntity> findByDateFromAndStatusCode(Date dateFilter, String status, Pageable pageable);
+
+	List<BookingEntity> findByDateToAndStatusCode(Date dateFilter, String status, Pageable pageable);
+
+	double countByDateToAndStatusCode(Date dateFilter, String statusCode);
+
+	double countByDateFromAndStatusCode(Date dateFilter, String statusCode);
 	
 }

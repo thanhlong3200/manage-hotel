@@ -1,5 +1,6 @@
 package com.chondo.controller.admin;
 
+import java.util.Calendar;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,15 +14,19 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.chondo.dto.BookedRoomDTO;
 import com.chondo.dto.BookingDTO;
+import com.chondo.dto.HotelDTO;
 import com.chondo.dto.PaymentDTO;
 import com.chondo.dto.RoomDTO;
 import com.chondo.dto.RoomStatusDTO;
+import com.chondo.dto.RoomTypeDTO;
 import com.chondo.dto.StaffDTO;
 import com.chondo.dto.StaffStatusDTO;
 import com.chondo.entity.StaffEntity;
 import com.chondo.service.IBookedRoomService;
 import com.chondo.service.IBookingService;
 import com.chondo.service.IPaymentService;
+import com.chondo.service.IRoomService;
+import com.chondo.service.IRoomStatusService;
 import com.chondo.service.IStaffService;
 import com.chondo.service.IStaffStatusService;
 import com.chondo.service.impl.BookingService;
@@ -35,7 +40,11 @@ public class BookingController {
 	@Autowired
 	private IBookedRoomService bookedRoomService;
 	
-
+	@Autowired
+	private IRoomService roomService;
+	
+	@Autowired
+	private IRoomStatusService roomStatusService;
 
 	@RequestMapping(value = "/quan-tri/booking", method = RequestMethod.GET)
 	public ModelAndView homePage(@RequestParam(value = "page", required = false) Integer page,
@@ -112,6 +121,42 @@ public class BookingController {
 			} else {
 				mav.addObject("error", "Không tìm thấy mã booking này !");
 			}
+		}
+		mav.addObject("code", code);
+		return mav;
+	}
+	
+	@RequestMapping(value = "/quan-tri/gia-han-booking", method = RequestMethod.GET)
+	public ModelAndView extendBooking(@RequestParam(value = "code", required = false) String code,
+			@RequestParam(value = "dateNumber", required = false) Integer dateNumber) {
+		ModelAndView mav = new ModelAndView("admin/booking/extendBooking");
+
+		if (code != null) {
+			BookingDTO booking = bookingService.findOneByCode(code);
+			if (booking != null) {
+				if (dateNumber !=null) {
+					Calendar c = Calendar.getInstance();
+				    c.setTime(booking.getDateTo());
+				    c.add(Calendar.DATE, dateNumber);
+
+					List<RoomDTO> availableRoom = roomService.findAvailable(booking.getHotel().getId(), 
+								booking.getRoomType().getId(), booking.getDateTo(), c.getTime());
+						
+					List<RoomStatusDTO> listStatus = roomStatusService.findByActive(1);
+					
+					mav.addObject("listStatus", listStatus);
+
+					mav.addObject("availableRoom", availableRoom);
+					mav.addObject("dateNumber", dateNumber);
+				}
+				
+				
+				mav.addObject("booking", booking);
+				
+			} else {
+				mav.addObject("error", "Không tìm thấy mã booking này !");
+			}
+			
 		}
 		mav.addObject("code", code);
 		return mav;

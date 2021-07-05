@@ -143,3 +143,25 @@ button#assignBtn {
     height: 45px;
     font-size: 18px;
 }
+form#formSubmit .booking-information.col-4 p {
+    color: black;
+    text-align: left;
+}
+.extendDiv h5 {display: inline-block;}
+
+input#dateNumber {
+    display: inline-block;
+}
+
+#dateNumber {
+    width: 50px;
+    padding-left: 10px;
+}
+button#saveExtend {
+    width: 80px;
+    font-size: 19px;
+    height: 40px;
+    margin: auto;
+    margin-top: 50px;
+    display:block;
+}

@@ -1,6 +1,8 @@
 package com.chondo.service.impl;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import org.modelmapper.ModelMapper;
@@ -174,7 +176,12 @@ public class BookedRoomService implements IBookedRoomService{
 //						}
 //						
 						BookingEntity bookingEntity = bookingRepository.findOneByCode(booking.getCode());
-						bookingEntity.setLogs(bookingEntity.getLogs() + "Change room " + booking.getIds()[i-1]+ "->" +booking.getIds()[i] +"</br>");
+						
+						SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");  
+					    Date date = new Date();  
+					    String currentTime = formatter.format(date);
+						bookingEntity.setLogs(bookingEntity.getLogs() + "Change room " + booking.getIds()[i-1]+ "->" +booking.getIds()[i] + " " + currentTime +"</br>");
+						
 						bookingRepository.save(bookingEntity);
 					}
 				}

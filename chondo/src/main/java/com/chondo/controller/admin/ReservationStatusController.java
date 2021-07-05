@@ -16,10 +16,12 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.chondo.dto.BookingDTO;
+import com.chondo.dto.BookingStatusDTO;
 import com.chondo.dto.RoomDTO;
 import com.chondo.dto.StaffTaskDTO;
 import com.chondo.entity.RoomEntity;
 import com.chondo.service.IBookingService;
+import com.chondo.service.IBookingStatusService;
 import com.chondo.service.IRoomService;
 import com.chondo.service.IRoomStatusService;
 import com.chondo.service.IRoomTypeService;
@@ -37,13 +39,17 @@ public class ReservationStatusController {
 	
 	@Autowired
 	private IBookingService bookingService;
+	
+	@Autowired
+	private IBookingStatusService bookingStatusService;
 
 	
 	@RequestMapping(value = "/quan-tri/tinh-hinh-dat-phong", method = RequestMethod.GET)
 	public ModelAndView reservationStatusPage(
 			@RequestParam(value = "page", required = false) Integer page,
 			@RequestParam(value = "limit", required = false) Integer limit,
-			@RequestParam(value = "date", required = false) String date) throws ParseException {
+			@RequestParam(value = "date", required = false) String date,
+			@RequestParam(value = "status", required = false) String status) throws ParseException {
 		ModelAndView mav = new ModelAndView("admin/room/reservation-status");
 		List<BookingDTO> bookings = new ArrayList<BookingDTO>();
 		Pageable pageable = new PageRequest(page - 1, limit);
@@ -54,21 +60,30 @@ public class ReservationStatusController {
 		if (date != null) {
 			SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
 			Date dateFilter = format.parse(date);
-			bookings = bookingService.findByDateFrom(dateFilter,pageable); 			
+			if (status.equalsIgnoreCase("checkin")) {
+				bookings = bookingService.findByDateFromAndStatusCode(dateFilter,"booked",pageable); 
+				dto.setTotalPage((int) Math.round((double) bookingService.countByDateFromAndStatusCode(dateFilter,"booked") / dto.getLimit()));
+			}else {
+				bookings = bookingService.findByDateToAndStatusCode(dateFilter,"checkin",pageable); 		
+				dto.setTotalPage((int) Math.round((double) bookingService.countByDateToAndStatusCode(dateFilter, "checkin") / dto.getLimit()));
+			}
+			
 			dto.setListResult(bookings);
-			dto.setTotalPage((int) Math.round((double) bookingService.countByDateFrom(dateFilter) / dto.getLimit()));
+		
 			mav.addObject("date",date);
 		}else {		
 		    Date dateFilter = new Date();  
-			bookings = bookingService.findByDateFrom(dateFilter,pageable); 			
+			bookings = bookingService.findByDateFromAndStatusCode(dateFilter,"booked",pageable); 			
 			dto.setListResult(bookings);
-			dto.setTotalPage((int) Math.round((double) bookingService.countByDateFrom(dateFilter) / dto.getLimit()));
+			dto.setTotalPage((int) Math.round((double) bookingService.countByDateFromAndStatusCode(dateFilter,"booked") / dto.getLimit()));
 			SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");  
 			  
 			mav.addObject("date",format.format(dateFilter));
 		}
 		
-
+		List<BookingStatusDTO> statusDTOs = bookingStatusService.findByActive(1);
+		mav.addObject("statusCode",status);
+		mav.addObject("listStatus",statusDTOs);
 		mav.addObject("model",dto);
 		return mav;
 	}

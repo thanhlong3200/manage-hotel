@@ -26,14 +26,20 @@ public interface IBookingService {
 
 	void setPrice(BookingDTO booking);
 
-	List<BookingDTO> findByDateFrom(Date dateFilter, Pageable pageable);
-
-	double countByDateFrom(Date dateFilter);
-
 	List<BookingDTO> findByStatusCode(String statusCode, Pageable pageable);
 
 	double countByStatusCode(String string);
 
 
 	void createLog(String bookingCode, String logCode);
+
+	List<BookingDTO> findByDateFromAndStatusCode(Date dateFilter, String status, Pageable pageable);
+
+	List<BookingDTO> findByDateToAndStatusCode(Date dateFilter, String string, Pageable pageable);
+
+	double countByDateToAndStatusCode(Date dateFilter, String string);
+
+	double countByDateFromAndStatusCode(Date dateFilter, String string);
+
+	BookingDTO extend(BookingDTO dto);
 }

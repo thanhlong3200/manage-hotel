@@ -6,6 +6,7 @@
 <c:url var="assignPage" value="/quan-tri/phan-cong" />
 <c:url var="paymentDetails" value="/quan-tri/thanh-toan" />
 <c:url var="upgrade" value="/quan-tri/nang-cap-booking" />
+<c:url var="extend" value="/quan-tri/gia-han-booking" />
 <c:url var="bill" value="/quan-tri/hoa-don" />
 <c:url var="paymentAPI" value="/api/checkout" />
 <!DOCTYPE html>
@@ -34,6 +35,11 @@
 			<c:if test="${booking.status.code != 'checkout'}">
 				<a href="${upgrade}?bookingCode=${booking.code}">
 					<button id="checkOutBtn" class="btn btn-primary">Nâng cấp booking</button>
+				</a>
+			</c:if>
+			<c:if test="${booking.status.code != 'checkout'}">
+				<a href="${extend}?code=${booking.code}">
+					<button id="checkOutBtn" class="btn btn-primary" style="margin-top:10px;">Gia hạn booking</button>
 				</a>
 			</c:if>
 			<c:if test="${booking.status.code == 'checkout'}">

@@ -1,6 +1,7 @@
 package com.chondo.service.impl;
 
 import java.text.SimpleDateFormat;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
@@ -241,24 +242,6 @@ public class BookingService implements IBookingService{
 	}
 
 
-
-	@Override
-	public List<BookingDTO> findByDateFrom(Date dateFilter, Pageable pageable) {
-		ModelMapper modelMapper = new ModelMapper();
-		List<BookingEntity> entities = bookingRepository.findByDateFrom(dateFilter,pageable);
-		List<BookingDTO> bookings = modelMapper.map(entities, new TypeToken<List<BookingDTO>>(){}.getType());
-		return bookings;
-	}
-
-
-
-	@Override
-	public double countByDateFrom(Date dateFilter) {
-		return bookingRepository.countByDateFrom(dateFilter);
-	}
-
-
-
 	@Override
 	public List<BookingDTO> findByStatusCode(String statusCode, Pageable pageable) {
 		ModelMapper modelMapper = new ModelMapper();
@@ -283,5 +266,56 @@ public class BookingService implements IBookingService{
 		bookingRepository.save(bookingEntity);
 	}
 
+
+
+	@Override
+	public List<BookingDTO> findByDateFromAndStatusCode(Date dateFilter, String status, Pageable pageable) {
+		ModelMapper modelMapper = new ModelMapper();
+		List<BookingEntity> entities = bookingRepository.findByDateFromAndStatusCode(dateFilter,status,pageable);
+		List<BookingDTO> bookings = modelMapper.map(entities, new TypeToken<List<BookingDTO>>(){}.getType());
+		return bookings;
+	}
+
+
+
+	@Override
+	public List<BookingDTO> findByDateToAndStatusCode(Date dateFilter, String status, Pageable pageable) {
+		ModelMapper modelMapper = new ModelMapper();
+		List<BookingEntity> entities = bookingRepository.findByDateToAndStatusCode(dateFilter,status,pageable);
+		List<BookingDTO> bookings = modelMapper.map(entities, new TypeToken<List<BookingDTO>>(){}.getType());
+		return bookings;
+	}
+
+
+
+	@Override
+	public double countByDateToAndStatusCode(Date dateFilter, String statusCode) {
+		return bookingRepository.countByDateToAndStatusCode(dateFilter,statusCode);
+	}
+
+
+
+	@Override
+	public double countByDateFromAndStatusCode(Date dateFilter, String statusCode) {
+		return bookingRepository.countByDateFromAndStatusCode(dateFilter,statusCode);
+	}
+
+
+
+	@Override
+	public BookingDTO extend(BookingDTO booking) {
+		ModelMapper modelMapper = new ModelMapper();
+		BookingEntity bookingEntity = bookingRepository.findOneByCode(booking.getCode());
+		long dateExtend = CalculateUtil.countNight(bookingEntity.getDateTo(), booking.getDateTo());
+		bookingEntity.setDateTo(booking.getDateTo());
+		SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");  
+	    Date date = new Date();  
+	    String currentTime = formatter.format(date);
+		bookingEntity.setLogs(bookingEntity.getLogs() + "Extend " + dateExtend+ " day, rooms: " + Arrays.toString(booking.getIds()) +" "+ currentTime +"</br>");
+		bookingRepository.save(bookingEntity);
+		return	modelMapper.map(bookingEntity,BookingDTO.class);	
+	}
+
+	
 
 }

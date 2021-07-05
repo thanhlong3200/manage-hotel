@@ -12,6 +12,7 @@
 <title>Đổi phòng</title>
 </head>
 <body>
+	<h2 style="padding-left:30px;">Đổi phòng</h2>
 	<form id="formSubmit" action="<c:url value = "/quan-tri/doi-phong"/>">
 		<div class="search-form-booking">
 			<h5>Nhập mã booking</h5>

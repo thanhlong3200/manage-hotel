@@ -5,34 +5,6 @@
     <script type="text/javascript">
         try{ace.settings.loadState('sidebar')}catch(e){}
     </script>
-    <div class="sidebar-shortcuts">
-        <div class="sidebar-shortcuts-large">
-            <button class="btn btn-success">
-                <i class="ace-icon fa fa-signal"></i>
-            </button>
-
-            <button class="btn btn-info">
-                <i class="ace-icon fa fa-pencil"></i>
-            </button>
-
-            <button class="btn btn-warning">
-                <i class="ace-icon fa fa-users"></i>
-            </button>
-
-            <button class="btn btn-danger">
-                <i class="ace-icon fa fa-cogs"></i>
-            </button>
-        </div>
-        <div class="sidebar-shortcuts-mini">
-            <span class="btn btn-success"></span>
-
-            <span class="btn btn-info"></span>
-
-            <span class="btn btn-warning"></span>
-
-            <span class="btn btn-danger"></span>
-        </div>
-    </div>
     <ul class="nav nav-list">
     	<%-- <li >
             <a href="#" class="dropdown-toggle">
@@ -85,6 +57,11 @@
         <li >
             <a href="<c:url value='/quan-tri/doi-phong'/>">
                 Đổi phòng
+            </a>
+        </li>
+        <li >
+            <a href="<c:url value='/quan-tri/gia-han-booking'/>">
+                Gia hạn booking
             </a>
         </li>
          <li >

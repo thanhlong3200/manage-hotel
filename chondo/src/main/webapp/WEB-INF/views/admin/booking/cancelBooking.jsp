@@ -12,6 +12,7 @@
 <title>Hủy booking</title>
 </head>
 <body>
+	<h2 style="padding-left:30px;">Hủy booking</h2>
 	<form id="formSubmit" action="<c:url value = "/quan-tri/huy-booking"/>">
 		<div class="search-form-booking">
 			<h5>Nhập mã booking</h5>
@@ -31,7 +32,7 @@
 		</c:if>
 		
 	</form>
-	<c:if test="${not empty code}">
+	<c:if test="${empty error && not empty code}">
 		<div class= "booking-details">
 			<div class= "booking-information col-4">
 				<h3>Chi tiết booking</h3>
