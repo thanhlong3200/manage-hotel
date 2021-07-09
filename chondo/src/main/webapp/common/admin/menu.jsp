@@ -6,38 +6,28 @@
         try{ace.settings.loadState('sidebar')}catch(e){}
     </script>
     <ul class="nav nav-list">
-    	<%-- <li >
-            <a href="#" class="dropdown-toggle">
-                <i class="menu-icon fa fa-list"></i>
-                <span class="menu-text"></span>
+     <li >
+            <a href="<c:url value='/quan-tri/trang-chu'/>">
                 Đặt phòng
-                <b class="arrow fa fa-angle-down"></b>
             </a>
-            <b class="arrow"></b>
-            <ul class="submenu">
-                <li>
-                    <a href="<c:url value='/quan-tri/trang-chu'/>">
-                        <i class="menu-icon fa fa-caret-right"></i>
-                        Tìm phòng
-                    </a>
-                    <b class="arrow"></b>
-                </li>
-            </ul>
-        </li> --%>
+        </li>
+        
+        
         <li >
+            <a href="<c:url value='/quan-tri/tinh-hinh-dat-phong?page=1&limit=10'/>">
+               	Tình hình đặt phòng
+            </a>
+        </li>
+     <security:authorize access = "hasAnyRole('receptionist')">
+		<li >
             <a href="<c:url value='/quan-tri/phong'/>">
                         Sơ đồ phòng
                     </a>
         </li>
         <li >
-            <a href="<c:url value='/quan-tri/trang-chu'/>">
-                        Đặt phòng
-                    </a>
-        </li>
-        <li >
-            <a href="<c:url value='/quan-tri/booking?page=1&limit=2'/>">
-                        Danh sách booking
-                    </a>
+            <a href="<c:url value='/quan-tri/booking?page=1&limit=10'/>">
+                 Danh sách booking
+             </a>
         </li>
         <li >
             <a href="<c:url value='/quan-tri/check-in'/>">
@@ -74,15 +64,44 @@
                 Upgrade booking
             </a>
         </li>
+	</security:authorize>
+         
         <li >
-            <a href="<c:url value='/quan-tri/tinh-hinh-dat-phong?page=1&limit=2'/>">
-               	Tình hình đặt phòng
-            </a>
-        </li>
-        <li >
-            <a href="<c:url value='/quan-tri/phan-cong?page=1&limit=2'/>">
+            <a href="<c:url value='/quan-tri/phan-cong?page=1&limit=10'/>">
                	Phân công
             </a>
         </li>
+     
+        
+      <security:authorize access = "hasAnyRole('accountant')">
+	      <li >
+            <a href="<c:url value='/quan-tri/doanh-so/hoa-don'/>">
+               	Thống kê doanh số
+            </a>
+        	</li>
+		</security:authorize>
+       
+        <security:authorize access = "hasAnyRole('system')">
+	          <li >
+				  <a href="<c:url value='/quan-tri/loai-phong/danh-sach?page=1&limit=10'/>">
+	               	Quản lý loại phòng
+	         	  </a>
+	        </li>
+		  </security:authorize>
+       
+         <security:authorize access = "hasAnyRole('personnel')">
+			 <li >
+	            <a href="<c:url value='/quan-tri/nguoi-dung/danh-sach?page=1&limit=10'/>">
+	               	Quản lý người dùng
+	            </a>
+	        </li>
+	        
+	        
+	         <li >
+	            <a href="<c:url value='/quan-tri/khach-hang?page=1&limit=10'/>">
+	               	Danh sách khách hàng
+	            </a>
+	        </li>
+		  </security:authorize>
     </ul>
 </div>

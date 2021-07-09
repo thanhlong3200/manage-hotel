@@ -3,10 +3,12 @@ package com.chondo.controller.admin;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.chondo.dto.BookedRoomDTO;
@@ -15,26 +17,26 @@ import com.chondo.dto.RoomDTO;
 import com.chondo.dto.RoomStatusDTO;
 import com.chondo.service.IBookedRoomService;
 import com.chondo.service.IBookingService;
-import com.chondo.service.IHotelService;
 import com.chondo.service.IRoomService;
 import com.chondo.service.IRoomStatusService;
 
-@Controller(value = "changeRoomControllerAdmin")
+@RestController(value = "changeRoomAPI")
 public class ChangeRoomController {
+	@Autowired
+	private IBookingService bookingService;
+	
+	@Autowired
+	private IBookedRoomService bookedRoomService;
+	
 
 	@Autowired
 	private IRoomStatusService roomStatusService;
 
 	@Autowired
-	private IBookedRoomService bookedRoomService;
-
-	@Autowired
 	private IRoomService roomService;
 
-	@Autowired
-	private IBookingService bookingService;
 
-	@RequestMapping(value = "/quan-tri/doi-phong", method = RequestMethod.GET)
+	@GetMapping(value = "/quan-tri/doi-phong")
 	public ModelAndView changeRoomPage(@RequestParam(value = "bookingCode", required = false) String bookingCode) {
 		ModelAndView mav = new ModelAndView("admin/booking/change-room");
 		if (bookingCode != null) {
@@ -60,5 +62,16 @@ public class ChangeRoomController {
 		}
 
 		return mav;
+	}
+
+	
+	@PostMapping(value = "/api/change-room")
+	@Transactional
+	public BookingDTO changeRoom(@RequestBody BookingDTO booking){	
+		
+		
+		bookedRoomService.changeRoom(booking);
+		
+		return bookingService.findOneByCode(booking.getCode());
 	}
 }

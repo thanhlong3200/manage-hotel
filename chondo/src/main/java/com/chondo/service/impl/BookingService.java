@@ -195,17 +195,20 @@ public class BookingService implements IBookingService{
 		ModelMapper modelMapper = new ModelMapper();
 		
 		Long priceService = 0L;
+		Long priceServiceFree = 0L;
 		List<BookedRoomDTO> bookedRoomDTOs = booking.getBookedRooms();
 		for (BookedRoomDTO bookedRoomDTO : bookedRoomDTOs) {
 			List<BookedServiceDTO> bookedServiceDTOs = bookedRoomDTO.getBookedServices();
 			for (BookedServiceDTO bookedServiceDTO : bookedServiceDTOs) {
 				if (bookedServiceDTO.getFree()==0) {
 					priceService += bookedServiceDTO.getService().getPrice();
+				}else {
+					priceServiceFree += bookedServiceDTO.getService().getPrice();
 				}
 			}
 		}
 		booking.setPriceService(priceService);
-		
+		booking.setPriceServiceFree(priceServiceFree);
 		
 		
 		

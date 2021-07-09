@@ -8,6 +8,29 @@
             http://www.springframework.org/schema/security/spring-security-3.2.xsd">
             
     <http auto-config="false" use-expressions="true" disable-url-rewriting="true">
+    	<intercept-url pattern="/quan-tri/phan-cong**" access="hasAnyRole('receptionist','staff','system','personnel','accountant')" />
+    	<intercept-url pattern="/quan-tri/tinh-hinh-dat-phong**" access="hasAnyRole('receptionist','staff','system','personnel','accountant')" />
+    	
+    	<intercept-url pattern="/quan-tri**" access="hasAnyRole('system')" />
+    	
+    	<intercept-url pattern="/quan-tri/nang-cap-booking**" access="hasAnyRole('receptionist')" />
+    	<intercept-url pattern="/quan-tri/phong**" access="hasAnyRole('receptionist')" />
+    	<intercept-url pattern="/quan-tri/dich-vu**" access="hasAnyRole('receptionist')" />
+    	<intercept-url pattern="/quan-tri/booking**" access="hasAnyRole('receptionist')" />
+    	<intercept-url pattern="/quan-tri/check-in**" access="hasAnyRole('receptionist')" />
+    	<intercept-url pattern="/quan-tri/check-out**" access="hasAnyRole('receptionist')" />	
+    	<intercept-url pattern="/quan-tri/huy-booking**" access="hasAnyRole('receptionist')" />
+    	<intercept-url pattern="/quan-tri/doi-phong**" access="hasAnyRole('receptionist')" /> 	
+    	<intercept-url pattern="/quan-tri/gia-han-booking**" access="hasAnyRole('receptionist')" />  	
+    	<intercept-url pattern="/quan-tri/loai-phong/danh-sach**" access="hasAnyRole('receptionist')" />
+    	
+    	
+		<intercept-url pattern="/quan-tri/nguoi-dung/**" access="hasAnyRole('personnel')" />
+		<intercept-url pattern="/quan-tri/khach-hang/**" access="hasAnyRole('personnel')" />
+    	<intercept-url pattern="/quan-tri/doanh-so/**" access="hasAnyRole('accountant')" />
+    	
+    	
+    	
     	
     	<access-denied-handler error-page="/accessDenied" />
         <form-login  login-page="/dang-nhap"
@@ -16,7 +39,6 @@
                      login-processing-url="/j_spring_security_check"
                      authentication-success-handler-ref="customSuccessHandler"
                      authentication-failure-url="/dang-nhap?incorrectAccount"/>
-        <session-management invalid-session-url="/dang-nhap?sessionTimeout"/>
         <logout delete-cookies="JSESSIONID"/>
     </http>
     

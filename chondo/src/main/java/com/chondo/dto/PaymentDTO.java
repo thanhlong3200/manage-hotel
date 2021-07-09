@@ -9,6 +9,51 @@ public class PaymentDTO extends AbstractDTO<PaymentDTO>{
 
 	private PaymentStatusDTO status;
 	private Integer refund;
+	
+	private Long totalRefund;
+	
+	private Long totalPriceService;
+	
+	private Long totalPriceBooked;
+	
+	private Long totalSales;
+
+	private Long totalPriceServiceFree;
+	
+	public Long getTotalRefund() {
+		return totalRefund;
+	}
+
+	public void setTotalRefund(Long totalRefund) {
+		this.totalRefund = totalRefund;
+	}
+
+	public Long getTotalPriceService() {
+		return totalPriceService;
+	}
+
+	public void setTotalPriceService(Long totalPriceService) {
+		this.totalPriceService = totalPriceService;
+	}
+
+	public Long getTotalPriceBooked() {
+		return totalPriceBooked;
+	}
+
+	public void setTotalPriceBooked(Long totalPriceBooked) {
+		this.totalPriceBooked = totalPriceBooked;
+	}
+
+	public Long getTotalSales() {
+		return totalSales;
+	}
+
+	public void setTotalSales(Long totalSales) {
+		this.totalSales = totalSales;
+	}
+
+		
+	
 
 
 	public BookingDTO getBooking() {
@@ -44,6 +89,15 @@ public class PaymentDTO extends AbstractDTO<PaymentDTO>{
 	public void setRefund(Integer refund) {
 		this.refund = refund;
 	}
+
+	public Long getTotalPriceServiceFree() {
+		return totalPriceServiceFree;
+	}
+
+	public void setTotalPriceServiceFree(Long totalPriceServiceFree) {
+		this.totalPriceServiceFree = totalPriceServiceFree;
+	}
+
 
 	
 	

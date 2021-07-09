@@ -14,7 +14,14 @@ public class UserDTO extends AbstractDTO<UserDTO>{
 	private Integer status;
 	private Long groupId;
 //	private String groupCode;
+	private UserGroupDTO group;
 	
+	public UserGroupDTO getGroup() {
+		return group;
+	}
+	public void setGroup(UserGroupDTO group) {
+		this.group = group;
+	}
 	public String getPassword() {
 		return password;
 	}

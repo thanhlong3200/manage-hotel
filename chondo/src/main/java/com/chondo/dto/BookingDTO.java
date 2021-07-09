@@ -41,6 +41,8 @@ public class BookingDTO extends AbstractDTO<BookingDTO>{
 	
 	private Long priceService;
 	
+	private Long priceServiceFree;
+	
 	private Long totalPrice;
 	
 	private Long nightCount;
@@ -229,6 +231,14 @@ public class BookingDTO extends AbstractDTO<BookingDTO>{
 
 	public void setRefund(boolean refund) {
 		this.refund = refund;
+	}
+
+	public Long getPriceServiceFree() {
+		return priceServiceFree;
+	}
+
+	public void setPriceServiceFree(Long priceServiceFree) {
+		this.priceServiceFree = priceServiceFree;
 	}
 
 	

@@ -1,6 +1,7 @@
 package com.chondo.service.impl;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import org.modelmapper.ModelMapper;
@@ -95,6 +96,22 @@ public class BookedServiceService implements IBookedServiceService{
 				
 			}
 		}
+	}
+
+	@Override
+	public List<BookedServiceDTO> findByRangeDate(Date dateFrom, Date dateTo, String code) {
+		ModelMapper modelMapper = new ModelMapper();
+		List<BookedServiceEntity> bookedServiceEntities = bookedServiceRepository.findByRangeDate(dateFrom,dateTo, code);
+		List<BookedServiceDTO> bookedServiceDTOs = modelMapper.map(bookedServiceEntities, new TypeToken<List<BookedServiceDTO>>(){}.getType());
+		return bookedServiceDTOs;
+	}
+
+	@Override
+	public List<BookedServiceDTO> getAllService(String code) {
+		ModelMapper modelMapper = new ModelMapper();
+		List<BookedServiceEntity> bookedServiceEntities = bookedServiceRepository.getAllService(code);
+		List<BookedServiceDTO> bookedServiceDTOs = modelMapper.map(bookedServiceEntities, new TypeToken<List<BookedServiceDTO>>(){}.getType());
+		return bookedServiceDTOs;
 	}
 	
 }

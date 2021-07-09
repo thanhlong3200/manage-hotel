@@ -1,4 +1,4 @@
-package com.chondo.controller.admin;
+package com.chondo.controller.web;
 
 import java.util.Calendar;
 import java.util.List;
@@ -6,47 +6,46 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.chondo.dto.BookedRoomDTO;
 import com.chondo.dto.BookingDTO;
-import com.chondo.dto.HotelDTO;
-import com.chondo.dto.PaymentDTO;
+import com.chondo.dto.CustomerDTO;
 import com.chondo.dto.RoomDTO;
 import com.chondo.dto.RoomStatusDTO;
-import com.chondo.dto.RoomTypeDTO;
-import com.chondo.dto.StaffDTO;
-import com.chondo.dto.StaffStatusDTO;
-import com.chondo.entity.StaffEntity;
 import com.chondo.service.IBookedRoomService;
 import com.chondo.service.IBookingService;
-import com.chondo.service.IPaymentService;
+import com.chondo.service.ICustomerService;
 import com.chondo.service.IRoomService;
 import com.chondo.service.IRoomStatusService;
-import com.chondo.service.IStaffService;
-import com.chondo.service.IStaffStatusService;
-import com.chondo.service.impl.BookingService;
+import com.chondo.util.SendMailUtil;
 
-@Controller(value = "bookingControllerAdmin")
+@RestController(value = "bookingAPI")
 public class BookingController {
-
+	
+	@Autowired
+	private ICustomerService customerService;
+	
 	@Autowired
 	private IBookingService bookingService;
-
+	
 	@Autowired
 	private IBookedRoomService bookedRoomService;
 	
-	@Autowired
+	@Autowired 
 	private IRoomService roomService;
-	
+
 	@Autowired
 	private IRoomStatusService roomStatusService;
 
-	@RequestMapping(value = "/quan-tri/booking", method = RequestMethod.GET)
+	@GetMapping(value = "/quan-tri/booking")
 	public ModelAndView homePage(@RequestParam(value = "page", required = false) Integer page,
 			@RequestParam(value = "limit", required = false) Integer limit,
 			@RequestParam(value = "bookingCode", required = false) String bookingCode,
@@ -103,7 +102,7 @@ public class BookingController {
 		return mav;
 	}
 
-	@RequestMapping(value = "/quan-tri/huy-booking", method = RequestMethod.GET)
+	@GetMapping(value = "/quan-tri/huy-booking")
 	public ModelAndView cancelBookingRoom(@RequestParam(value = "code", required = false) String code) {
 		ModelAndView mav = new ModelAndView("admin/booking/cancelBooking");
 
@@ -126,7 +125,7 @@ public class BookingController {
 		return mav;
 	}
 	
-	@RequestMapping(value = "/quan-tri/gia-han-booking", method = RequestMethod.GET)
+	@GetMapping(value = "/quan-tri/gia-han-booking")
 	public ModelAndView extendBooking(@RequestParam(value = "code", required = false) String code,
 			@RequestParam(value = "dateNumber", required = false) Integer dateNumber) {
 		ModelAndView mav = new ModelAndView("admin/booking/extendBooking");
@@ -162,7 +161,7 @@ public class BookingController {
 		return mav;
 	}
 	
-	@RequestMapping(value = "/quan-tri/xac-nhan-booking", method = RequestMethod.GET)
+	@GetMapping(value = "/quan-tri/xac-nhan-booking")
 	public ModelAndView verifyBooking(@RequestParam(value = "code") String code,
 			@RequestParam(value = "manipulation", required = false) String manipulation) {
 		ModelAndView mav = new ModelAndView("admin/booking/verify-booking");
@@ -175,4 +174,34 @@ public class BookingController {
 		return mav;
 	}
 
+	
+	@PostMapping(value = "/api/booking")
+	@Transactional
+	public BookingDTO save(@RequestBody BookingDTO booking){
+		CustomerDTO customer;
+		if ((customer = customerService.findOneByEmail(booking.getCustomer().getEmail())) == null) {
+			customer = customerService.save(booking.getCustomer());
+		}
+		
+		booking.setCustomer(customer);
+		
+		booking = bookingService.save(booking);
+		
+		SendMailUtil.sendMail(customer.getEmail(), booking);
+		
+		bookedRoomService.setBookedRooms(booking);
+		
+//		bookedServiceService.setBookedServices(bookedRooms);
+		
+//		paymentService.createPayment(booking,"Ti�?n đặt phòng");
+		
+		return booking;
+	}
+	
+	@PutMapping(value = "/api/booking")
+	@Transactional
+	public BookingDTO cancel(@RequestBody BookingDTO booking){
+		
+		return bookingService.save(booking);
+	}
 }

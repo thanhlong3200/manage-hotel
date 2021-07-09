@@ -1,26 +1,26 @@
 package com.chondo.controller.admin;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.chondo.dto.StaffTaskDTO;
 import com.chondo.service.IStaffTaskService;
 
-@Controller(value = "assignControllerAdmin")
-public class AssignController {
+@RestController(value = "assignTaskAPI")
+public class AssignTaskController {
 	
 	@Autowired
 	private IStaffTaskService staffTaskService;
 	
-	@RequestMapping(value = "/quan-tri/phan-cong", method = RequestMethod.GET)
+	@GetMapping(value = "/quan-tri/phan-cong")
 	public ModelAndView homePage(@RequestParam(value = "page", required = false) Integer page,
 			@RequestParam(value = "limit", required = false) Integer limit) {
 		ModelAndView mav = new ModelAndView("admin/assign/list-assign");
@@ -39,5 +39,12 @@ public class AssignController {
 		
 		mav.addObject("model", dto);
 		return mav;
+	}
+	
+	@PostMapping(value = "/api/assign")
+	@Transactional
+	public StaffTaskDTO assignGuideGuest(@RequestBody StaffTaskDTO dto){	
+	
+		return staffTaskService.assignTask(dto);
 	}
 }

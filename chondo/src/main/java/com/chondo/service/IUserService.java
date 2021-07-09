@@ -1,5 +1,7 @@
 package com.chondo.service;
 
+import java.util.List;
+
 import com.chondo.dto.UserDTO;
 
 public interface IUserService {
@@ -12,5 +14,7 @@ public interface IUserService {
 	boolean checkPassword(String username, String password);
 
 	UserDTO findOne(Long id);
+
+	List<UserDTO> findByStatus(int i);
 	
 }

@@ -17,26 +17,12 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.chondo.dto.BookingDTO;
 import com.chondo.dto.BookingStatusDTO;
-import com.chondo.dto.RoomDTO;
-import com.chondo.dto.StaffTaskDTO;
-import com.chondo.entity.RoomEntity;
 import com.chondo.service.IBookingService;
 import com.chondo.service.IBookingStatusService;
-import com.chondo.service.IRoomService;
-import com.chondo.service.IRoomStatusService;
-import com.chondo.service.IRoomTypeService;
 
 @Controller(value = "reservationStatusAdmin")
 public class ReservationStatusController {
-	@Autowired
-	private IRoomStatusService roomStatusService;
-	
-	@Autowired
-	private IRoomService roomService;
-	
-	@Autowired
-	private IRoomTypeService roomTypeService;
-	
+
 	@Autowired
 	private IBookingService bookingService;
 	

@@ -12,7 +12,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -21,12 +20,10 @@ import org.springframework.web.servlet.ModelAndView;
 import com.chondo.dto.HotelDTO;
 import com.chondo.dto.RoomTypeDTO;
 import com.chondo.dto.SearchDTO;
-import com.chondo.service.IFurnitureService;
 import com.chondo.service.IHotelService;
 import com.chondo.service.IImageService;
 import com.chondo.service.IRateService;
 import com.chondo.service.IRoomTypeService;
-import com.chondo.service.IServiceService;
 
 @Controller(value = "searchController")
 public class SearchController {
@@ -38,13 +35,7 @@ public class SearchController {
 	private IRoomTypeService roomTypeService;
 
 	@Autowired
-	private IFurnitureService furnitureService;
-
-	@Autowired
 	private IRateService rateService;
-
-	@Autowired
-	private IServiceService service;
 
 	@Autowired
 	private IImageService imageService;

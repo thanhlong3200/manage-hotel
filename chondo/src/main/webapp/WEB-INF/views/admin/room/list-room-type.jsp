@@ -16,8 +16,6 @@
 		<table class="table text-center">
 			<thead class="thead-dark">
 				<tr>
-					<th scope="col">Xóa</th>
-					<!-- <th scope="col">Cập nhật</th> -->
 					<th scope="col">Tên</th>
 					<th scope="col">Diện tích</th>
 					<th scope="col">Hình ảnh</th>		
@@ -30,10 +28,6 @@
 			<tbody class="scrollDiv">
 				<c:forEach items="${model.listResult}" var="roomType">
 					<tr>
-						<td style="line-height: 60px;"><input type="checkbox"
-							name="delete"></td>
-					<!-- 	<td style="line-height: 60px;"><a href=""><i
-								class="fa fa-edit"></i></a></td> -->
 						<td style="line-height: 60px;">${roomType.name}</td>
 						<td style="line-height: 60px;">${roomType.acreage} m<sup>2</sup></td>
 						<td><img style="width: 60px; height: 60px;" alt=""
@@ -50,19 +44,7 @@
 			</tbody>
 		</table>
 	</div>
-	<div class="btn-control ml-2 mb-2">
-		<button type="button" class="btn btn-danger">
-			Xóa<i class="fa fa-trash ml-2"></i>
-		</button>
-		<button type="button" class="btn btn-danger">
-			Xóa tất cả<i class="fa fa-trash  ml-2"></i>
-		</button>
-		<a style="color: white; text-decoration: none;"
-			href="<c:url value ="/view/admin/product/add-product.jsp"/>"
-			type="button" class="btn btn-info"> Thêm loại phòng <i
-			class="fa fa-plus ml-2"></i>
-		</a>
-	</div>
+
 
 
 <form id="formSubmit" action="<c:url value = "/quan-tri/loai-phong/danh-sach"/>">

@@ -65,7 +65,12 @@ $("#dateFrom").datepicker({
 		currentDate.setDate(currentDate.getDate()+1);
 		 $("#dateTo").datepicker('setStartDate', currentDate);
 	});
-
+$("#dateToPayment").datepicker({
+      format: 'dd/mm/yyyy'
+})
+$("#dateFromPayment").datepicker({
+    	format: 'dd/mm/yyyy'
+})
 
  
 

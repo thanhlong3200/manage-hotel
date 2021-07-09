@@ -3,31 +3,28 @@ package com.chondo.controller.admin;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.chondo.dto.BookedRoomDTO;
 import com.chondo.dto.BookingDTO;
-import com.chondo.dto.PaymentDTO;
-import com.chondo.dto.RoomDTO;
-import com.chondo.dto.RoomStatusDTO;
 import com.chondo.service.IBookedRoomService;
 import com.chondo.service.IBookingService;
-import com.chondo.service.IPaymentService;
 
-@Controller(value = "checkInController")
+@RestController(value = "checkInAPI")
 public class CheckInController {
-
 	@Autowired
 	private IBookingService bookingService;
 	
 	@Autowired
 	private IBookedRoomService bookedRoomService;
 	
-	@RequestMapping(value = "/quan-tri/check-in", method = RequestMethod.GET)
+	@GetMapping(value = "/quan-tri/check-in")
 	public ModelAndView checkInPage(@RequestParam(value = "code", required = false) String code) {
 		ModelAndView mav = new ModelAndView("admin/booking/checkIn");
 		if (code != null) {
@@ -50,5 +47,18 @@ public class CheckInController {
 
 		
 		return mav;
+	}
+	
+	@PostMapping(value = "/api/check-in")
+	@Transactional
+	public BookingDTO saveCustomerCheckIn(@RequestBody BookingDTO booking){
+		
+		List<BookedRoomDTO> list = bookedRoomService.setCustomers(booking.getBookedRooms());		
+		
+		booking =  bookingService.findOneByBookedRoomsId(list.get(0).getId());
+		
+		bookingService.changeStatus(booking, "checkin");
+		
+		return booking;
 	}
 }

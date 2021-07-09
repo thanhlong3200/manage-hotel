@@ -1,14 +1,19 @@
 package com.chondo.service.impl;
 
 import java.sql.Date;
+import java.util.List;
 
 import javax.transaction.Transactional;
 
+import org.modelmapper.ModelMapper;
+import org.modelmapper.TypeToken;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.chondo.converter.UserConverter;
+import com.chondo.dto.TaskDTO;
 import com.chondo.dto.UserDTO;
+import com.chondo.entity.TaskEntity;
 import com.chondo.entity.UserEntity;
 import com.chondo.entity.UserGroupEntity;
 import com.chondo.repository.UserGroupRepository;
@@ -66,5 +71,13 @@ public class UserService implements IUserService {
 	public UserDTO findOne(Long id) {
 		UserEntity entity = userRepository.findOne(id);
 		return userConverter.toDTO(entity);
+	}
+
+	@Override
+	public List<UserDTO> findByStatus(int i) {
+		ModelMapper modelMapper = new ModelMapper();
+		List<UserEntity> entities = userRepository.findByStatus(i);
+		List<UserDTO> dtos = modelMapper.map(entities, new TypeToken<List<UserDTO>>(){}.getType());
+		return dtos;
 	}
 }

@@ -38,9 +38,6 @@ public class RoomController {
 	private IRoomTypeService roomTypeService;
 	
 	@Autowired
-	private IBookingService bookingService;
-	
-	@Autowired
 	private IStaffStatusService staffStatusService;
 	
 	@Autowired
