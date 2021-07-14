@@ -156,7 +156,7 @@ public class BookingService implements IBookingService{
 
 	@Override
 	public List<BookingDTO> findAll(Pageable pageable) {
-		List<BookingEntity> entities = bookingRepository.findAll(pageable).getContent();
+		List<BookingEntity> entities = bookingRepository.findAllByOrderByCreatedDateDesc(pageable);
 		ModelMapper modelMapper = new ModelMapper();
 		List<BookingDTO> dtos = modelMapper.map(entities, new TypeToken<List<BookingDTO>>(){}.getType());
 		return dtos;
@@ -317,6 +317,16 @@ public class BookingService implements IBookingService{
 		bookingEntity.setLogs(bookingEntity.getLogs() + "Extend " + dateExtend+ " day, rooms: " + Arrays.toString(booking.getIds()) +" "+ currentTime +"</br>");
 		bookingRepository.save(bookingEntity);
 		return	modelMapper.map(bookingEntity,BookingDTO.class);	
+	}
+
+
+
+	@Override
+	public List<BookingDTO> findByBookedRoomsCustomersCmnd(String cmnd) {
+		ModelMapper modelMapper = new ModelMapper();
+		List<BookingEntity> entities = bookingRepository.findByBookedRoomsCustomersCmnd(cmnd);
+		List<BookingDTO> bookings = modelMapper.map(entities, new TypeToken<List<BookingDTO>>(){}.getType());
+		return bookings;
 	}
 
 	

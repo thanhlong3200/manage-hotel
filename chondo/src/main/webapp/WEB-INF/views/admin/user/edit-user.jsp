@@ -41,11 +41,7 @@
 					</c:if>
 					
 					<c:if test="${not empty model.id}">
-					
-						<label style="margin-top:5px;">Mật khẩu</label>
-						<form:input type="password" path="password" placeholder="Mật khẩu" />
-						<label style="color:red;" class="error" for="password"></label>	
-						
+						<form:input type="hidden" path="password" placeholder="Mật khẩu" />					
 					</c:if>
 					
 					<label style="margin-top:5px;">Họ tên</label>

@@ -2,44 +2,49 @@
 	pageEncoding="UTF-8"%>
 <%@ include file="/common/taglib.jsp"%>
 <%@page import="com.chondo.util.PriceUtil"%>
-<c:url var="roomTypeAPI" value="/api/roomType" />
+<c:url var="roomAPI" value="/api/room" />
+<c:url var="rooms" value="/quan-tri/quan-ly-phong" />
+<c:url var="editRoom" value="/quan-tri/phong/chinh-sua" />
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Loại phòng</title>
+<title>Phòng</title>
 </head>
 <body>
 	<c:if test="${empty model.id}">
-		<h3>Thêm loại phòng</h3>
+		<h3>Thêm phòng</h3>
 	</c:if>
 	<c:if test="${not empty model.id}">
-		<h3>Chỉnh sửa loại phòng</h3>
+		<h3>Chỉnh sửa phòng</h3>
 	</c:if>
 	<form:form id="formSubmit" modelAttribute="model" action=""
 					cssStyle="width:50%;margin:auto; padding-bottom:50px;">		
-					<label>Tên</label>
-					<form:input path="name" placeholder="Tên" />
-					<label>Mã</label>
-					<form:input path="code" placeholder="Mã" />			
-					<label>Diện tích</label>
-					<form:input path="acreage" placeholder="Diện tích"  />		
-					<label>Sức chứa</label>
-					<form:input path="capacity" placeholder="Sức chứa"  />
-					<label>Link hình ảnh</label>
-					<form:input path="image" placeholder="Link hình ảnh" />
-					<label>Gía gốc (VND/đêm)</label>
-					<form:input path="originalPrice" placeholder="Gía gốc"  />
-					<label>Gía đặt (VND/đêm)</label>
-					<form:input path="sellPrice" placeholder="Gía đặt"  />	
-					<label>Hình thức thanh toán</label>
-					<form:select path="prepayment"  >
-						<form:option value="">--Chọn hình thức thanh toán--</form:option>
-						<form:option value="1">Trả trước (trước khi nhận phòng)</form:option>
-						<form:option value="0">Trả sau (khi trả phòng)</form:option>
+					<label>Số phòng</label>
+					<form:input path="number" placeholder="Số phòng" />
+				
+					<label>Tầng</label>
+					<form:input path="floor" placeholder="Tầng" />			
+					
+					<form:select path="statusId"  style="margin-top:5px;" >
+						<form:option value="">--Chọn trạng thái--</form:option>
+						<form:options items="${listStatus}" itemValue="id" itemLabel="name"/>
 					</form:select>
 					
+				
+					<form:select path="roomTypeId"  style="margin-top:5px;" >
+						<form:option value="">--Chọn loại phòng--</form:option>
+						<form:options items="${listRoomType}" itemValue="id" itemLabel="name"/>
+					</form:select>
+					
+					<form:select path="hotelId"  style="margin-top:5px;" >
+						<form:option value="">--Chọn khách sạn--</form:option>
+						<form:options items="${listHotel}" itemValue="id" itemLabel="location"/>
+					</form:select>
+		
 					<form:hidden path="id"/>
+					
+								
 					
 					<c:if test="${empty model.id}">
 						<button type= ""id="btnEdit">Thêm</button>
@@ -60,38 +65,45 @@
 					data["" + v.name + ""] = v.value;
 				});
 				if ($('#id')==null) {
-					addRoomType(data);
+					addRoom(data);
 				} else{
-					editRoomType(data);
+					editRoom(data);
 				}
 			});
-			function editRoomType(data) {
+			function editRoom(data) {
 				$.ajax({
-					url : '${roomTypeAPI}',
+					url : '${roomAPI}',
 					type : 'PUT',
 					contentType : 'application/json',
 					data : JSON.stringify(data),
 					dataType : 'json',
 					success : function(result) {
 						alert("Thành công");
+						window.location.href = '${rooms}';
 					},
 					error : function(error) {
-						alert("Đăng ký thất bại");
+						alert("Thành công");
+						window.location.href = '${rooms}';
+
 					}
 				});
 			}
-			function addRoomType(data) {
+			function addRoom(data) {
 				$.ajax({
-					url : '${roomTypeAPI}',
+					url : '${roomAPI}',
 					type : 'POST',
 					contentType : 'application/json',
 					data : JSON.stringify(data),
 					dataType : 'json',
 					success : function(result) {
 						alert("Thành công");
+						window.location.href = '${rooms}';
+
 					},
 					error : function(error) {
-						alert("Đăng ký thất bại");
+						alert("Thành công");
+						window.location.href = '${rooms}';
+
 					}
 				});
 			}

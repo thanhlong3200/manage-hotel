@@ -51,7 +51,7 @@
 					<h5>Gia hạn</h5>
 					<input type="number" min="1" value="${dateNumber}" name="dateNumber" id="dateNumber" required/>
 					<h5>ngày</h5>
-					<button type="submit" id="searchExtend" class="btn btn-primary" style="display:block;margin-top:20px;">Tìm kiếm</button>
+					<button type="submit" id="searchExtend" class="btn btn-primary" style="display:block;margin-top:20px;">Tìm kiếm phòng trống</button>
 				</div>
 				
 			</div>
@@ -72,7 +72,7 @@
 						</li>
 	
 					</c:forEach>
-					<button id="saveExtend" class="btn btn-primary">Lưu</button>
+					<button id="saveExtend" style="width:150px;" class="btn btn-primary">Gia hạn</button>
 				</ul>
 			</div>
 		

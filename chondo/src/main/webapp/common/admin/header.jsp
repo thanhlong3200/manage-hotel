@@ -16,11 +16,11 @@
         <div class="navbar-buttons navbar-header pull-right collapse navbar-collapse" role="navigation">
             <ul class="nav ace-nav">
                 <li class="light-blue dropdown-modal">
-                    <a data-toggle="dropdown" href="#" class="dropdown-toggle">
+                    <a data-toggle="dropdown" href="#" class="dropdown-toggle" style="padding:0px 15px;">
                         Xin chào, <%=SecurityUtils.getPrincipal().getFullname()%> 
                     </a>
                     <li class="light-blue dropdown-modal">
-                        <a href='<c:url value='/thoat'/>'>
+                        <a href='<c:url value='/thoat'/>' style="padding:0px 15px;">
                             <i class="ace-icon fa fa-power-off"></i>
                             Thoát
                         </a>

@@ -9,6 +9,8 @@
 <c:url var="extend" value="/quan-tri/gia-han-booking" />
 <c:url var="bill" value="/quan-tri/hoa-don" />
 <c:url var="paymentAPI" value="/api/checkout" />
+<c:url var="cancelBooking" value="/quan-tri/huy-booking" />
+<c:url var="changeRoom" value="/quan-tri/doi-phong" />
 <!DOCTYPE html>
 <html>
 <head>
@@ -32,21 +34,32 @@
 					<button id="checkOutBtn" class="btn btn-danger">Check-out</button>
 				</a>
 			</c:if>
-			<c:if test="${booking.status.code != 'checkout'}">
+			<c:if test="${booking.status.code != 'checkout' && booking.status.code != 'cancel'}">
 				<a href="${upgrade}?bookingCode=${booking.code}">
 					<button id="checkOutBtn" class="btn btn-primary">Nâng cấp booking</button>
 				</a>
-			</c:if>
-			<c:if test="${booking.status.code != 'checkout'}">
 				<a href="${extend}?code=${booking.code}">
 					<button id="checkOutBtn" class="btn btn-primary" style="margin-top:10px;">Gia hạn booking</button>
 				</a>
+				<a href="${changeRoom}?bookingCode=${booking.code}">
+					<button id="checkOutBtn" class="btn btn-primary" style="margin-top:10px;">Đổi phòng</button>
+				</a>
 			</c:if>
+			<c:if test="${booking.status.code == 'booked'}">
+				<a href="${cancelBooking}?code=${booking.code}">
+					<button id="checkOutBtn" class="btn btn-danger" style="margin-top:10px;">Hủy booking</button>
+				</a>
+			</c:if>
+			
+			
 			<c:if test="${booking.status.code == 'checkout'}">
 				<a href="${paymentDetails}?code=${booking.code}">
 					<button id="checkOutBtn" class="btn btn-primary">Chi tiết hóa đơn</button>
 				</a>
 			</c:if>
+			
+		
+			
 		</div>
 		<div class= "payments-information col-3">
 			<h3>Lịch sử</h3>

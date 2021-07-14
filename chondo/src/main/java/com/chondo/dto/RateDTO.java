@@ -7,6 +7,10 @@ public class RateDTO extends BaseEntity{
 	private String comment;
 	
 	private Integer vote;
+	
+	private String roomTypeName;
+	
+	private Long roomTypeId;
 
 	public String getComment() {
 		return comment;
@@ -23,6 +27,22 @@ public class RateDTO extends BaseEntity{
 	public void setVote(Integer vote) {
 		this.vote = vote;
 	}
-	
+
+	public String getRoomTypeName() {
+		return roomTypeName;
+	}
+
+	public void setRoomTypeName(String roomTypeName) {
+		this.roomTypeName = roomTypeName;
+	}
+
+	public Long getRoomTypeId() {
+		return roomTypeId;
+	}
+
+	public void setRoomTypeId(Long roomTypeId) {
+		this.roomTypeId = roomTypeId;
+	}
+
 	
 }

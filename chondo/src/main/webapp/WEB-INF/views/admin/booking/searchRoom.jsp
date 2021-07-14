@@ -30,6 +30,8 @@
 								<form:option value="1">1 người lớn</form:option>
 								<form:option value="2">2 người lớn</form:option>
 								<form:option value="3">3 người lớn</form:option>
+								<form:option value="4">4 người lớn</form:option>
+								<form:option value="5">5 người lớn</form:option>
 							</form:select>
 						</div>
 						<div class="mb-15">
@@ -39,6 +41,8 @@
 								<form:option value="1">1 trẻ em</form:option>
 								<form:option value="2">2 trẻ em</form:option>
 								<form:option value="3">3 trẻ em</form:option>
+								<form:option value="4">4 trẻ em</form:option>
+								<form:option value="5">5 trẻ em</form:option>
 							</form:select>
 						</div>
 						<div class="mb-15">
@@ -47,6 +51,8 @@
 								<form:option value="1">1 phòng</form:option>
 								<form:option value="2">2 phòng</form:option>
 								<form:option value="3">3 phòng</form:option>
+								<form:option value="4">4 phòng</form:option>
+								<form:option value="5">5 phòng</form:option>
 							</form:select>
 						</div>
 						<div class="mb-15">

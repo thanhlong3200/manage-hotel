@@ -68,6 +68,7 @@ public class RoomTypeController {
 	    	list.add(viewRoom);
 	    	imageService.setImages(list);
 	    	dto.setListResult(list);
+	    	 rateService.setRates(dto.getListResult());
 	    	mav.setViewName("admin/room/room-type-details");
 		}
     	

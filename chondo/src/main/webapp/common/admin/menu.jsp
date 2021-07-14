@@ -7,7 +7,7 @@
     </script>
     <ul class="nav nav-list">
      <li >
-            <a href="<c:url value='/quan-tri/trang-chu'/>">
+            <a href="<c:url value='/quan-tri/tim-phong'/>">
                 Đặt phòng
             </a>
         </li>
@@ -85,6 +85,16 @@
 	          <li >
 				  <a href="<c:url value='/quan-tri/loai-phong/danh-sach?page=1&limit=10'/>">
 	               	Quản lý loại phòng
+	         	  </a>
+	        </li>
+	        <li >
+				  <a href="<c:url value='/quan-tri/danh-gia'/>">
+	               Quản lý đánh giá
+	         	  </a>
+	        </li>
+	        <li >
+				  <a href="<c:url value='/quan-tri/quan-ly-phong'/>">
+	               	Quản lý phòng
 	         	  </a>
 	        </li>
 		  </security:authorize>

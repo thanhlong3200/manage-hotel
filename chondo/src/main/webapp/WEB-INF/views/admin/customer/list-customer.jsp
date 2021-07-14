@@ -23,28 +23,26 @@
 		<table class="table text-center">
 			<thead class="thead-dark">
 				<tr>
-					<!-- <th scope="col">Xóa</th> -->
-					<!-- <th scope="col">Cập nhật</th> -->
+
 					<th scope="col">Họ tên</th>
 					<th scope="col">Giới tính</th>
 					<th scope="col">Số điện thoại</th>
 					<th scope="col">CMND</th>
 					<th scope="col">Email</th>
+					<th scope="col">Hoạt động</th>
 				</tr>
 			</thead>
 			<tbody class="scrollDiv">
 				<c:forEach items="${model.listResult}" var="customer">
 					<tr>
-						<!-- <td style="line-height: 60px;"><input type="checkbox"
-							name="delete"></td> -->
-					<!-- 	<td style="line-height: 60px;"><a href=""><i
-								class="fa fa-edit"></i></a></td> -->
+
 						<td style="line-height: 60px;">${customer.firstName} ${customer.lastName}</td>
 						<td style="line-height: 60px;">${customer.gender}</td>
 						<td style="line-height: 60px;">${customer.phone}</td>
 						<td style="line-height: 60px;">${customer.cmnd}</td>
 						<td style="line-height: 60px;">${customer.email}</td>
-
+						<td style="line-height: 60px;"><a
+							href="<c:url value ="/quan-tri/khach-hang?cmnd=${customer.cmnd}"/>">Xem</a></td>
 					</tr>
 
 				</c:forEach>

@@ -134,11 +134,12 @@ public class SearchController {
 			mav.setViewName("admin/booking/roomAvailable");
 		}
 
-		
-		
-		
-		
-		
+		return mav;
+	}
+	
+	@RequestMapping(value = "/quan-tri/tim-phong", method = RequestMethod.GET)
+	public ModelAndView homePage() {
+		ModelAndView mav = new ModelAndView("admin/booking/formSearch");
 		return mav;
 	}
 }

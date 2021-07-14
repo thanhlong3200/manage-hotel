@@ -5,6 +5,7 @@
 <%@page import="com.chondo.util.PriceUtil"%>
 <c:url var="checkOutAPI" value="/api/check-out" />
 <c:url var="bookingDetails" value="/quan-tri/booking" />
+<c:url var="addRate" value="/quan-tri/them-danh-gia" />
 <!DOCTYPE html>
 <html>
 <head>
@@ -154,7 +155,7 @@
 				<option value="${type.code }">${type.name}</option>
 			</c:forEach>
 		</select>
-			<button class="btn btn-primary" id="verifyCheckOut" style="width:105px;height:45px;margin-bottom:50px;">Xác nhận</button>
+		<button class="btn btn-primary" id="verifyCheckOut" style="width:105px;height:45px;margin-bottom:50px;">Xác nhận</button>
 	</c:if>
 	<c:if test="${not empty payment}">
 		<h3>Phương thức thanh toán: ${payment.paymentType.name}</h3>
@@ -188,7 +189,7 @@
 				dataType : 'json',
 				success : function(result) {
 					alert("Thành công");
-					window.location.href = '${bookingDetails}?id=' +result["booking"]["id"];
+					window.location.href = '${addRate}?roomTypeId=' +result["booking"]["roomType"]["id"] + "&bookingId=" + result["booking"]["id"];
 				},
 				error : function(error) {
 					alert("Thất bại");

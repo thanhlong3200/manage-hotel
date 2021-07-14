@@ -7,10 +7,12 @@ import org.modelmapper.TypeToken;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.chondo.dto.PaymentDTO;
 import com.chondo.dto.RateDTO;
 import com.chondo.dto.RoomTypeDTO;
 import com.chondo.entity.RateEntity;
 import com.chondo.repository.RateRepository;
+import com.chondo.repository.RoomTypeRepository;
 import com.chondo.service.IRateService;
 
 @Service
@@ -18,6 +20,9 @@ public class RateService implements IRateService{
 
 	@Autowired
 	private RateRepository rateRepository;
+	
+	@Autowired
+	private RoomTypeRepository roomTypeReposiory;
 	
 	@Override
 	public void setRates(List<RoomTypeDTO> dtos) {
@@ -49,6 +54,23 @@ public class RateService implements IRateService{
 			rank = "Tuyệt vời";
 		}
 		roomtype.setRank(rank);
+	}
+
+	@Override
+	public List<RateDTO> findAll() {
+		List<RateEntity> entities = rateRepository.findAll();
+		ModelMapper modelMapper = new ModelMapper();
+		List<RateDTO> list = modelMapper.map(entities, new TypeToken<List<RateDTO>>(){}.getType());
+		return list;
+	}
+
+	@Override
+	public RateDTO save(RateDTO dto) {
+		ModelMapper modelMapper = new ModelMapper();
+		RateEntity entity = modelMapper.map(dto, RateEntity.class);
+		entity.setRoomType(roomTypeReposiory.findOne(dto.getRoomTypeId()));
+		entity = rateRepository.save(entity);
+		return modelMapper.map(entity, RateDTO.class);
 	}
 	
 }

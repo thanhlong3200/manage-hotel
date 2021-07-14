@@ -8,21 +8,25 @@ import org.modelmapper.TypeToken;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.chondo.dto.BookingDTO;
 import com.chondo.dto.RoomDTO;
-import com.chondo.entity.BookingEntity;
-import com.chondo.entity.BookingStatusEntity;
 import com.chondo.entity.RoomEntity;
 import com.chondo.entity.RoomStatusEntity;
+import com.chondo.repository.HotelRepository;
 import com.chondo.repository.RoomRepository;
 import com.chondo.repository.RoomStatusRepository;
+import com.chondo.repository.RoomTypeRepository;
 import com.chondo.service.IRoomService;
-import com.chondo.util.LogUtil;
 
 @Service
 public class RoomService implements IRoomService{
 	@Autowired
 	private RoomRepository roomRepository;
+	
+	@Autowired
+	private HotelRepository hotelRepository;
+	
+	@Autowired
+	private RoomTypeRepository roomTypeRepository;
 	
 	@Autowired
 	private RoomStatusRepository roomStatusRepository;
@@ -91,6 +95,25 @@ public class RoomService implements IRoomService{
 		RoomEntity entity = roomRepository.findOneByNumber(number);
 		roomRepository.save(entity);
 		return	modelMapper.map(entity,RoomDTO.class);	
+	}
+
+	@Override
+	public RoomDTO save(RoomDTO dto) {
+		RoomEntity roomEntity = new RoomEntity();
+		ModelMapper modelMapper = new ModelMapper();
+	
+		if (dto.getId() != null) {
+			roomEntity = roomRepository.findOne(dto.getId());
+			
+		}
+		roomEntity.setNumber(dto.getNumber());
+		roomEntity.setFloor(dto.getFloor());
+		roomEntity.setHotel(hotelRepository.findOne(dto.getHotelId()));
+		roomEntity.setRoomType(roomTypeRepository.findOne(dto.getRoomTypeId()));
+		roomEntity.setStatus(roomStatusRepository.findOne(dto.getStatusId()));
+		
+		roomRepository.save(roomEntity);
+		return dto;
 	}
 	
 }

@@ -9,4 +9,8 @@ public interface IRateService {
 	void setRates(List<RoomTypeDTO> dtos);
 
 	void setRates(RoomTypeDTO roomtype);
+
+	List<RateDTO> findAll();
+
+	RateDTO save(RateDTO dto);
 }

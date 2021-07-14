@@ -35,4 +35,7 @@ public interface BookingRepository extends JpaRepository<BookingEntity, Long>{
 
 	double countByDateFromAndStatusCode(Date dateFilter, String statusCode);
 	
+	List<BookingEntity> findByBookedRoomsCustomersCmnd(String cmnd);
+
+	List<BookingEntity> findAllByOrderByCreatedDateDesc(Pageable pageable);
 }

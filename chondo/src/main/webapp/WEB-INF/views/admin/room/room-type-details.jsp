@@ -38,6 +38,11 @@
 			
 				<div class="review"><input type="hidden" id="review" value="${roomType.review}"></div>
 				
+				<h3 style="margin-top:20px;">Đánh giá</h3>
+				<h4>Số lượt đánh giá: ${roomType.rates.size()}</h4>
+				<h4>Đánh giá trung bình: ${roomType.averageBadge}</h4>
+				<h4>Độ hài lòng: ${roomType.rank}</h4>
+				
 				<h3 style="margin-top:20px;">Các dịch vụ miễn phí</h3>
 				<c:forEach items="${roomType.services}" var="service">
 					<span style="margin:0px 20px 20px 0px;white-space:nowrap;display:inline-block;font-size:19px;">

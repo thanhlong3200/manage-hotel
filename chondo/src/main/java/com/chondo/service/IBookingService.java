@@ -42,4 +42,6 @@ public interface IBookingService {
 	double countByDateFromAndStatusCode(Date dateFilter, String string);
 
 	BookingDTO extend(BookingDTO dto);
+
+	List<BookingDTO> findByBookedRoomsCustomersCmnd(String cmnd);
 }

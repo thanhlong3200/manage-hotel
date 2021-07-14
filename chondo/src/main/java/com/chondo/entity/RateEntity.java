@@ -36,5 +36,13 @@ public class RateEntity extends BaseEntity{
 		this.vote = vote;
 	}
 
+	public RoomTypeEntity getRoomType() {
+		return roomType;
+	}
+
+	public void setRoomType(RoomTypeEntity roomType) {
+		this.roomType = roomType;
+	}
+
 	
 }

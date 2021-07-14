@@ -24,4 +24,6 @@ public interface IRoomService {
 	RoomDTO changeStatus(RoomDTO room, String statusCode);
 
 	RoomDTO findOneByNumber(Integer number);
+
+	RoomDTO save(RoomDTO dto);
 }

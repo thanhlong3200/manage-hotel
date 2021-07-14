@@ -62,7 +62,7 @@
 						<c:if test="${bookedRoom.customers.size() > 0}">
 							<a class ="btn btn-secondary">Đã check-in</a>
 						</c:if>
-						<button id="submit" class="btn btn-danger" data-toggle="modal" data-target="#exampleModal">Lưu</button>
+						<button id="submit" class="btn btn-danger"  style="display:block;margin-top:15px;"  data-toggle="modal" data-target="#exampleModal">Lưu</button>
 					</div>
 						
 					<c:if test="${not empty availableRoom}">

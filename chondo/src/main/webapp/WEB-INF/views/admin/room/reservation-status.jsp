@@ -14,13 +14,13 @@
 	<div class="reservation">
 		<form id="formSubmit" action="<c:url value = "/quan-tri/tinh-hinh-dat-phong"/>" style="margin-bottom:20px;">
 			<c:if test="${not empty date }">
-				<input id="dateFrom" autocomplete="off" name="date"
+				<input id="dateFromPayment" autocomplete="off" name="date"
 				data-date-format="dd/mm/yyyy" class="date-picker" type="text"
-				placeholder="Chọn ngày" value="${date }" required>
+				placeholder="Chọn ngày" value="${date }" style="width:150px;" required>
 			</c:if>
 			<c:if test="${empty date }">
-				<input id="dateFrom" autocomplete="off" name="date"
-				data-date-format="dd/mm/yyyy" class="date-picker" type="text"
+				<input id="dateFromPayment" autocomplete="off" name="date"
+				data-date-format="dd/mm/yyyy" class="date-picker"  style="width:150px;" type="text"
 				placeholder="Chọn ngày" required>
 			</c:if>
 			<input id="page" type="hidden" name="page" value="${model.page}"/>
