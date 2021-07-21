@@ -24,7 +24,7 @@ public class CustomerController {
 	private IBookingService bookingService;
 	
 	@GetMapping(value = "/quan-tri/khach-hang")
-	public ModelAndView checkInPage(
+	public ModelAndView customerPage(
 			@RequestParam(value = "cmnd", required = false) String cmnd,
 			@RequestParam(value = "page", required = false) Integer page,
 			@RequestParam(value = "limit", required = false) Integer limit) {

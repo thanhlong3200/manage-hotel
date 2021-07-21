@@ -265,7 +265,7 @@
 			$('.tab-pane:nth-child(4)').addClass('active');
 		}
 
-		$('#submit').on('click', function(event) {
+		$('#submit').on('click', function checkRoom(event) {
 			event.preventDefault();
 			if (maxRoom > 0) {
 				alert('Vui lòng chọn phòng !');

@@ -61,7 +61,7 @@
         </li>
         <li >
             <a href="<c:url value='/quan-tri/nang-cap-booking'/>">
-                Upgrade booking
+                Nâng cấp booking
             </a>
         </li>
 	</security:authorize>

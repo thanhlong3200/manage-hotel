@@ -16,7 +16,6 @@
 		<table class="table text-center">
 			<thead class="thead-dark">
 				<tr>
-					<th scope="col">Chỉnh sửa</th>
 					<th scope="col">Tên</th>
 					<th scope="col">Email</th>
 					<th scope="col">Vai trò</th>		
@@ -28,8 +27,7 @@
 			<tbody class="scrollDiv">
 				<c:forEach items="${listUser}" var="user">
 					<tr>
-					   <td style="line-height: 60px;"><a href="<c:url value='/quan-tri/nguoi-dung/chinh-sua?id=${user.id}'/>"><i
-								class="fa fa-edit"></i></a></td>
+					  
 						<td style="line-height: 60px;">${user.fullname}</td>
 						<td style="line-height: 60px;">${user.email}</td>
 						<td style="line-height: 60px;">${user.group.name}</td>

@@ -3,6 +3,7 @@
 <%@ include file="/common/taglib.jsp"%>
 <%@page import="com.chondo.util.PriceUtil"%>
 <c:url var="roomTypeAPI" value="/api/roomType" />
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -76,7 +77,7 @@
 						alert("Thành công");
 					},
 					error : function(error) {
-						alert("Đăng ký thất bại");
+						alert("Thất bại");
 					}
 				});
 			}
@@ -91,7 +92,7 @@
 						alert("Thành công");
 					},
 					error : function(error) {
-						alert("Đăng ký thất bại");
+						alert("Thất bại");
 					}
 				});
 			}

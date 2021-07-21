@@ -60,6 +60,17 @@ public class SalesController {
 		}
 		
 		PaymentDTO totalDTO = new PaymentDTO();
+		setPrice(totalDTO,paymentDTOs);
+		
+		
+		
+		mav.addObject("total", totalDTO);
+    	mav.addObject("model", paymentDTOs);
+		
+		return mav;
+	}
+	
+	private void setPrice(PaymentDTO totalDTO, List<PaymentDTO> paymentDTOs) {
 		Long totalPriceBooked = 0L;
 		Long totalPriceService = 0L;
 		Long totalSales = 0L;
@@ -78,14 +89,8 @@ public class SalesController {
 		totalDTO.setTotalPriceService(totalPriceService);
 		totalDTO.setTotalSales(totalSales);
 		totalDTO.setTotalRefund(totalRefund);
-		
-		
-		mav.addObject("total", totalDTO);
-    	mav.addObject("model", paymentDTOs);
-		
-		return mav;
 	}
-	
+
 	@GetMapping(value = "/quan-tri/doanh-so/dich-vu")
 	public ModelAndView salesServicePage(@RequestParam(value = "dateFrom", required = false) String dateFromStr,
 			@RequestParam(value = "dateTo", required = false) String dateToStr) throws ParseException {

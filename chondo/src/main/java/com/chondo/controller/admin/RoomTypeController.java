@@ -78,7 +78,7 @@ public class RoomTypeController {
 	}
 	
 	@GetMapping(value = "/quan-tri/loai-phong/chinh-sua")
-	public ModelAndView editPage(@RequestParam(value = "roomTypeId", required = false) Long roomTypeId) {
+	public ModelAndView editRoomTypePage(@RequestParam(value = "roomTypeId", required = false) Long roomTypeId) {
 		ModelAndView mav = new ModelAndView("admin/room/edit-room-type");
 		RoomTypeDTO dto = new RoomTypeDTO();
 		if (roomTypeId != null) {

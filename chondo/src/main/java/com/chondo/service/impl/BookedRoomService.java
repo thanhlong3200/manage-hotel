@@ -159,12 +159,13 @@ public class BookedRoomService implements IBookedRoomService{
 						
 						RoomEntity roomEntity = roomRepository.findOne(booking.getIds()[i]);
 						bookedRoomEntity.setRoom(roomEntity);
-						roomEntity.setStatus(roomStatusRepository.findOneByCode("booked"));
-						roomRepository.save(roomEntity);
+						
+						changeRoomStatus(roomEntity,"booked");
+						
 						
 						RoomEntity oldRoomEntity = roomRepository.findOne(booking.getIds()[i-1]);
-						oldRoomEntity.setStatus(roomStatusRepository.findOneByCode("available"));
-						roomRepository.save(oldRoomEntity);
+						
+						changeRoomStatus(oldRoomEntity,"available");
 						
 						
 						result.add(modelMapper.map((bookedRoomRepository.save(bookedRoomEntity)), BookedRoomDTO.class));
@@ -196,6 +197,11 @@ public class BookedRoomService implements IBookedRoomService{
 		
 		return result;
 	}
+
+private void changeRoomStatus(RoomEntity roomEntity, String code) {
+	roomEntity.setStatus(roomStatusRepository.findOneByCode(code));
+	roomRepository.save(roomEntity);
+}
 
 //	private void upgradeBookedService(Long id) {
 //		ModelMapper modelMapper = new ModelMapper(); 

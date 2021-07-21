@@ -57,7 +57,7 @@ public class RoomController {
 	private ITaskService taskService;
 
 	@RequestMapping(value = "/quan-tri/phong", method = RequestMethod.GET)
-	public ModelAndView homePage
+	public ModelAndView listRoomPage
 			(@RequestParam(value = "roomTypeCode", required = false) String roomTypeCode,
 			@RequestParam(value = "number", required = false) Integer number) {
 		ModelAndView mav = new ModelAndView();	

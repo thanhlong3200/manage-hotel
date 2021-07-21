@@ -67,16 +67,17 @@ public class BookingService implements IBookingService{
 	public BookingDTO save(BookingDTO booking) {
 		ModelMapper modelMapper = new ModelMapper();
 		BookingEntity bookingEntity = new BookingEntity();
-		if (booking.getCode()!=null) {
+		if (booking.getCode()!=null) {	
 			bookingEntity = bookingRepository.findOneByCode(booking.getCode());
-			bookingEntity.setStatus(bookingStatusRepository.findOneByCode("cancel"));
+			
+			changeStatus(bookingEntity,"cancel");
+			
 			List<BookedRoomEntity> bookedRoomEntities = bookingEntity.getBookedRooms();
 			List<BookedRoomDTO> bookedRoomDTOs = modelMapper.map(bookedRoomEntities, new TypeToken<List<BookedRoomDTO>>(){}.getType());
 			for (BookedRoomDTO bookedRoomDTO : bookedRoomDTOs) {
-				RoomEntity roomEntity = roomRepository.findOne(bookedRoomDTO.getRoom().getId());
-				roomEntity.setStatus(roomStatusRepository.findOneByCode("available"));
-				roomRepository.save(roomEntity);
+				changeRoomStatus(bookedRoomDTO,"available");
 			}
+			
 			bookingEntity.setLogs(bookingEntity.getLogs() + LogUtil.createLog("cancel"));
 		}else {
 			modelMapper.getConfiguration().setAmbiguityIgnored(true);
@@ -86,10 +87,12 @@ public class BookingService implements IBookingService{
 			bookingEntity.setCustomer(customerEntity);
 			
 			bookingEntity.setCode(getCode() + bookingRepository.count());
-			bookingEntity.setStatus(bookingStatusRepository.findOneByCode("booked"));
+			changeStatus(bookingEntity,"booked");
+
 			bookingEntity.setRoomType(roomTypeRepository.findOne(booking.getRoomType().getId()));
 			bookingEntity.setHotel(hotelRepository.findOneByLocationAndStatus(booking.getHotel().getLocation(), 1));
 			bookingEntity.setUpgraded(0);
+			
 			bookingEntity.setLogs(LogUtil.createLog("booked"));
 			
 		}
@@ -104,6 +107,20 @@ public class BookingService implements IBookingService{
 	
 
 	
+	private void changeStatus(BookingEntity bookingEntity, String code) {
+		bookingEntity.setStatus(bookingStatusRepository.findOneByCode(code));
+	}
+
+
+
+	private void changeRoomStatus(BookedRoomDTO bookedRoomDTO, String code) {
+		RoomEntity roomEntity = roomRepository.findOne(bookedRoomDTO.getRoom().getId());
+		roomEntity.setStatus(roomStatusRepository.findOneByCode(code));
+		roomRepository.save(roomEntity);
+	}
+
+
+
 	private String getCode() {
 		SimpleDateFormat formatter = new SimpleDateFormat("ddMMyyyy");  
 	    Date date = new Date();  
@@ -145,8 +162,9 @@ public class BookingService implements IBookingService{
 	public BookingDTO changeStatus(BookingDTO booking, String code) {
 		ModelMapper modelMapper = new ModelMapper();
 		BookingEntity bookingEntity = bookingRepository.findOne(booking.getId());
-		BookingStatusEntity status = bookingStatusRepository.findOneByCode(code);
-		bookingEntity.setStatus(status);
+		
+		changeStatus(bookingEntity, code);
+		
 		bookingEntity.setLogs(bookingEntity.getLogs() + LogUtil.createLog(code));
 		bookingRepository.save(bookingEntity);
 		return	modelMapper.map(bookingEntity,BookingDTO.class);	
@@ -309,13 +327,18 @@ public class BookingService implements IBookingService{
 	public BookingDTO extend(BookingDTO booking) {
 		ModelMapper modelMapper = new ModelMapper();
 		BookingEntity bookingEntity = bookingRepository.findOneByCode(booking.getCode());
-		long dateExtend = CalculateUtil.countNight(bookingEntity.getDateTo(), booking.getDateTo());
+
 		bookingEntity.setDateTo(booking.getDateTo());
+		
 		SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");  
 	    Date date = new Date();  
 	    String currentTime = formatter.format(date);
+	    
+		long dateExtend = CalculateUtil.countNight(bookingEntity.getDateTo(), booking.getDateTo());
 		bookingEntity.setLogs(bookingEntity.getLogs() + "Extend " + dateExtend+ " day, rooms: " + Arrays.toString(booking.getIds()) +" "+ currentTime +"</br>");
+		
 		bookingRepository.save(bookingEntity);
+		
 		return	modelMapper.map(bookingEntity,BookingDTO.class);	
 	}
 

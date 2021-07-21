@@ -27,7 +27,7 @@ public class RateController {
 	private IRateService rateService;
 	
 	@RequestMapping(value = {"/quan-tri/danh-gia"}, method = RequestMethod.GET)
-	public ModelAndView homePage
+	public ModelAndView ratePage
 			(@RequestParam(value = "roomTypeId", required = false) Long roomTypeId) {
 		ModelAndView mav = new ModelAndView();	
 	

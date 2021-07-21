@@ -11,7 +11,6 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
-import com.chondo.constant.SystemConstant;
 import com.chondo.dto.MyUser;
 import com.chondo.entity.RoleEntity;
 import com.chondo.entity.UserEntity;

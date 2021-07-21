@@ -31,7 +31,7 @@ public class UpgradeController {
 	private IBookingService bookingService;
 
 	@GetMapping(value = "/quan-tri/nang-cap-booking")
-	public ModelAndView changeRoomPage(@RequestParam(value = "bookingCode", required = false) String code) {
+	public ModelAndView upgradePage(@RequestParam(value = "bookingCode", required = false) String code) {
 		ModelAndView mav = new ModelAndView("admin/booking/upgradeBooking");
 		if (code != null) {
 			BookingDTO booking = bookingService.findOneByCode(code);

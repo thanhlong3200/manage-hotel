@@ -38,15 +38,10 @@ public class BookingController {
 	
 	@Autowired
 	private IBookedRoomService bookedRoomService;
-	
-	@Autowired 
-	private IRoomService roomService;
 
-	@Autowired
-	private IRoomStatusService roomStatusService;
 
 	@GetMapping(value = "/quan-tri/booking")
-	public ModelAndView homePage(@RequestParam(value = "page", required = false) Integer page,
+	public ModelAndView bookingPage(@RequestParam(value = "page", required = false) Integer page,
 			@RequestParam(value = "limit", required = false) Integer limit,
 			@RequestParam(value = "bookingCode", required = false) String bookingCode,
 			@RequestParam(value = "id", required = false) Long id) {
@@ -103,7 +98,7 @@ public class BookingController {
 	}
 
 	@GetMapping(value = "/quan-tri/huy-booking")
-	public ModelAndView cancelBookingRoom(@RequestParam(value = "code", required = false) String code) {
+	public ModelAndView cancelPage(@RequestParam(value = "code", required = false) String code) {
 		ModelAndView mav = new ModelAndView("admin/booking/cancelBooking");
 
 		if (code != null) {
@@ -125,41 +120,7 @@ public class BookingController {
 		return mav;
 	}
 	
-	@GetMapping(value = "/quan-tri/gia-han-booking")
-	public ModelAndView extendBooking(@RequestParam(value = "code", required = false) String code,
-			@RequestParam(value = "dateNumber", required = false) Integer dateNumber) {
-		ModelAndView mav = new ModelAndView("admin/booking/extendBooking");
-
-		if (code != null) {
-			BookingDTO booking = bookingService.findOneByCode(code);
-			if (booking != null) {
-				if (dateNumber !=null) {
-					Calendar c = Calendar.getInstance();
-				    c.setTime(booking.getDateTo());
-				    c.add(Calendar.DATE, dateNumber);
-
-					List<RoomDTO> availableRoom = roomService.findAvailable(booking.getHotel().getId(), 
-								booking.getRoomType().getId(), booking.getDateTo(), c.getTime());
-						
-					List<RoomStatusDTO> listStatus = roomStatusService.findByActive(1);
-					
-					mav.addObject("listStatus", listStatus);
-
-					mav.addObject("availableRoom", availableRoom);
-					mav.addObject("dateNumber", dateNumber);
-				}
-				
-				
-				mav.addObject("booking", booking);
-				
-			} else {
-				mav.addObject("error", "Không tìm thấy mã booking này !");
-			}
-			
-		}
-		mav.addObject("code", code);
-		return mav;
-	}
+	
 	
 	@GetMapping(value = "/quan-tri/xac-nhan-booking")
 	public ModelAndView verifyBooking(@RequestParam(value = "code") String code,

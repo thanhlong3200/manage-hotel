@@ -48,7 +48,7 @@ public class ChangeRoomController {
 
 				List<RoomStatusDTO> listStatus = roomStatusService.findByActive(1);
 				List<BookedRoomDTO> bookedRooms = bookedRoomService.findByBookingId(booking.getId());
-
+				
 				mav.addObject("bookedRooms", bookedRooms);
 				mav.addObject("listStatus", listStatus);
 				mav.addObject("availableRoom", availableRoom);

@@ -35,6 +35,7 @@ public class UpgradeService implements IUpgradeService{
 		upgradeEntity.setInitRoomType(bookingEntity.getRoomType());
 		
 		bookingEntity.setRoomType(roomTypeRepository.findOne(dto.getInitRoomType().getId()));
+		
 		bookingEntity.setUpgraded(1);
 		bookingRepository.save(bookingEntity);
 		

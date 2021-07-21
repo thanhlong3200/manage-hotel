@@ -21,7 +21,7 @@ public class AssignTaskController {
 	private IStaffTaskService staffTaskService;
 	
 	@GetMapping(value = "/quan-tri/phan-cong")
-	public ModelAndView homePage(@RequestParam(value = "page", required = false) Integer page,
+	public ModelAndView assignTaskPage(@RequestParam(value = "page", required = false) Integer page,
 			@RequestParam(value = "limit", required = false) Integer limit) {
 		ModelAndView mav = new ModelAndView("admin/assign/list-assign");
 		
@@ -43,7 +43,7 @@ public class AssignTaskController {
 	
 	@PostMapping(value = "/api/assign")
 	@Transactional
-	public StaffTaskDTO assignGuideGuest(@RequestBody StaffTaskDTO dto){	
+	public StaffTaskDTO assignTask(@RequestBody StaffTaskDTO dto){	
 	
 		return staffTaskService.assignTask(dto);
 	}

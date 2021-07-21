@@ -51,7 +51,7 @@ public class CheckInController {
 	
 	@PostMapping(value = "/api/check-in")
 	@Transactional
-	public BookingDTO saveCustomerCheckIn(@RequestBody BookingDTO booking){
+	public BookingDTO checkIn(@RequestBody BookingDTO booking){
 		
 		List<BookedRoomDTO> list = bookedRoomService.setCustomers(booking.getBookedRooms());		
 		
