@@ -1,7 +1,10 @@
 package com.chondo.controller.web;
 
+import java.io.UnsupportedEncodingException;
 import java.util.Calendar;
 import java.util.List;
+
+import javax.mail.MessagingException;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
@@ -138,7 +141,7 @@ public class BookingController {
 	
 	@PostMapping(value = "/api/booking")
 	@Transactional
-	public BookingDTO save(@RequestBody BookingDTO booking){
+	public BookingDTO save(@RequestBody BookingDTO booking) throws UnsupportedEncodingException, MessagingException{
 		CustomerDTO customer;
 		if ((customer = customerService.findOneByEmail(booking.getCustomer().getEmail())) == null) {
 			customer = customerService.save(booking.getCustomer());
