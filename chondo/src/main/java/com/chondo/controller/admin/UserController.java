@@ -78,7 +78,6 @@ public class UserController {
 		return mav;
 	}
 	
-	 
 	@GetMapping(value = "/dang-ky")
 	public ModelAndView registerPage() {
 		ModelAndView mav = new ModelAndView("web/register");
@@ -92,26 +91,26 @@ public class UserController {
 	@Transactional
 	public ResponseEntity<?> register(@RequestBody UserDTO userDTO) {
 		if (userService.existEmail(userDTO.getEmail())) {
-			return ResponseEntity.badRequest().body(new MessageResponse("Lỗi: Email đã được đăng ký!"));
+			return ResponseEntity.badRequest().body(new MessageResponse("Lá»—i: Email Ä‘Ã£ Ä‘Æ°á»£c Ä‘Äƒng kÃ½!"));
 		}
 		if (userService.existUsername(userDTO.getUsername())) {
-			return ResponseEntity.badRequest().body(new MessageResponse("Lỗi: Username đã được đăng ký!"));
+			return ResponseEntity.badRequest().body(new MessageResponse("Lá»—i: Username Ä‘Ã£ Ä‘Æ°á»£c Ä‘Äƒng kÃ½!"));
 		}
 		userService.save(userDTO);
-		return ResponseEntity.ok(new MessageResponse("Đăng ký thành công!"));
+		return ResponseEntity.ok(new MessageResponse("Ä�Äƒng kÃ½ thÃ nh cÃ´ng!"));
 	}
 	
 	@PutMapping(value = "/api/user")
 	@Transactional
 	public ResponseEntity<?> update(@RequestBody UserDTO userDTO) {
 		if (!userService.checkPassword(userDTO.getUsername(), userDTO.getPassword())) {
-			return ResponseEntity.badRequest().body(new MessageResponse("Lỗi: Mật khẩu không đúng!"));
+			return ResponseEntity.badRequest().body(new MessageResponse("Lá»—i: Máº­t kháº©u khÃ´ng Ä‘Ãºng!"));
 		}
 		
 		if (userService.save(userDTO) == null) {
-			return ResponseEntity.badRequest().body(new MessageResponse("Lỗi: Lỗi hệ thống!"));
+			return ResponseEntity.badRequest().body(new MessageResponse("Lá»—i: Lá»—i há»‡ thá»‘ng!"));
 		}
-		return ResponseEntity.ok(new MessageResponse("Cập nhật thành công!"));
+		return ResponseEntity.ok(new MessageResponse("Cáº­p nháº­t thÃ nh cÃ´ng!"));
 	}
 	
 }

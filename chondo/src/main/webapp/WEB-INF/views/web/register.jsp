@@ -2,8 +2,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@include file="/common/taglib.jsp"%>
-<c:url var="userAPI" value="/api/user" />
+<c:url var="userAPI" value="/api/user" />\
+<c:url var="confirmAPI" value="/api/sendCode" />
 <c:url var="login" value="/dang-nhap" />
+<c:url var="confirm" value="/xac-nhan-dang-ky" />
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -29,7 +31,6 @@
 					<form:input type="password" path="password" placeholder="Mật khẩu" />
 					<input type="password" id="confirmPassword" name = "confirmPassword" placeholder="Nhập lại mật khẩu"  />
 					<form:input path="fullname" placeholder="Họ và tên"  />
-					<form:input path="email" placeholder="Địa chỉ email" />
 					<form:input path="phone" placeholder="Số điện thoại"  />
 					<form:select path="gender"  >
 						<form:option value="">--Chọn giới tính--</form:option>
@@ -39,6 +40,9 @@
 					</form:select>
 					<input type="date" name="birthday" id="birthday" >
 					<form:input path="address" placeholder="Địa chỉ" />
+					<form:input path="email" placeholder="Địa chỉ email" />
+					<button type= ""id="btnSendCode" style = "margin-bottom:20px; color:black">Gửi mã</button>
+					<input id="code" placeholder="Nhập mã xác nhận" />
 					<button type= ""id="btnRegister">Đăng ký</button>
 				</form:form>
 			</div>
@@ -46,10 +50,21 @@
 	</div>
 	<script type="text/javascript">
 	$().ready(function (){
-			console.log("aaaaaaa");
+			var code = null;
+			$('#btnSendCode').on('click', function(event) {
+				alert("Kiem tra email de lay ma xac nhan!");
+				event.preventDefault();
+				var data = {};
+				var formData = $('#formSubmit').serializeArray();
+				$.each(formData, function(i, v) {
+					data["" + v.name + ""] = v.value;
+				});
+				
+				confirm(data);
+				
+			});
 			
 			$('#btnRegister').on('click', function(event) {
-				console.log("dd");
 				event.preventDefault();
 				var data = {};
 				var formData = $('#formSubmit').serializeArray();
@@ -57,15 +72,37 @@
 					data["" + v.name + ""] = v.value;
 				});
 				if (data["password"] == data["confirmPassword"]) {
-					data["groupId"] = 1;
-					data["status"] = 1;
-					register(data);
+					if ($('#code').val() == code) {
+						data["groupId"] = 1;
+						data["status"] = 1;
+						console.log("reg");
+						register(data);
+					}
+					else{
+						alert("Ma xac nhan khong dung!");
+					}
 				} else{
 					$('#message').css("display","block");
 					$('#message').html("Mật khẩu nhập lại không trùng khớp !");
 				}
 				
 			});
+			
+			function confirm(data) {
+				$.ajax({
+					url : '${confirmAPI}',
+					type : 'POST',
+					contentType : 'application/json',
+					data : JSON.stringify(data),
+					dataType : 'json',
+					success : function(result) {
+						code = result;
+					},
+					error : function(error) {
+					}
+				});
+			}
+			
 			function register(data) {
 				$.ajax({
 					url : '${userAPI}',
@@ -74,7 +111,7 @@
 					data : JSON.stringify(data),
 					dataType : 'json',
 					success : function(result) {
-						alert("Thành công");
+						alert("Đăng ký thành công");
 						window.location.href = '${login}';
 					},
 					error : function(error) {
