@@ -7,6 +7,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -70,9 +71,18 @@ public class UserController {
 		
 		return mav;
 	}
+	
 	@GetMapping(value = "/thay-doi-thong-tin")
 	public ModelAndView updatePage(@RequestParam("id") Long id) {
 		ModelAndView mav = new ModelAndView("web/change-information");
+		UserDTO userDTO = userService.findOne(id);
+		mav.addObject("model", userDTO);
+		return mav;
+	}
+	
+	@GetMapping(value = "/thay-doi-mat-khau")
+	public ModelAndView updatePasswordPage(@RequestParam("id") Long id) {
+		ModelAndView mav = new ModelAndView("web/change-password");
 		UserDTO userDTO = userService.findOne(id);
 		mav.addObject("model", userDTO);
 		return mav;
@@ -99,6 +109,8 @@ public class UserController {
 		userService.save(userDTO);
 		return ResponseEntity.ok(new MessageResponse("Ä�Äƒng kÃ½ thÃ nh cÃ´ng!"));
 	}
+	
+
 	
 	@PutMapping(value = "/api/user")
 	@Transactional
