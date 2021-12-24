@@ -23,4 +23,6 @@ public interface IRoomTypeService {
 	List<RoomTypeDTO> findAll();
 
 	List<RoomTypeDTO> findAvailableUpgrade(BookingDTO booking);
+
+	List<RoomTypeDTO> findBestSeller();
 }

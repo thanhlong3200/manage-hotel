@@ -9,7 +9,6 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
 import com.chondo.entity.RoomTypeEntity;
-import com.chondo.entity.ServiceEntity;
 
 public interface RoomTypeRepository extends JpaRepository<RoomTypeEntity, Long>{
 
@@ -33,5 +32,13 @@ public interface RoomTypeRepository extends JpaRepository<RoomTypeEntity, Long>{
 	List<RoomTypeEntity> findByStatus(Integer status, Pageable pageable);
 
 	Integer countByStatus(Integer status);
+	
+	
+	@Query(value = "select rt.*, count(rt.id)\n"
+			+ "from room_types rt join rooms r on rt.id = r.room_type_id\n"
+			+ "					join booked_rooms br on br.room_id = r.id\n"
+			+ "group by rt.id\n"
+			+ "limit 9", nativeQuery = true)
+	List<RoomTypeEntity> findBestSeller();
 	
 }
