@@ -34,13 +34,16 @@
 											<a id="infor" href="">
 												<%=SecurityUtils.getPrincipal().getFullname()%>
 												<div id="infor-panel">
-													<a  href="<c:url value='/thoat'/>">Xem thông tin</a>
 													<c:url value = "/thay-doi-thong-tin" var = "updateURL">
 													   <c:param name = "id" value = "<%=SecurityUtils.getPrincipal().getId()%>"/>		
 													</c:url>
+													<a  href="${updateURL}">Xem thông tin</a>
+													
 													<a  href="${updateURL}">
 													Thay đổi thông tin</a>
-													<a  href="<c:url value='/thoat'/>">Đổi mật khẩu</a>
+													
+													
+												
 												</div>
 											</a>
 											<a  href="<c:url value='/thoat'/>">Thoát</a>
