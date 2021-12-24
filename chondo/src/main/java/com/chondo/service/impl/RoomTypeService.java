@@ -114,6 +114,15 @@ public class RoomTypeService implements IRoomTypeService{
 		return availableRoomType;
 	}
 
+
+	@Override
+	public List<RoomTypeDTO> findBestSeller() {
+		List<RoomTypeEntity> entities = roomTypeRepository.findBestSeller();
+		ModelMapper modelMapper = new ModelMapper();
+		List<RoomTypeDTO> dtos = modelMapper.map(entities, new TypeToken<List<RoomTypeDTO>>(){}.getType());
+		return dtos;
+	}
+
 	
 
 	

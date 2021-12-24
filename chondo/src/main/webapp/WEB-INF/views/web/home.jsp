@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@include file="/common/taglib.jsp" %>
+<%@page import="com.chondo.util.PriceUtil"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -45,519 +46,88 @@
                 <div class="row">
                     <div class="col-md-12">
                         <div class="section-title mb-75">
-                            <h2>our <span>Room</span></h2>
-                            <p>There are many variations of passages of Lorem Ipsum available, but the majority have suffered by injected humour.</p>
+                            <h2>BEST <span>SELLER</span></h2>
+                  
                         </div>
                     </div>
                 </div>
                 <div class="our-room-show">
                     <div class="row">
                         <div class="carousel-list">
-                            <div class="col-md-4">
+                        <c:forEach items="${listBestSeller}" var="roomType">
+                        	<div class="col-md-4">
                                 <div class="single-room">
                                     <div class="room-img">
-                                        <a href="#"><img src="images/room/room1.jpg" alt=""></a>
+                                        <a href="#"><img src="<c:url value='/template/web/images/room/${roomType.image}'/>" alt=""></a>
                                     </div>
                                     <div class="room-desc">
                                         <div class="room-name">
-                                            <h3><a href="#">Delux room</a></h3>
+                                            <h3><a href="#">${roomType.name }</a></h3>
                                         </div>
-                                        <div class="room-rent">
-                                            <h5>€ 200 / <span>Night</span></h5>
+                                        <div class="room-rent" style="padding-top:5px">
+                                            <h5>${PriceUtil.convert(roomType.sellPrice)} đ/ <span>Đêm</span></h5>
                                         </div>
-                                        <div class="room-book">
-                                            <a href="#">Book now</a>
+                                        <div class="room-book" style="padding-top:20px">
+                                            <a href="<c:url value='http://localhost:8080/chondo/tim-kiem?dateFrom=24/12/2021&dateTo=25/12/2021&adult=1&children=0&roomCount=1&location=V%C5%A9ng+T%C3%A0u&page=1&limit=2&roomTypeId=${roomType.id}'/>">Book ngay</a>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-md-4">
-                                <div class="single-room">
-                                    <div class="room-img">
-                                        <a href="#"><img src="images/room/room2.jpg" alt=""></a>
-                                    </div>
-                                    <div class="room-desc">
-                                        <div class="room-name">
-                                            <h3><a href="#">Delux room</a></h3>
-                                        </div>
-                                        <div class="room-rent">
-                                            <h5>€ 200 / <span>Night</span></h5>
-                                        </div>
-                                        <div class="room-book">
-                                            <a href="#">Book now</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="single-room">
-                                    <div class="room-img">
-                                        <a href="#"><img src="images/room/room3.jpg" alt=""></a>
-                                    </div>
-                                    <div class="room-desc">
-                                        <div class="room-name">
-                                            <h3><a href="#">Delux room</a></h3>
-                                        </div>
-                                        <div class="room-rent">
-                                            <h5>€ 200 / <span>Night</span></h5>
-                                        </div>
-                                        <div class="room-book">
-                                            <a href="#">Book now</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="single-room">
-                                    <div class="room-img">
-                                        <a href="#"><img src="images/room/room1.jpg" alt=""></a>
-                                    </div>
-                                    <div class="room-desc">
-                                        <div class="room-name">
-                                            <h3><a href="#">Delux room</a></h3>
-                                        </div>
-                                        <div class="room-rent">
-                                            <h5>€ 200 / <span>Night</span></h5>
-                                        </div>
-                                        <div class="room-book">
-                                            <a href="#">Book now</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="single-room">
-                                    <div class="room-img">
-                                        <a href="#"><img src="images/room/room2.jpg" alt=""></a>
-                                    </div>
-                                    <div class="room-desc">
-                                        <div class="room-name">
-                                            <h3><a href="#">Delux room</a></h3>
-                                        </div>
-                                        <div class="room-rent">
-                                            <h5>€ 200 / <span>Night</span></h5>
-                                        </div>
-                                        <div class="room-book">
-                                            <a href="#">Book now</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="single-room">
-                                    <div class="room-img">
-                                        <a href="#"><img src="images/room/room3.jpg" alt=""></a>
-                                    </div>
-                                    <div class="room-desc">
-                                        <div class="room-name">
-                                            <h3><a href="#">Delux room</a></h3>
-                                        </div>
-                                        <div class="room-rent">
-                                            <h5>€ 200 / <span>Night</span></h5>
-                                        </div>
-                                        <div class="room-book">
-                                            <a href="#">Book now</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="single-room">
-                                    <div class="room-img">
-                                        <a href="#"><img src="images/room/room1.jpg" alt=""></a>
-                                    </div>
-                                    <div class="room-desc">
-                                        <div class="room-name">
-                                            <h3><a href="#">Delux room</a></h3>
-                                        </div>
-                                        <div class="room-rent">
-                                            <h5>€ 200 / <span>Night</span></h5>
-                                        </div>
-                                        <div class="room-book">
-                                            <a href="#">Book now</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="single-room">
-                                    <div class="room-img">
-                                        <a href="#"><img src="images/room/room2.jpg" alt=""></a>
-                                    </div>
-                                    <div class="room-desc">
-                                        <div class="room-name">
-                                            <h3><a href="#">Delux room</a></h3>
-                                        </div>
-                                        <div class="room-rent">
-                                            <h5>€ 200 / <span>Night</span></h5>
-                                        </div>
-                                        <div class="room-book">
-                                            <a href="#">Book now</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="single-room">
-                                    <div class="room-img">
-                                        <a href="#"><img src="images/room/room3.jpg" alt=""></a>
-                                    </div>
-                                    <div class="room-desc">
-                                        <div class="room-name">
-                                            <h3><a href="#">Delux room</a></h3>
-                                        </div>
-                                        <div class="room-rent">
-                                            <h5>€ 200 / <span>Night</span></h5>
-                                        </div>
-                                        <div class="room-book">
-                                            <a href="#">Book now</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+                        </c:forEach>
+                            
+                            
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-        <!--Our room end-->
-        <!--Our services start-->
-        <div class="our-sevices text-center ptb-80 white_bg">
+       
+       
+       <div class="our-room text-center ptb-80 white-bg">
             <div class="container">
                 <div class="row">
                     <div class="col-md-12">
-                        <div class="section-title mb-80">
-                            <h2>our <span>services</span></h2>
-                            <p>There are many variations of passages of Lorem Ipsum available, but the majority have suffered by injected humour.</p>
+                        <div class="section-title mb-75">
+                            <h2>GỢI Ý<span> CHỌN PHÒNG</span></h2>
+                  
                         </div>
                     </div>
                 </div>
-            </div>
-            <div class="our-services-list">
-                <div class="container-fluid">
-                    <div class="row">
-                        <div class="col-md-3 col-sm-6 col-xs-12">
-                            <div class="single-services">
-                                <div class="services-img">
-                                    <img src="images/services/services1.jpg" alt="">
-                                    <div class="services-title">
-                                        <h2>Breakfast & Buffet</h2>
-                                    </div>
-                                    <div class="services-hover-desc">
-                                        <div class="services-hover-inner">
-                                            <div class="services-hover-table">
-                                                <div class="services-hover-table-cell">
-                                                    <h2>Breakfast & Buffet</h2>
-                                                    <p>There are many variations of passages Loem Ipsum available, but the majority have suffered alteration in some form, by injected humour.</p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-3 col-sm-6 col-xs-12">
-                            <div class="single-services">
-                                <div class="services-img">
-                                    <img src="images/services/services2.jpg" alt="">
-                                    <div class="services-title">
-                                        <h2>Towels and bedding</h2>
-                                    </div>
-                                    <div class="services-hover-desc">
-                                        <div class="services-hover-inner">
-                                            <div class="services-hover-table">
-                                                <div class="services-hover-table-cell">
-                                                    <h2>Breakfast & Buffet</h2>
-                                                    <p>There are many variations of passages Loem Ipsum available, but the majority have suffered alteration in some form, by injected humour.</p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-3 col-sm-6 col-xs-12">
-                            <div class="single-services">
-                                <div class="services-img">
-                                    <img src="images/services/services3.jpg" alt="">
-                                    <div class="services-title">
-                                        <h2>24/7 Reception</h2>
-                                    </div>
-                                    <div class="services-hover-desc">
-                                        <div class="services-hover-inner">
-                                            <div class="services-hover-table">
-                                                <div class="services-hover-table-cell">
-                                                    <h2>24/7 Reception</h2>
-                                                    <p>There are many variations of passages Loem Ipsum available, but the majority have suffered alteration in some form, by injected humour.</p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-3 col-sm-6 col-xs-12">
-                            <div class="single-services">
-                                <div class="services-img">
-                                    <img src="images/services/services4.jpg" alt="">
-                                    <div class="services-title">
-                                        <h2>City Tours</h2>
-                                    </div>
-                                    <div class="services-hover-desc">
-                                        <div class="services-hover-inner">
-                                            <div class="services-hover-table">
-                                                <div class="services-hover-table-cell">
-                                                    <h2>City Tourst</h2>
-                                                    <p>There are many variations of passages Loem Ipsum available, but the majority have suffered alteration in some form, by injected humour.</p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!--Our services end-->
-        <!--Our staff start-->
-        <div class="our-staff text-center pb-80 white_bg">
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-12">
-                        <div class="section-title mb-80">
-                            <h2>our <span>Staff</span></h2>
-                            <p>There are many variations of passages of Lorem Ipsum available, but the majority have suffered by injected humour.</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="staff-list">
+                <div class="our-room-show">
                     <div class="row">
                         <div class="carousel-list">
-                            <div class="col-md-4">
-                                <div class="single-staff">
-                                    <div class="sraff-inner">
-                                        <img src="images/staff/staff1.jpg" alt="">
-                                        <div class="staff-title">
-                                            <span class="plus"></span>
-                                            <h2>Soleman</h2>
-                                            <h5>hotel staff</h5>
-
+                        <c:forEach items="${listRoomType}" var="roomType">
+                        	<div class="col-md-4">
+                                <div class="single-room">
+                                    <div class="room-img">
+                                        <a href="#"><img src="<c:url value='/template/web/images/room/${roomType.image}'/>" alt=""></a>
+                                    </div>
+                                    <div class="room-desc">
+                                        <div class="room-name">
+                                            <h3><a href="#">${roomType.name }</a></h3>
                                         </div>
-                                        <div class="staff-hover-desc">
-                                            <h2>Soleman</h2>
-                                            <h5>hotel staff</h5>
-                                            <p>There are many variaons of passa of Lorem Ipsuable, amrn in sofby injected humour, amr.</p>
-                                            <div class="scoial_icons">
-                                                <a href="#"><i class="mdi mdi-facebook"></i></a>
-                                                <a href="#"><i class="mdi mdi-rss"></i></a>
-                                                <a href="#"><i class="mdi mdi-google-plus"></i></a>
-                                                <a href="#"><i class="mdi mdi-instagram"></i></a>
-                                            </div>
+                                        <div class="room-rent" style="padding-top:5px">
+                                            <h5>${PriceUtil.convert(roomType.sellPrice)} đ/ <span>Đêm</span></h5>
+                                        </div>
+                                        <div class="room-book" style="padding-top:20px">
+                                            <a href="<c:url value='http://localhost:8080/chondo/tim-kiem?dateFrom=24/12/2021&dateTo=25/12/2021&adult=1&children=0&roomCount=1&location=V%C5%A9ng+T%C3%A0u&page=1&limit=2&roomTypeId=${roomType.id}'/>">Book ngay</a>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-md-4">
-                                <div class="single-staff">
-                                    <div class="sraff-inner">
-                                        <img src="images/staff/staff2.jpg" alt="">
-                                        <div class="staff-title">
-                                            <span class="plus"></span>
-                                            <h2>Soleman</h2>
-                                            <h5>hotel staff</h5>
-
-                                        </div>
-                                        <div class="staff-hover-desc">
-                                            <h2>Soleman</h2>
-                                            <h5>hotel staff</h5>
-                                            <p>There are many variaons of passa of Lorem Ipsuable, amrn in sofby injected humour, amr.</p>
-                                            <div class="scoial_icons">
-                                                <a href="#"><i class="mdi mdi-facebook"></i></a>
-                                                <a href="#"><i class="mdi mdi-rss"></i></a>
-                                                <a href="#"><i class="mdi mdi-google-plus"></i></a>
-                                                <a href="#"><i class="mdi mdi-instagram"></i></a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="single-staff">
-                                    <div class="sraff-inner">
-                                        <img src="images/staff/staff3.jpg" alt="">
-                                        <div class="staff-title">
-                                            <span class="plus"></span>
-                                            <h2>Soleman</h2>
-                                            <h5>hotel staff</h5>
-
-                                        </div>
-                                        <div class="staff-hover-desc">
-                                            <h2>Soleman</h2>
-                                            <h5>hotel staff</h5>
-                                            <p>There are many variaons of passa of Lorem Ipsuable, amrn in sofby injected humour, amr.</p>
-                                            <div class="scoial_icons">
-                                                <a href="#"><i class="mdi mdi-facebook"></i></a>
-                                                <a href="#"><i class="mdi mdi-rss"></i></a>
-                                                <a href="#"><i class="mdi mdi-google-plus"></i></a>
-                                                <a href="#"><i class="mdi mdi-instagram"></i></a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="single-staff">
-                                    <div class="sraff-inner">
-                                        <img src="images/staff/staff1.jpg" alt="">
-                                        <div class="staff-title">
-                                            <span class="plus"></span>
-                                            <h2>Soleman</h2>
-                                            <h5>hotel staff</h5>
-
-                                        </div>
-                                        <div class="staff-hover-desc">
-                                            <h2>Soleman</h2>
-                                            <h5>hotel staff</h5>
-                                            <p>There are many variaons of passa of Lorem Ipsuable, amrn in sofby injected humour, amr.</p>
-                                            <div class="scoial_icons">
-                                                <a href="#"><i class="mdi mdi-facebook"></i></a>
-                                                <a href="#"><i class="mdi mdi-rss"></i></a>
-                                                <a href="#"><i class="mdi mdi-google-plus"></i></a>
-                                                <a href="#"><i class="mdi mdi-instagram"></i></a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="single-staff">
-                                    <div class="sraff-inner">
-                                        <img src="images/staff/staff2.jpg" alt="">
-                                        <div class="staff-title">
-                                            <span class="plus"></span>
-                                            <h2>Soleman</h2>
-                                            <h5>hotel staff</h5>
-
-                                        </div>
-                                        <div class="staff-hover-desc">
-                                            <h2>Soleman</h2>
-                                            <h5>hotel staff</h5>
-                                            <p>There are many variaons of passa of Lorem Ipsuable, amrn in sofby injected humour, amr.</p>
-                                            <div class="scoial_icons">
-                                                <a href="#"><i class="mdi mdi-facebook"></i></a>
-                                                <a href="#"><i class="mdi mdi-rss"></i></a>
-                                                <a href="#"><i class="mdi mdi-google-plus"></i></a>
-                                                <a href="#"><i class="mdi mdi-instagram"></i></a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="single-staff">
-                                    <div class="sraff-inner">
-                                        <img src="images/staff/staff3.jpg" alt="">
-                                        <div class="staff-title">
-                                            <span class="plus"></span>
-                                            <h2>Soleman</h2>
-                                            <h5>hotel staff</h5>
-
-                                        </div>
-                                        <div class="staff-hover-desc">
-                                            <h2>Soleman</h2>
-                                            <h5>hotel staff</h5>
-                                            <p>There are many variaons of passa of Lorem Ipsuable, amrn in sofby injected humour, amr.</p>
-                                            <div class="scoial_icons">
-                                                <a href="#"><i class="mdi mdi-facebook"></i></a>
-                                                <a href="#"><i class="mdi mdi-rss"></i></a>
-                                                <a href="#"><i class="mdi mdi-google-plus"></i></a>
-                                                <a href="#"><i class="mdi mdi-instagram"></i></a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="single-staff">
-                                    <div class="sraff-inner">
-                                        <img src="images/staff/staff1.jpg" alt="">
-                                        <div class="staff-title">
-                                            <span class="plus"></span>
-                                            <h2>Soleman</h2>
-                                            <h5>hotel staff</h5>
-
-                                        </div>
-                                        <div class="staff-hover-desc">
-                                            <h2>Soleman</h2>
-                                            <h5>hotel staff</h5>
-                                            <p>There are many variaons of passa of Lorem Ipsuable, amrn in sofby injected humour, amr.</p>
-                                            <div class="scoial_icons">
-                                                <a href="#"><i class="mdi mdi-facebook"></i></a>
-                                                <a href="#"><i class="mdi mdi-rss"></i></a>
-                                                <a href="#"><i class="mdi mdi-google-plus"></i></a>
-                                                <a href="#"><i class="mdi mdi-instagram"></i></a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="single-staff">
-                                    <div class="sraff-inner">
-                                        <img src="images/staff/staff2.jpg" alt="">
-                                        <div class="staff-title">
-                                            <span class="plus"></span>
-                                            <h2>Soleman</h2>
-                                            <h5>hotel staff</h5>
-
-                                        </div>
-                                        <div class="staff-hover-desc">
-                                            <h2>Soleman</h2>
-                                            <h5>hotel staff</h5>
-                                            <p>There are many variaons of passa of Lorem Ipsuable, amrn in sofby injected humour, amr.</p>
-                                            <div class="scoial_icons">
-                                                <a href="#"><i class="mdi mdi-facebook"></i></a>
-                                                <a href="#"><i class="mdi mdi-rss"></i></a>
-                                                <a href="#"><i class="mdi mdi-google-plus"></i></a>
-                                                <a href="#"><i class="mdi mdi-instagram"></i></a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="single-staff">
-                                    <div class="sraff-inner">
-                                        <img src="images/staff/staff3.jpg" alt="">
-                                        <div class="staff-title">
-                                            <span class="plus"></span>
-                                            <h2>Soleman</h2>
-                                            <h5>hotel staff</h5>
-
-                                        </div>
-                                        <div class="staff-hover-desc">
-                                            <h2>Soleman</h2>
-                                            <h5>hotel staff</h5>
-                                            <p>There are many variaons of passa of Lorem Ipsuable, amrn in sofby injected humour, amr.</p>
-                                            <div class="scoial_icons">
-                                                <a href="#"><i class="mdi mdi-facebook"></i></a>
-                                                <a href="#"><i class="mdi mdi-rss"></i></a>
-                                                <a href="#"><i class="mdi mdi-google-plus"></i></a>
-                                                <a href="#"><i class="mdi mdi-instagram"></i></a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+                        </c:forEach>
+                            
+                            
                         </div>
                     </div>
                 </div>
             </div>
-
         </div>
-        <!--Our staff end-->
+       
+       
+       
+       
+       
         <!--Testimonial start-->
         <div class="staff-tesimonial text-center white_bg">
             <div class="testimonail-bg-opacity"></div>
