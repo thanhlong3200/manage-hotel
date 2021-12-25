@@ -37,6 +37,10 @@
 													<c:url value = "/thay-doi-thong-tin" var = "updateURL">
 													   <c:param name = "id" value = "<%=SecurityUtils.getPrincipal().getId()%>"/>		
 													</c:url>
+													<c:url value = "/lich-su-dat-phong" var = "historyURL">
+													   
+													</c:url>
+													<a  href="${historyURL}">Xem lịch sử đặt phòng</a>
 													<a  href="${updateURL}">Xem thông tin</a>
 													
 													<a  href="${updateURL}">
