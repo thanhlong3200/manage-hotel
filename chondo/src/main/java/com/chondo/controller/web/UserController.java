@@ -20,5 +20,9 @@ public class UserController {
 	@Autowired
 	private IUserService userService;
 	
-	
+	@GetMapping(value = "lich-su-dat-phong")
+	public ModelAndView historyBookingPage() {
+		ModelAndView mv = new ModelAndView("web/historyBooking");
+		return mv;
+	}
 }
