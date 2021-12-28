@@ -270,7 +270,15 @@ public class BookingService implements IBookingService{
 		List<BookingDTO> bookings = modelMapper.map(entities, new TypeToken<List<BookingDTO>>(){}.getType());
 		return bookings;
 	}
-
+	
+	@Override
+	public List<BookingDTO> findByCustomerId(Long id, Pageable pageable) {
+		ModelMapper modelMapper = new ModelMapper();
+		List<BookingEntity> entities = bookingRepository.findByCustomerId(id, pageable);
+		System.out.println("List " + entities);
+		List<BookingDTO> bookings = modelMapper.map(entities, new TypeToken<List<BookingDTO>>() {}.getType());
+		return bookings;
+	}
 
 
 	@Override
@@ -351,6 +359,18 @@ public class BookingService implements IBookingService{
 		List<BookingDTO> bookings = modelMapper.map(entities, new TypeToken<List<BookingDTO>>(){}.getType());
 		return bookings;
 	}
+
+
+
+
+
+
+
+	
+
+
+
+
 
 	
 

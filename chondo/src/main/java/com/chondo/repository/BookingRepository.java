@@ -38,4 +38,7 @@ public interface BookingRepository extends JpaRepository<BookingEntity, Long>{
 	List<BookingEntity> findByBookedRoomsCustomersCmnd(String cmnd);
 
 	List<BookingEntity> findAllByOrderByCreatedDateDesc(Pageable pageable);
+	
+	List<BookingEntity> findByCustomerId(Long id, Pageable pageable);
+	
 }

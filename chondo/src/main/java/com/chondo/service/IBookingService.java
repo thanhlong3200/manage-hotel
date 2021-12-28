@@ -17,6 +17,8 @@ public interface IBookingService {
 	BookingDTO findOneByBookedRoomsId(Long id);
 
 	BookingDTO changeStatus(BookingDTO booking, String code);
+	
+
 
 	List<BookingDTO> findAll(Pageable pageable);
 
@@ -44,4 +46,6 @@ public interface IBookingService {
 	BookingDTO extend(BookingDTO dto);
 
 	List<BookingDTO> findByBookedRoomsCustomersCmnd(String cmnd);
+	
+	List<BookingDTO> findByCustomerId(Long id, Pageable pageable);
 }

@@ -14,7 +14,7 @@
 <body>
 
 	<form class="container" id="formSubmit" style="margin-top: 2rem;"
-		action="<c:url value = "/quan-tri/booking"/>">
+		action="<c:url value = "/quan-tri/lich-su-dat-phong"/>">
 		<div class="search-form-booking ">
 			<h5>Tìm kiếm booking</h5>
 
@@ -75,7 +75,7 @@
 							<td style="line-height: 60px;">${booking.children}</td>
 							<td style="line-height: 60px;">${booking.status.name}</td>
 							<td style="line-height: 60px;"><a
-								href="<c:url value ="/quan-tri/booking?id=${booking.id}"/>">Xem</a></td>
+								href="<c:url value ="/quan-tri/lich-su-dat-phong?id=${booking.id}"/>">Xem</a></td>
 						</tr>
 
 					</c:forEach>

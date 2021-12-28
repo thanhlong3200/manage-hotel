@@ -61,7 +61,8 @@ public class BookingController {
 			mav.addObject("booking", bookingDTO);
 			mav.addObject("bookedRooms", bookedRooms);
 			
-			mav.setViewName("admin/booking/bookingDetails");
+			mav.setViewName("web/detailBooking");
+
 		} else {
 			Pageable pageable = new PageRequest(page - 1, limit);
 
