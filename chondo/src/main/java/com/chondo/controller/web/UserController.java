@@ -29,62 +29,64 @@ import com.chondo.service.IUserService;
 public class UserController {
 	@Autowired
 	private IUserService userService;
-	
+
 	@Autowired
 	private IBookingService bookingService;
-	
+
 	@Autowired
 	private ICustomerService customerService;
-	
+
 	@Autowired
 	private IBookedRoomService bookedRoomService;
-	
+
 	@GetMapping(value = "lich-su-dat-phong")
-	public ModelAndView historyBookingPage(@RequestParam(value = "page", required = false) Integer page, 
-			@RequestParam(value = "limit", required = false) Integer limit, 
+	public ModelAndView historyBookingPage(@RequestParam(value = "page", required = false) Integer page,
+			@RequestParam(value = "limit", required = false) Integer limit,
 			@RequestParam(value = "bookingCode", required = false) String bookingCode,
 			@RequestParam(value = "id", required = false) Long id) {
 		ModelAndView mav = new ModelAndView();
-		if (id != null) {
-			BookingDTO bookingDTO = bookingService.findOne(id);
 
+		UserDTO userDTO = userService.findOne(id);
+		String email = userDTO.getEmail();
+		Pageable pageable = new PageRequest(page - 1, limit);
+		System.out.println(email);
 
-			List<BookedRoomDTO> bookedRooms = bookedRoomService.findByBookingId(bookingDTO.getId());
-			
-		
+		CustomerDTO customerDTO = customerService.findOneByEmail(email);
+		Long customerID = customerDTO.getId();
 
-			mav.addObject("booking", bookingDTO);
-			mav.addObject("bookedRooms", bookedRooms);
-			
-		} else {
-			UserDTO userDTO = userService.findOne(id);
-			String email = userDTO.getEmail();
-			Pageable pageable = new PageRequest(page - 1, limit);
-			System.out.println(email);
-			
-			CustomerDTO customerDTO = customerService.findOneByEmail(email);
-			Long customerID = customerDTO.getId();
-			
-			BookingDTO dto = new BookingDTO();
-			
-			System.out.println("customer id" + customerID);
-			List<BookingDTO> list = bookingService.findByCustomerId(customerID, pageable);
-			
-			System.out.println(list);
-			
-			dto.setListResult(list);
+		BookingDTO dto = new BookingDTO();
 
-			dto.setLimit(limit);
-			dto.setPage(page);
+		System.out.println("customer id" + customerID);
+		List<BookingDTO> list = bookingService.findByCustomerId(customerID, pageable);
 
-			dto.setTotalPage((int) Math.round((double) bookingService.count() / dto.getLimit()));
+		System.out.println(list);
 
-			mav.addObject("model", dto);
-			mav.setViewName("web/historyBooking");
-		}
+		dto.setListResult(list);
+
+		dto.setLimit(limit);
+		dto.setPage(page);
+
+		dto.setTotalPage((int) Math.round((double) bookingService.count() / dto.getLimit()));
+
+		mav.addObject("model", dto);
+		mav.setViewName("web/historyBooking");
 		return mav;
 	}
-	
-//	@GetMapping(value = "chi-tiet-dat-phong")
-//	public ModelAndView detailBooking()
+
+	@GetMapping(value = "chi-tiet-dat-phong")
+	public ModelAndView detailBooking(@RequestParam(value = "id", required = true) Long id) {
+		ModelAndView mav = new ModelAndView();
+		BookingDTO bookingDTO = bookingService.findOne(id);
+
+
+		List<BookedRoomDTO> bookedRooms = bookedRoomService.findByBookingId(bookingDTO.getId());
+		
+		System.out.println("booking" + bookingDTO.getCode());
+
+		mav.addObject("booking", bookingDTO);
+		mav.addObject("bookedRooms", bookedRooms);
+		
+		mav.setViewName("web/detailBooking");
+		return mav;
+	}
 }
