@@ -75,7 +75,7 @@
 							<td style="line-height: 60px;">${booking.children}</td>
 							<td style="line-height: 60px;">${booking.status.name}</td>
 							<td style="line-height: 60px;"><a
-								href="<c:url value ="/quan-tri/lich-su-dat-phong?id=${booking.id}"/>">Xem</a></td>
+								href="<c:url value ="/chi-tiet-dat-phong?id=${booking.id}"/>">Xem</a></td>
 						</tr>
 
 					</c:forEach>

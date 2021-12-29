@@ -18,7 +18,7 @@
 <title>Chi tiết Booking</title>
 </head>
 <body>
-	<div class= "booking-details">
+	<div class= "booking-details" style="display: block;z-index: 3;position: relative;margin-bottom: 35rem;margin-top: 5rem;">
 		<div class= "booking-information col-3">
 			<h3>Chi tiết booking</h3>
 			<p>Mã booking: ${booking.code}</p>
