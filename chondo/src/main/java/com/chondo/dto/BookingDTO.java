@@ -4,51 +4,62 @@ import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.chondo.entity.BookedRoomEntity;
-
-public class BookingDTO extends AbstractDTO<BookingDTO>{
+public class BookingDTO extends AbstractDTO<BookingDTO> {
 	private String code;
-	
+
 	private Date dateFrom;
-	
+
 	private Date dateTo;
-	
+
 	private Integer roomCount;
-	
+
 	private Integer adult;
-	
+
 	private Integer children;
-	
+
 	private String logs;
-	
+
 	private HotelDTO hotel;
-	
+
 	private RoomTypeDTO roomType;
-	
+
 	private Long userId;
-	
+
 	private CustomerDTO customer;
-	
+
 	private BookingStatusDTO status;
-	
+
 	private Long sellPriceBooked;
-	
+
 	private Long sellPriceUpgrade;
-	
+
 	private Long originalPriceBooked;
-	
+
 	private Long originalPriceUpgrade;
-	
+
 	private Long priceService;
-	
+
 	private Long priceServiceFree;
-	
+
 	private Long totalPrice;
-	
+
+	private Integer signed;
+
 	private Long nightCount;
+
 	private boolean refund;
 
 	private List<BookedRoomDTO> bookedRooms = new ArrayList<BookedRoomDTO>();
+
+	public String getSignature() {
+		if (signed == null || signed == 0) {
+			return "ChÆ°a kÃ½";
+		} else if (signed == 1) {
+			return "Dáº« kÃ½";
+		} else {
+			return "KÃ½ tháº¥t báº¡i";
+		}
+	}
 
 	public String getCode() {
 		return code;
@@ -113,8 +124,6 @@ public class BookingDTO extends AbstractDTO<BookingDTO>{
 	public void setRoomType(RoomTypeDTO roomType) {
 		this.roomType = roomType;
 	}
-
-	
 
 	public CustomerDTO getCustomer() {
 		return customer;
@@ -212,17 +221,38 @@ public class BookingDTO extends AbstractDTO<BookingDTO>{
 		this.nightCount = nightCount;
 	}
 
+	public Integer getSigned() {
+		return signed;
+	}
+
+	public void setSigned(Integer signed) {
+		this.signed = signed;
+	}
+
 	public String toStringBooking() {
 		StringBuilder toString = new StringBuilder();
-		toString.append("Ma booking: " + getCode() + "\n");
-		toString.append("Khach hang: " + getCustomer().getFirstName() + " " + getCustomer().getLastName() + "\n");
-		toString.append("Loai phong: " + getRoomType().getName() + "\n");
-		toString.append("Ngay nhan phong: " + getDateFrom() + "\n");
-		toString.append("Ngay tra phong: " + getDateTo() + "\n");
-		toString.append("So phong: " + getRoomCount() + "\n");
-		toString.append("So khach: " + getAdult() + " nguoi lon, " + getChildren() + " tre em" +"\n");
-		toString.append("Gio dat: " + getCreatedDate() + "\n");
+		toString.append("Ä�áº·t phÃ²ng thÃ nh cÃ´ng!\n\nTHÃ”NG TIN Ä�áº¶T PHÃ’NG:\n");
+		toString.append("MÃ£ Ä‘áº·t phÃ²ng:               " + getCode() + "\n");
+		toString.append("KhÃ¡ch hÃ ng:                 " + getCustomer().getFirstName() + " "
+				+ getCustomer().getLastName() + "\n");
+		toString.append("Loáº¡i phÃ²ng:                 " + getRoomType().getName() + "\n");
+		toString.append("NgÃ y nháº­n phÃ²ng:            " + getDateFrom() + "\n");
+		toString.append("NgÃ y tráº£ phÃ²ng:             " + getDateTo() + "\n");
+		toString.append("Sá»‘ phÃ²ng:                   " + getRoomCount() + "\n");
+		toString.append(
+				"Sá»‘ lÆ°á»£ng:                   " + getAdult() + " ngÆ°á»�i lá»›n, " + getChildren() + " tráº» em" + "\n");
+		toString.append("Thá»�i gian Ä‘áº·t phÃ²ng:        " + getCreatedDate());
+
 		return toString.toString();
+	}
+
+	public String getInfo() {
+		String createdDate = String.format("%2d:%2d %2d-%2d-%4d", getCreatedDate().getHours(),
+				getCreatedDate().getMinutes(), getCreatedDate().getDay(), getCreatedDate().getMonth(),
+				getCreatedDate().getYear() + 1900);
+
+		return getCode() + getCustomer().getFirstName() + getCustomer().getLastName() + getRoomType().getName()
+				+ getDateFrom() + getDateTo() + getRoomCount() + getAdult() + getChildren() + createdDate;
 	}
 
 	public boolean isRefund() {
@@ -241,5 +271,4 @@ public class BookingDTO extends AbstractDTO<BookingDTO>{
 		this.priceServiceFree = priceServiceFree;
 	}
 
-	
 }
